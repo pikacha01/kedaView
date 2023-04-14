@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {} from 'vue'
 import SocialContribution from '@/components/socialContribution.vue';
+import StationHealthy from '@/components/stationHealthy.vue';
 </script>
 
 <template>
   <div class="leftChart addZIndex">
     <SocialContribution />
+    <StationHealthy />
   </div>
 </template>
 
