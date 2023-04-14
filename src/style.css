@@ -77,3 +77,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.addZIndex{
+  z-index: 999;
+}
+@font-face {
+  font-family:"Light";
+  src: url("@/assets/font/HarmonyOS_Sans_SC_Light.ttf");
+}
+@font-face {
+  font-family:"Medium";
+  src: url("@/assets/font/HarmonyOS_Sans_SC_Medium.ttf");
+}
+@font-face {
+  font-family:"HRegular";
+  src: url("@/assets/font/HarmonyOS_Sans_SC_Regular.ttf");
+}
+@font-face {
+  font-family:"DRegular";
+  src: url("@/assets/font/DINPro-Regular.otf.ttf");
+}
