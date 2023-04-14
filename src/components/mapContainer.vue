@@ -4,6 +4,7 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from '@vue/reactivity'
 import Header from '../views/header.vue';
 import BodyContainer from '@/views/BodyContainer.vue';
+import LeftChart from '@/views/leftChart.vue';
 let map = shallowRef(null);
 const initMap = ()=>{
     AMapLoader.load({
@@ -29,6 +30,7 @@ onMounted(() => {
 <div id="mapContainer" class="mapContainer">
   <Header></Header>
   <BodyContainer></BodyContainer>
+  <LeftChart />
 </div>
 </template>
 
