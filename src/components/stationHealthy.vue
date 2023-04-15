@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import {} from 'vue'
+import {computed,ref} from 'vue'
 import ChartTitle from './chartTitle.vue';
+// const percentage = computed(()=>{
+//   return `80`
+// })
+const percentage = ref(80)
 </script>
 
 <template>
@@ -13,9 +17,9 @@ import ChartTitle from './chartTitle.vue';
         </div>
         <div class="content">
           <div class="strip">
-            <img src="@/assets/img/电站健康分析4.png" alt="">
+            <img src="@/assets/img/电站健康分析4.png" :style="{width: percentage+'%'}" alt="">
           </div>
-          <div class="percent">100<span style="font-size: 45px;">%</span></div>
+          <div class="percent">{{ percentage }}<span style="font-size: 45px;">%</span></div>
         </div>
       </div>
     </div>
@@ -59,6 +63,26 @@ import ChartTitle from './chartTitle.vue';
           background: url("@/assets/img/电站健康分析3.png") no-repeat center center;
           background-size: 100% 100%;
           margin-left: 25px;
+          transition: width 0.5s ease-out;
+          position: relative;
+          img {
+            margin-left: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: url("@/assets/img/电站健康分析2.png") no-repeat center center;
+          }
         }
         .percent{
           padding-right: 80px;
