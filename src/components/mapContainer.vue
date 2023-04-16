@@ -105,10 +105,4 @@ onMounted(() => {
   height: 3240px;
   position: relative;
 }
-#mapContainer .mapContainer__stationInfo {
- 
-  .text {
-    
-  }
-}
 </style>
