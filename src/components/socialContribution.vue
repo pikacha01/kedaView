@@ -5,17 +5,17 @@ const boxData = ref([{
     yearData: "86.63",
     total: "956.52",
     title: "节约标煤(吨)",
-    image:"社会贡献1.png"
+    image:"src/assets/img/社会贡献2.png"
   },{
     yearData: "86.63",
     total: "956.52",
     title:"CO2减排量(吨)",
-    image:"社会贡献2.png"
+    image:"src/assets/img/社会贡献3.png"
   },{
     yearData: "86.63",
     total: "956.52",
     title: "等效植树量(棵)",
-    image:"社会贡献3.png"
+    image:"src/assets/img/社会贡献4.png"
   }])
 
 </script>
@@ -38,7 +38,7 @@ const boxData = ref([{
           {{ item.total }}
         </div>
         <div class="image">
-          <img :src="'@/assets/img/'+item.image" alt="">
+          <img :src=item.image alt="">
         </div>
         <div class="title">
           {{ item.title }}

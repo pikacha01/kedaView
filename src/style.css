@@ -94,5 +94,5 @@ button:focus-visible {
 }
 @font-face {
   font-family:"DRegular";
-  src: url("@/assets/font/DINPro-Regular.otf.ttf");
+  src: url("@/assets/font/DINPro-Regular.otf");
 }

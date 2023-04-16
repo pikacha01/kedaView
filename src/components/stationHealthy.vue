@@ -4,7 +4,12 @@ import ChartTitle from './chartTitle.vue';
 // const percentage = computed(()=>{
 //   return `80`
 // })
-const percentage = ref(80)
+const percentage = ref(90)
+
+const rotate = computed(() => {
+  const rotateTotal = 405 - 159
+  return (rotateTotal * percentage.value / 100  + 159).toFixed(2)
+})
 </script>
 
 <template>
@@ -22,6 +27,30 @@ const percentage = ref(80)
           <div class="percent">{{ percentage }}<span style="font-size: 45px;">%</span></div>
         </div>
       </div>
+      <div class="chart">
+        <div class="pointer">
+          <div class="pointerChart">
+            <div class="image">
+              <div class="content">
+                <img :style="`transform: rotate(${rotate}deg)`" src="@/assets/img//电站健康分析9.png">
+                <div class="circle">
+                  <img src="@/assets/img/电站健康分析8.png">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="percent">{{ percentage }} <span>%</span></div>
+          <div class="healthyHI">
+              健康度HI
+              <div>
+                <img src="@/assets/img/电站健康分析5.png" alt="">
+              </div>
+          </div>
+        </div>
+        <div class="lineChart">
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +58,7 @@ const percentage = ref(80)
 <style scoped lang="less">
 .container {
   width: 1600px;
+  margin-top: 120px;
   .body{
     margin-top: 30px;
     display: flex;
@@ -63,7 +93,7 @@ const percentage = ref(80)
           background: url("@/assets/img/电站健康分析3.png") no-repeat center center;
           background-size: 100% 100%;
           margin-left: 25px;
-          transition: width 0.5s ease-out;
+          transition: width 1s ease-out;
           position: relative;
           img {
             margin-left: 10px;
@@ -91,6 +121,77 @@ const percentage = ref(80)
           color: #23f8ef;
           font-size: 60px;
         }
+      }
+    }
+    .chart{
+      display: flex;
+      .pointer {
+        margin-top: 100px;
+        .pointerChart{
+          width: 340px;
+          height: 275px;
+          background: url("@/assets/img//电站健康分析6.png") no-repeat center center;
+          background-size: 100% 100%;
+          display: flex;
+          justify-content:center;
+          align-items: center;
+          .image{
+            width: 300px;
+            height: 236px;
+            background: url("@/assets/img//电站健康分析7.png") no-repeat center center;
+            background-size: 100% 100%;
+            .content{
+              width: 100%;
+              height: 100%;
+              position: relative;
+              .circle{
+                width: 100%;
+                height: 100%;
+                position: relative;
+                img {
+                  position: absolute;
+                  top: 45%;
+                  left: 34%;
+                }
+              }
+              img{
+                position: absolute;
+                top: 50%;
+                transition: transform 0.5s ease-out;
+                transform-origin: left bottom; 
+                left: 50%;
+              }
+            }
+          }
+        }
+        .percent{
+          font-size: 50px;
+          color: #fff;
+          font-family: "DRegular";
+          text-align: center;
+          span {
+            font-size: 35px;
+          }
+        }
+        .healthyHI{
+          // background: url("@/assets/img/电站健康分析5.png") no-repeat center center;
+          // background-size: 100% 100%;
+          width: 100%;
+          height: 125px;
+          text-align: center;
+          font-size: 45px;
+          color: #95d4e6;
+          font-family: "Light";
+          div img {
+            margin-top: -40px;
+          }
+        }
+      }
+      .lineChart{
+        margin-top: 50px;
+        margin-left: 50px;
+        height: 600px;
+        width: 1030px;
       }
     }
   }
