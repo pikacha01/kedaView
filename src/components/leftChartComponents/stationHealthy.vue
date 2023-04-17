@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed,ref, onMounted,onUnmounted} from 'vue'
-import ChartTitle from './chartTitle.vue';
+import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 
 // const percentage = computed(()=>{
@@ -24,16 +24,14 @@ onUnmounted(() => {
 });
 
   // 基础配置一下Echarts
-  function initChart() {
-  let chart = echart.init(document.getElementById("lineChart") as HTMLElement, "dark");
-  // 把配置和数据放这里
+function initChart() {
+  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
+  // 把配置和数据
   chart.setOption({
     grid: {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
-      backgroundColor:"#07191f"
     },
-    backgroundColor:"#07191f",
     tooltip: {
       trigger: "axis",
       axisPointer: {
@@ -44,22 +42,23 @@ onUnmounted(() => {
       },
     },
     legend: {
-      data: [,"主营业务","销售水量"],
+      data: ["健康度HI","能效PR"],
       top: "15%",
       textStyle: {
         color: "#ffffff",
+        fontSize: 25
       },
     },
     xAxis: {
       data: [
-        "当年完成水量",
-        "去年同期水量",
-        "滚动目标值水量",
-        "全年目标值水量",
-        "当年完成金额",
-        "去年同期金额",
-        "滚动目标金额",
-        "全年目标值",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
       ],
       axisLine: {
         show: true, //隐藏X轴轴线
@@ -74,6 +73,7 @@ onUnmounted(() => {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
+          fontSize: 25
         },
       },
     },
@@ -83,6 +83,7 @@ onUnmounted(() => {
         name: "%",
         nameTextStyle: {
           color: "#96D6E8",
+          fontSize: 42
         },
         splitLine: {
           show:false
@@ -92,14 +93,12 @@ onUnmounted(() => {
         },
         axisLine: {
           show: false,
-          lineStyle: {
-            color: "#FFFFFF",
-          },
         },
         axisLabel: {
           show: true,
           textStyle: {
             color: "#96D6E8 ",
+            fontSize: 42
           },
         },
       },
@@ -108,6 +107,7 @@ onUnmounted(() => {
         name: "%",
         nameTextStyle: {
           color: "#96D6E8 ",
+          fontSize: 42
         },
         position: "right",
         splitLine: {
@@ -124,6 +124,7 @@ onUnmounted(() => {
           formatter: "{value}", //右侧Y轴文字显示
           textStyle: {
             color: "#96D6E8",
+            fontSize: 42
           },
         },
       },
@@ -149,7 +150,7 @@ onUnmounted(() => {
     ],
     series: [
       {
-        name: "销售水量",
+        name: "能效PR",
         type: "line",
         yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
         smooth: true, //平滑曲线显示
@@ -160,7 +161,7 @@ onUnmounted(() => {
           //折线拐点标志的样式
           color: "#ffba00",
           borderColor: '#fff',
-          borderWidth: 3
+          borderWidth: 3,
         },
         lineStyle: {
           color: "#ffba00",
@@ -171,7 +172,7 @@ onUnmounted(() => {
         data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
       },
       {
-        name: "主营业务",
+        name: "健康度HI",
         type: "bar",
         barWidth: 15,
         itemStyle: {

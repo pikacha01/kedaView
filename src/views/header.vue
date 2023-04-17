@@ -49,13 +49,13 @@ import {} from 'vue'
   z-index: 999;
   height: 308px;
   .container{
-    background: url("@/assets/title/标题光晕.png") no-repeat center center;
+    background: url("@/assets/title/标题光晕.png") no-repeat center bottom;
     position: relative;
     height: 308px;
     padding-bottom: 90px;
     .title {
       position: absolute;
-      top: 40%;
+      top: 50%;
       display: flex;
       justify-content: center;
       align-items: center;

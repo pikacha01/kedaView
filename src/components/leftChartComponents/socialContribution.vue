@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue'
-import ChartTitle from './chartTitle.vue';
+import ChartTitle from '../chartTitle.vue';
 const boxData = ref([{
     yearData: "86.63",
     total: "956.52",

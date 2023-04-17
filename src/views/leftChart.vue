@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {} from 'vue'
-import SocialContribution from '@/components/socialContribution.vue';
-import StationHealthy from '@/components/stationHealthy.vue';
+import SocialContribution from '@/components/leftChartComponents/socialContribution.vue';
+import StationHealthy from '@/components/leftChartComponents/stationHealthy.vue';
 </script>
 
 <template>
