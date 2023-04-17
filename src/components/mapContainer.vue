@@ -7,7 +7,6 @@ import BodyContainer from '@/views/BodyContainer.vue';
 import LeftChart from '@/views/leftChart.vue';
 import BottomChart from '@/views/bottomChart.vue';
 import { mapDataStore } from '@/store'
-import { getStationListApi } from '@/api/energyApi'
 
 
 const mapStore = mapDataStore()
@@ -35,7 +34,6 @@ let map = shallowRef(null);
 
 
 const initMap = async () => {
-  console.log(1)
   const AMap =await AMapLoader.load({
       key:"21197c9fef143c98f6d08bf2ebab8488",             // 申请好的Web端开发者Key，首次调用 load 时必填
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
@@ -60,7 +58,7 @@ const initMap = async () => {
   //       polyline.setMap(map);
   // })
   mapStore.stationList.forEach(item => {
-    let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 300px"> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" ><span>' + item.content + "</span></div></div></div>";
+    let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 300px" display: inline-block;> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" ><span>' + item.content + "</span></div></div></div>";
     var marker = new AMap.Marker({
           icon: '/src/assets/img/定位点1.png', // 添加 Icon 图标 URL
           position: item.position, // 基点位置

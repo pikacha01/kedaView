@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import {} from 'vue'
+import { onMounted} from 'vue'
+import { headerDataStore } from '@/store'
+const store = headerDataStore()
+
+onMounted(() => {
+  store.getPoverRealTime()
+})
 
 </script>
 
