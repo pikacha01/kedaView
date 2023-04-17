@@ -2,12 +2,12 @@
 import {computed,ref, onMounted,onUnmounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
-
+import { leftDataStore } from '@/store';
 // const percentage = computed(()=>{
 //   return `80`
 // })
 const percentage = ref(90)
-
+const store = leftDataStore()
 const rotate = computed(() => {
   const rotateTotal = 405 - 159
   return (rotateTotal * percentage.value / 100  + 159).toFixed(2)
@@ -15,9 +15,10 @@ const rotate = computed(() => {
 
 let echart = echarts
 
-onMounted(() => {
-      initChart();
-    });
+onMounted(async () => {
+    await store.getPRdata()
+    initChart();
+});
 
 onUnmounted(() => {
   echart.dispose;
@@ -36,7 +37,7 @@ function initChart() {
       trigger: "axis",
     },
     legend: {
-      data: ["健康度HI","能效PR"],
+      data: ["能效PR"],
       top: "15%",
       textStyle: {
         color: "#ffffff",
@@ -44,16 +45,7 @@ function initChart() {
       },
     },
     xAxis: {
-      data: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-      ],
+      data: store.PRTitle,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -74,7 +66,7 @@ function initChart() {
     yAxis: [
       {
         type: "value",
-        name: "%",
+        name: "",
         nameTextStyle: {
           color: "#96D6E8",
           fontSize: 42
@@ -104,6 +96,9 @@ function initChart() {
           fontSize: 42
         },
         position: "right",
+        min: 0,
+        max: 100,
+        splitNumber: 6,  
         splitLine: {
           show: false,
         },
@@ -145,30 +140,11 @@ function initChart() {
     series: [
       {
         name: "能效PR",
-        type: "line",
+        type: "bar",
         yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
         symbol: "circle", //标记的图形为实心圆
-        symbolSize: 10, //标记的大小
-        itemStyle: {
-          //折线拐点标志的样式
-          color: "#ffba00",
-          borderColor: '#fff',
-          borderWidth: 3,
-        },
-        lineStyle: {
-          color: "#ffba00",
-        },
-        areaStyle: {
-          color: "rgba(5,140,255, 0.2)",
-        },
-        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
-      },
-      {
-        name: "健康度HI",
-        type: "bar",
-        barWidth: 15,
         itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -183,8 +159,8 @@ function initChart() {
             ]),
           },
         },
-        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
-      },
+        data: store.PRValue,
+      }
     ],
   }
   );

@@ -1,35 +1,15 @@
 <script setup lang="ts">
 import {ref,onMounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { headerDataStore } from '@/store'
+import { leftDataStore } from '@/store'
 
-const store = headerDataStore()
+const store = leftDataStore()
 
 onMounted(async () => {
   await store.getContributeData()
-  boxData.value[0].yearData = store.energyContribute?.coalYear as number
-  boxData.value[0].total = store.energyContribute?.coalTotal as number
-  boxData.value[1].yearData = store.energyContribute?.co2Year as number
-  boxData.value[1].total = store.energyContribute?.co2Total as number
-  boxData.value[2].yearData = store.energyContribute?.treeYear as number
-  boxData.value[2].total = store.energyContribute?.treeTotal as number
+
 })
-const boxData = ref([{
-    yearData: 0,
-    total: 0,
-    title: "节约标煤(吨)",
-    image:"src/assets/img/社会贡献2.png"
-  },{
-    yearData: 0,
-    total: 0,
-    title:"CO2减排量(吨)",
-    image:"src/assets/img/社会贡献3.png"
-  },{
-    yearData: 0,
-    total: 0,
-    title: "等效植树量(棵)",
-    image:"src/assets/img/社会贡献4.png"
-  }])
+
 
 
 </script>
@@ -38,7 +18,7 @@ const boxData = ref([{
   <div class="container">
     <ChartTitle title="社会贡献" />
     <div class="body">
-      <div class="box" v-for="item in boxData" :key="item.title">
+      <div class="box" v-for="item in store.energyContribute" :key="item.title">
         <div class="text">
           年度
         </div>

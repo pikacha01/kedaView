@@ -26,3 +26,9 @@ export interface energyContribute {
   treeTotal: number,
   treeYear: number
 }
+export interface energyContributeList {
+  yearData: number,
+  total: number,
+  title: string,
+  image: string
+}
