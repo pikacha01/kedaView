@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import {computed,ref} from 'vue'
+import {computed,ref, onMounted,onUnmounted} from 'vue'
 import ChartTitle from './chartTitle.vue';
+import * as echarts from "echarts";
+
 // const percentage = computed(()=>{
 //   return `80`
 // })
@@ -10,6 +12,194 @@ const rotate = computed(() => {
   const rotateTotal = 405 - 159
   return (rotateTotal * percentage.value / 100  + 159).toFixed(2)
 })
+
+let echart = echarts
+
+onMounted(() => {
+      initChart();
+    });
+
+onUnmounted(() => {
+  echart.dispose;
+});
+
+  // 基础配置一下Echarts
+  function initChart() {
+  let chart = echart.init(document.getElementById("lineChart") as HTMLElement, "dark");
+  // 把配置和数据放这里
+  chart.setOption({
+    grid: {
+      top: "25%",
+      bottom: "10%", //也可设置left和right设置距离来控制图表的大小
+      backgroundColor:"#07191f"
+    },
+    backgroundColor:"#07191f",
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+        label: {
+          show: true,
+        },
+      },
+    },
+    legend: {
+      data: [,"主营业务","销售水量"],
+      top: "15%",
+      textStyle: {
+        color: "#ffffff",
+      },
+    },
+    xAxis: {
+      data: [
+        "当年完成水量",
+        "去年同期水量",
+        "滚动目标值水量",
+        "全年目标值水量",
+        "当年完成金额",
+        "去年同期金额",
+        "滚动目标金额",
+        "全年目标值",
+      ],
+      axisLine: {
+        show: true, //隐藏X轴轴线
+        lineStyle: {
+          color: "#065a63",
+        },
+      },
+      axisTick: {
+        show: true, //隐藏X轴刻度
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#96D6E8", //X轴文字颜色
+        },
+      },
+    },
+    yAxis: [
+      {
+        type: "value",
+        name: "%",
+        nameTextStyle: {
+          color: "#96D6E8",
+        },
+        splitLine: {
+          show:false
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLine: {
+          show: false,
+          lineStyle: {
+            color: "#FFFFFF",
+          },
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: "#96D6E8 ",
+          },
+        },
+      },
+      {
+        type: "value",
+        name: "%",
+        nameTextStyle: {
+          color: "#96D6E8 ",
+        },
+        position: "right",
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLine: {
+          show: false,
+        },
+        axisLabel: {
+          show: true,
+          formatter: "{value}", //右侧Y轴文字显示
+          textStyle: {
+            color: "#96D6E8",
+          },
+        },
+      },
+      {
+        type: "value",
+        gridIndex: 0,
+        min: 50,
+        max: 100,
+        splitNumber: 8,
+        splitLine: {
+          show: false,
+        },
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          show: false,
+        },
+      },
+    ],
+    series: [
+      {
+        name: "销售水量",
+        type: "line",
+        yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+        smooth: true, //平滑曲线显示
+        showAllSymbol: true, //显示所有图形。
+        symbol: "circle", //标记的图形为实心圆
+        symbolSize: 10, //标记的大小
+        itemStyle: {
+          //折线拐点标志的样式
+          color: "#ffba00",
+          borderColor: '#fff',
+          borderWidth: 3
+        },
+        lineStyle: {
+          color: "#ffba00",
+        },
+        areaStyle: {
+          color: "rgba(5,140,255, 0.2)",
+        },
+        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
+      },
+      {
+        name: "主营业务",
+        type: "bar",
+        barWidth: 15,
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: "#22e7e4",
+              },
+              {
+                offset: 1,
+                color: "#04417d",
+              },
+            ]),
+          },
+        },
+        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
+      },
+    ],
+  }
+  );
+  window.onresize = function() {
+    //自适应大小
+    chart.resize()
+  };
+}
+
+
 </script>
 
 <template>
@@ -47,8 +237,7 @@ const rotate = computed(() => {
               </div>
           </div>
         </div>
-        <div class="lineChart">
-
+        <div class="lineChart" id="lineChart">
         </div>
       </div>
     </div>

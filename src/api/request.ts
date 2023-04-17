@@ -1,5 +1,5 @@
 import axios, { type Method } from 'axios'
-export const baseUrl = 'https://zhuyiyun.com/api/dev/smoker/'
+export const baseUrl = 'https://zhuyiyun.com/api/smoker/'
 const instance = axios.create({
   // TODO 1. 基础地址，超时时间
   baseURL: baseUrl,

@@ -61,7 +61,7 @@ const initMap = async () => {
   //       polyline.setMap(map);
   // })
   markerData.forEach(item => {
-    let markerContent = '<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 0"> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" >' + item.content + "</div></div><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>";
+    let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 0"> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" >' + item.content + "</div></div></div>";
     var marker = new AMap.Marker({
           icon: '/src/assets/img/定位点1.png', // 添加 Icon 图标 URL
           position: item.position, // 基点位置
