@@ -34,12 +34,6 @@ function initChart() {
     },
     tooltip: {
       trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-        label: {
-          show: true,
-        },
-      },
     },
     legend: {
       data: ["健康度HI","能效PR"],

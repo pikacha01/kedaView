@@ -13,11 +13,7 @@ instance.interceptors.response.use(
   }
 )
 
-type Data<T> = {
-  // code: number
-  // message: string
-  data: T
-}
+type Data<T> = T
 
 export const request = <T>(
   url: string,
