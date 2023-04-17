@@ -32,3 +32,10 @@ export interface energyContributeList {
   title: string,
   image: string
 }
+
+export enum date {
+  1, //小时
+  2, //天
+  3, //月
+  4 //年
+}

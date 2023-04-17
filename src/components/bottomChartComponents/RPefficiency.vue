@@ -2,10 +2,13 @@
 import {onMounted,onUnmounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
+import { bottomDataStore } from '@/store';
 
+const store = bottomDataStore()
 let echart = echarts
 
-onMounted(() => {
+onMounted(async () => {
+  await store.getPR()
   barChart();
 });
 function barChart() {
@@ -28,16 +31,7 @@ function barChart() {
       },
     },
     xAxis: {
-      data: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-      ],
+      data: store.PRxData,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -61,7 +55,9 @@ function barChart() {
         name: "%",
         nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 42
+          fontSize: 42,
+          padding:[0,0,40,0]
+
         },
         splitLine: {
           show:false
@@ -82,10 +78,11 @@ function barChart() {
       },
       {
         type: "value",
-        name: "%",
+        name: "小时",
         nameTextStyle: {
           color: "#96D6E8 ",
-          fontSize: 42
+          fontSize: 42,
+          padding:[0,0,40,50]
         },
         position: "right",
         splitLine: {
@@ -147,7 +144,7 @@ function barChart() {
         areaStyle: {
           color: "rgba(5,140,255, 0.2)",
         },
-        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
+        data: store.HourYData,
       },
       {
         name: "能效PR",
@@ -167,7 +164,7 @@ function barChart() {
             ]),
           },
         },
-        data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
+        data: store.PRyData,
       },
     ],
   }

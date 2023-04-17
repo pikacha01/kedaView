@@ -6,18 +6,18 @@ import { leftDataStore } from '@/store';
 // const percentage = computed(()=>{
 //   return `80`
 // })
-const percentage = ref(90)
 const store = leftDataStore()
 const rotate = computed(() => {
   const rotateTotal = 405 - 159
-  return (rotateTotal * percentage.value / 100  + 159).toFixed(2)
+  return (rotateTotal * store.alarmReport / 100  + 159).toFixed(2)
 })
 
 let echart = echarts
 
 onMounted(async () => {
-    await store.getPRdata()
-    initChart();
+  await store.getPRdata()
+  await store.getalarmReport()
+  initChart();
 });
 
 onUnmounted(() => {
@@ -93,7 +93,8 @@ function initChart() {
         name: "%",
         nameTextStyle: {
           color: "#96D6E8 ",
-          fontSize: 42
+          fontSize: 42,
+          padding:[0,0,40,50]
         },
         position: "right",
         min: 0,
@@ -183,9 +184,9 @@ function initChart() {
         </div>
         <div class="content">
           <div class="strip">
-            <img src="@/assets/img/电站健康分析4.png" :style="{width: percentage+'%'}" alt="">
+            <img src="@/assets/img/电站健康分析4.png" :style="{width: store.PRProgress+'%'}" alt="">
           </div>
-          <div class="percent">{{ percentage }}<span style="font-size: 45px;">%</span></div>
+          <div class="percent">{{ store.PRProgress }}<span style="font-size: 45px;">%</span></div>
         </div>
       </div>
       <div class="chart">
@@ -200,7 +201,7 @@ function initChart() {
               </div>
             </div>
           </div>
-          <div class="percent">{{ percentage }} <span>%</span></div>
+          <div class="percent">{{ store.alarmReport }} <span>%</span></div>
           <div class="healthyHI">
               健康度HI
               <div>

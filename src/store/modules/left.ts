@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getEnergyPhour, getPR, getContribute } from "@/api/energyApi"
-import {  energyContributeList,realTimePower } from "@/api/data"
+import { getEnergyPhourApi, getPRApi, getContributeApi,getalarmReportApi } from "@/api/energyApi"
+import {  energyContributeList } from "@/api/data"
 
 export const leftDataStore = defineStore(
   'left-store',
   () => {
     const getPoverRealTime = async () => {
-      const res = await getEnergyPhour()
+      const res = await getEnergyPhourApi()
       
     }
     // 社会贡献
@@ -29,7 +29,7 @@ export const leftDataStore = defineStore(
       }
     ])
     const getContributeData = async () => {
-      const contribute = await getContribute()
+      const contribute = await getContributeApi()
       energyContribute.value[0].yearData = contribute.coalYear as number
       energyContribute.value[0].total = contribute.coalTotal as number
       energyContribute.value[1].yearData = contribute.co2Year as number
@@ -42,10 +42,13 @@ export const leftDataStore = defineStore(
     const PRTitle = ref<string[]>([])
     const PRValue = ref<string[]>([])
     const regex = /(\d{4})-(\d{2})-(\d{2})/;
+    // PR进度条
+    const PRProgress = ref<number>(0)
     const getPRdata = async () => {
       PRTitle.value = []
       PRValue.value = []
-      const res = await getPR()
+      const res = await getPRApi()
+      PRProgress.value =  Number(res[res.length-1].value)
       res.forEach(item => {
         const match = regex.exec(item.title);
         const day = match![3]
@@ -54,9 +57,16 @@ export const leftDataStore = defineStore(
       })
     }
 
+    // 获取警报统计
+    const alarmReport = ref(0)
+    const getalarmReport =async () => {
+      const res =await getalarmReportApi(2)
+      alarmReport.value = 100 - Number(res[res.length-1].value)
+    }
+
 
     return {
       getPoverRealTime, energyContribute, getContributeData, getPRdata
-      ,PRTitle,PRValue}
+      ,PRTitle,PRValue,getalarmReport,alarmReport,PRProgress}
   }
 )

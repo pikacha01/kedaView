@@ -2,18 +2,23 @@
 import {onMounted,onUnmounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
+import { bottomDataStore } from '@/store';
 
-// 年
-const handleFirstOptionChange = () => {
-  console.log("FirstOptionChange")
-}
+const store = bottomDataStore()
 // 月
+const handleFirstOptionChange = () => {
+  store.getGenerateEnum = 3
+  store.getGenerateElectricity()
+}
+// 年
 const handleSecondOptionChange = () => {
-  console.log("handleSecondOptionChange")
+  store.getGenerateEnum = 4
+  store.getGenerateElectricity()
 }
 let echart = echarts
 
-onMounted(() => {
+onMounted(async () => {
+  await store.getGenerateElectricity()
   barChart();
 });
 
@@ -39,7 +44,8 @@ function barChart() {
       name: "万kwh",
       nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 30
+          fontSize: 30,
+          padding:[0,20,60,20]
       },
       axisLine: {
         show: false, //隐藏X轴轴线
@@ -68,7 +74,7 @@ function barChart() {
           fontSize: 25
         },
       },
-      data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+      data: store.generateYData
     },
     series: [
       {
@@ -95,7 +101,7 @@ function barChart() {
             ]),
           },
         },
-        data: [1823, 2389, 2904, 10490, 13144, 6230],
+        data: store.generateXData,
       }
     ]
   })
