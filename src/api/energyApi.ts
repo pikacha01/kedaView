@@ -1,5 +1,5 @@
 import request from "./request"
-import { stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage} from '@/api/data'
+import { stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage,devStatus} from '@/api/data'
 // 获取电站位置
 export const getStationListApi = (start: string, end: string) => {
   return request<stationList>(`/energy/plantList/${start}/${end}`, 'POST')
@@ -32,4 +32,8 @@ export const getVolumeApi = () => {
 // 获取电站工单
 export const getStationWorkOrderApi = () => {
   return request<operationManage>(`/energy/workOrder`)
+}
+//获取设备工况
+export const getdevStatusApi = () => {
+  return request<devStatus>(`/energy/devStatus`)
 }

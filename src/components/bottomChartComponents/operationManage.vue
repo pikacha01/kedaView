@@ -76,7 +76,11 @@ function cakeChart() {
         data: store.workOrder
       }
     ]
-  })
+  }),
+  window.onresize = function() {
+    //自适应大小
+    chart.resize()
+  };
 }
 
 onUnmounted(() => {
@@ -157,7 +161,7 @@ onUnmounted(() => {
             right: 0;
             bottom: 0;
             width: 100%;
-            background: url("@/assets/img/运维分析管理2.png") no-repeat center center;
+            background: url("@/assets/img/运维管理分析2.png") no-repeat center center;
           }
         }
         .percent{

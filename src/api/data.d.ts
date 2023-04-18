@@ -60,3 +60,11 @@ export interface operationManage {
   processed: number
   processing: number
 }
+
+// 设备工况
+export interface devStatus {
+  alarm: number,
+  normal: number,
+  offline: number,
+  total: number
+}

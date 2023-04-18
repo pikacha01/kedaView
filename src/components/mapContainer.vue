@@ -7,6 +7,7 @@ import BodyContainer from '@/views/BodyContainer.vue';
 import LeftChart from '@/views/leftChart.vue';
 import BottomChart from '@/views/bottomChart.vue';
 import { mapDataStore } from '@/store'
+import RightChart from '@/views/rightChart.vue';
 
 
 const mapStore = mapDataStore()
@@ -93,6 +94,7 @@ onMounted(async () => {
   <BodyContainer></BodyContainer>
   <LeftChart />
   <BottomChart />
+  <RightChart />
 </div>
 </template>
 
