@@ -184,9 +184,9 @@ function initChart() {
         </div>
         <div class="content">
           <div class="strip">
-            <img src="@/assets/img/电站健康分析4.png" :style="{width: store.PRProgress+'%'}" alt="">
+            <img src="@/assets/img/电站健康分析4.png" :style="{width: 100 - store.PRProgress+'%'}" alt="">
           </div>
-          <div class="percent">{{ store.PRProgress }}<span style="font-size: 45px;">%</span></div>
+          <div class="percent">{{ 100 - store.PRProgress }}<span style="font-size: 45px;">%</span></div>
         </div>
       </div>
       <div class="chart">

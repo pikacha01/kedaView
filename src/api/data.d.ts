@@ -39,3 +39,24 @@ export enum date {
   3, //月
   4 //年
 }
+
+// 电站容量
+export interface VolumeCapacity {
+  buildVolume: number;
+  installVolume: number;
+  unbuildVolume: number;
+}
+// 饼图接口
+export interface pieData {
+  name: string,
+  value: number,
+  [key?: string]: any; 
+}
+
+// 工单管理
+export interface operationManage {
+  close: number,
+  pending: number,
+  processed: number
+  processing: number
+}

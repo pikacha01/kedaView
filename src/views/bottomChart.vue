@@ -2,12 +2,18 @@
 import {} from 'vue'
 import ElectricityRank from '@/components/bottomChartComponents/electricityRank.vue';
 import RPefficiency from '@/components/bottomChartComponents/RPefficiency.vue';
+import RealTimePower from '@/components/bottomChartComponents/RealTimePower.vue';
+import PowerStationCapacity from '@/components/bottomChartComponents/powerStationCapacity.vue';
+import OperationManage from '@/components/bottomChartComponents/operationManage.vue'
 </script>
 
 <template>
   <div class="bottomAllChart addZIndex">
     <ElectricityRank />
     <RPefficiency />
+    <RealTimePower />
+    <PowerStationCapacity />
+    <OperationManage />
   </div>
 </template>
 

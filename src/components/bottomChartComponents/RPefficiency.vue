@@ -192,7 +192,7 @@ onUnmounted(() => {
 <style scoped lang="less">
 .rpEfficiency{
   margin-left: 150px;
-  width: 1300px;
+  width: 1350px;
   height: 100%;
   .barChart {
     width: 100%;
