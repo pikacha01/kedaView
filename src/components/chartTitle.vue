@@ -4,7 +4,8 @@ defineProps<{
   title: string,
   subTitle?: string,
   firstOption?: string,
-  secondOption?: string
+  secondOption?: string,
+  isChecked?: boolean
 }>()
 </script>
 
@@ -20,9 +21,9 @@ defineProps<{
       {{ subTitle }}
     </div>
     <div class="changeDate" >
-      <div class="firstOption" v-if="firstOption" @click="$emit
+      <div class="firstOption" v-if="firstOption" :style="{ 'background': `url(src/assets/img/${isChecked ? 'tab1.png' : 'tab2.png'}) no-repeat center center` }" @click="$emit
       ('changeFirstOption')">{{ firstOption }}</div>
-      <div class="secondOption" v-if="secondOption" @click="$emit('changeSecondOption')">{{ secondOption }}</div>
+      <div class="secondOption" v-if="secondOption" :style="{ 'background': `url(src/assets/img/${isChecked ? 'tab2.png' : 'tab1.png'}) no-repeat center center` }" @click="$emit('changeSecondOption')">{{ secondOption }}</div>
     </div>
   </div>
 </template>

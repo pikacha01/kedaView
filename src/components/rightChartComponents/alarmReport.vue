@@ -3,6 +3,7 @@ import { onMounted, onUnmounted } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { rightDataStore } from '@/store'
+import { computed } from '@vue/reactivity';
 const store = rightDataStore()
 
 let echart = echarts
@@ -16,16 +17,24 @@ onUnmounted(() => {
   echart.dispose;
 });
 
+
 // 月
 const handleFirstOptionChange = () => {
-  // store.getGenerateEnum = 3
-  // store.getGenerateEle ctricity()
+  store.type = 3
+  store.getAlarmReport()
 }
 // 日
 const handleSecondOptionChange = () => {
-  // store.getGenerateEnum = 4
-  // store.getGenerateElectricity()
+  store.type = 4
+  store.getAlarmReport()
 }
+
+const isChecked = computed(() => {
+  if (store.type === 3) {
+    return true
+  }
+  return false
+})
 
 function alarmChart() {
   let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
@@ -131,7 +140,9 @@ function alarmChart() {
     first-option="月" 
     second-option="日" 
     @changeFirstOption="handleFirstOptionChange"
-    @changeSecondOption="handleSecondOptionChange"  />
+    @changeSecondOption="handleSecondOptionChange" 
+    :is-checked="isChecked"
+    />
     <div class="alarmChart" id="alarmReport"></div>
   </div>
 

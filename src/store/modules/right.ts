@@ -47,7 +47,7 @@ export const rightDataStore = defineStore(
 
     return {
       getDevStatus, devStatusData, devStatusTotal, alarmxData, alarmyData,
-      getAlarmReport
+      getAlarmReport,type
     }
   }
 )

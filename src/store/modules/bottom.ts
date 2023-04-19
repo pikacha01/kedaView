@@ -180,7 +180,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const workOrder = ref<pieData[]>([])
   const workOrderName = ref<string[]>([])
   const sumValueOrderName = ref<number>(0)
-  const objDataWorkeOrder = ref <any>()
+  const objDataWorkeOrder = ref<any>()
+  const percentageComplete = ref<string>('')
   const getWorkOrder = async () => {
     workOrder.value = []
     const res = await getStationWorkOrderApi()
@@ -200,13 +201,14 @@ export const bottomDataStore = defineStore("bottom-store", () => {
       name: "已关闭工单",
       value: res.close
     })
+    percentageComplete.value = ((res.goodCount / res.processed) * 100).toFixed(2)
     sumValueOrderName.value = workOrder.value.reduce((acc,cur) => acc + cur.value,0)
     workOrderName.value = getArrayValue(workOrder.value, "name")
     objDataWorkeOrder.value = array2obj(workOrder.value, "name")
   }
   
   return {
-    generateXData, generateYData, getGenerateEnum, getGenerateElectricity,
+    generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,
     getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData,
     arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName
   }

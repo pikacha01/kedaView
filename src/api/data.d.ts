@@ -58,7 +58,8 @@ export interface operationManage {
   close: number,
   pending: number,
   processed: number
-  processing: number
+  processing: number,
+  goodCount: number
 }
 
 // 设备工况

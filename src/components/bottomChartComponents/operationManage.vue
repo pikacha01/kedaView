@@ -93,13 +93,13 @@ onUnmounted(() => {
     <ChartTitle title="运维管理分析" />
     <div class="progress">
       <div class="title">
-        运维管理分析
+        工单准时完成率
       </div>
       <div class="content">
           <div class="strip">
-            <img src="@/assets/img/电站健康分析4.png" :style="{width: 80 +'%'}" alt="">
+            <img src="@/assets/img/电站健康分析4.png" :style="{width: store.percentageComplete +'%'}" alt="">
           </div>
-          <div class="percent">{{ 100  }}<span style="font-size: 45px;">%</span></div>
+          <div class="percent">{{ store.percentageComplete  }}<span style="font-size: 45px;">%</span></div>
         </div>
     </div>
     <div class="chart">
@@ -124,7 +124,7 @@ onUnmounted(() => {
         font-family: Medium;
         background: url("@/assets/img/运维管理分析1.png") no-repeat center center;
         background-size: 100% 100%;
-        font-size: 45px;
+        font-size: 40px;
         color: #c4ebf6;
         text-align: center;
         height: 100%;
