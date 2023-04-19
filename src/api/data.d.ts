@@ -1,9 +1,16 @@
 // 获取电站列表
 export interface stationListInfo  {
-    lat: string,
-    lon: string,
-    name: string,
-    volume: number
+  lat: string,
+  lon: string,
+  name: string,
+  volume: number,
+  address: string,
+  factory: string,
+  health: string,
+  sn: string,
+  status: string,
+  todayPower: string,
+  totalPower: string
 }
 export interface stationList {
   data?: stationListInfo[],

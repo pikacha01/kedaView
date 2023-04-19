@@ -128,7 +128,7 @@ function initBarChart(data: pieData) {
   <div class="devStatus">
     <ChartTitle title="设备工况统计" />
     <div class="content">
-      <div class="box" v-for="(item) in store.devStatusData">
+      <div class="box" v-for="(item) in store.devStatusData" :key="item.name">
         <div class="chart"  :id="`proChart${item.name}`">
         </div>
         <div class="text">{{ item.value }} <span> / {{ store.devStatusTotal }}</span></div>

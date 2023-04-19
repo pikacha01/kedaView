@@ -4,8 +4,15 @@ import { getStationListApi } from '@/api/energyApi'
 import {stationList,stationListInfo} from '@/api/data'
 interface stationListDetail {
   position: string[],
-  content: string,
-  volume: number
+  name: string,
+  volume: number,
+  address: string,
+  factory: string,
+  health: string,
+  sn: string,
+  status: string,
+  todayPower: string,
+  totalPower: string
 }
 
 export const mapDataStore = defineStore(
@@ -22,8 +29,15 @@ export const mapDataStore = defineStore(
         stationListData.value.data.forEach(item => {
           tempList.push({
             position: [item.lon, item.lat],
-            content: item.name,
-            volume: item.volume
+            name: item.name,
+            volume: item.volume,
+            address: item.address,
+            factory: item.factory,
+            health: item.health,
+            sn: item.sn,
+            status: item.status,
+            todayPower: item.todayPower,
+            totalPower: item.totalPower
           })
         })
       }

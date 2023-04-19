@@ -7,6 +7,8 @@ onMounted(() => {
   store.getPoverRealTime()
 })
 
+const title = "科达智慧能源智能管控系统"
+
 </script>
 
 <template>
@@ -16,7 +18,9 @@ onMounted(() => {
         <div class="left">
           <img src="@/assets/title/标题修饰2.png" alt="">
         </div>
-        <img src="@/assets/title/标题名称.png" alt="">
+        <div class="text">
+          <div v-for="item in title" :key="title">{{ item }}</div>
+        </div>
         <div class="right">
           <img src="@/assets/title/标题修饰1.png" alt="">
         </div>
@@ -70,6 +74,13 @@ onMounted(() => {
       .left {
         margin-right: 100px;
         padding-bottom: 40px;
+      }
+      .text {
+        display: flex;
+        justify-content: space-between;
+        font-size: 120px;
+        width: 2000px;
+        color: #9FF6F4
       }
       .right{
         margin-left: 100px;

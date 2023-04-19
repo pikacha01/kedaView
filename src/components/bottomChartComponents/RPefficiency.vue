@@ -20,7 +20,19 @@ function barChart() {
     },
     tooltip: {
       trigger: "axis",
-
+      axisPointer: {
+        type: 'shadow'
+      },
+      backgroundColor: 'rgba(28, 212, 145, 0.2)', // 设置 Tooltip 的背景色
+      borderWidth: 1, // 设置 Tooltip 的边框宽度
+      formatter: function (params: any) {
+        let html =''
+        html += '<div style="width: 380px; height: 250px; padding: 10px; font-size: 40px; color: #fff;">'
+        html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
+        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>等效小时数:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'小时</div></div>';
+        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>能效PR:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[1].data +'%</div></div>';
+        return html
+      }
     },
     legend: {
       data: ["能效PR","等效小时数"],

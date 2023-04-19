@@ -32,12 +32,6 @@ function barChart() {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
     },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
     xAxis: {
       type: 'value',
       boundaryGap: [0, 0.01],
