@@ -37,3 +37,4 @@ export const getStationWorkOrderApi = () => {
 export const getdevStatusApi = () => {
   return request<devStatus>(`/energy/devStatus`)
 }
+// 获取

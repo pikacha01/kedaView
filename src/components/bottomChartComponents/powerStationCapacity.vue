@@ -65,7 +65,11 @@ function pieChart() {
         show: false
     }],
     series:store.optionData.series
-  })
+  }),
+  window.onresize = function() {
+    //自适应大小
+    chart.resize()
+  };
 }
 </script>
 

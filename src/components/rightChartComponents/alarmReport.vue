@@ -1,24 +1,34 @@
 <script setup lang="ts">
-import { onMounted,onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { bottomDataStore } from '@/store';
 import * as echarts from "echarts";
+import { rightDataStore } from '@/store'
+const store = rightDataStore()
 
-
-const store = bottomDataStore()
 let echart = echarts
 
 onMounted(async () => {
-  await store.getPR()
-  lineChart();
-});
-onUnmounted(() =>{
-  echart.dispose;
-}
-)
+  await store.getAlarmReport()
+  alarmChart()
+})
 
-function lineChart() {
-  let chart = echart.init(document.getElementById("LineChart") as HTMLElement);
+onUnmounted(() => {
+  echart.dispose;
+});
+
+// 月
+const handleFirstOptionChange = () => {
+  // store.getGenerateEnum = 3
+  // store.getGenerateEle ctricity()
+}
+// 日
+const handleSecondOptionChange = () => {
+  // store.getGenerateEnum = 4
+  // store.getGenerateElectricity()
+}
+
+function alarmChart() {
+  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",
@@ -30,7 +40,7 @@ function lineChart() {
     },
     xAxis: {
       type: 'category',
-      data: store.PRxData,
+      data: store.alarmxData,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -76,7 +86,7 @@ function lineChart() {
     },
     series: [
       {
-        data: store.HourYData,
+        data: store.alarmyData,
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
@@ -113,23 +123,28 @@ function lineChart() {
     chart.resize()
   };
 }
-
 </script>
 
 <template>
-  <div class="realTimePwoer">
-    <ChartTitle title="实时发电功率" />
-    <div class="lineChart" id="LineChart"></div>
+  <div class="alarmReport">
+    <ChartTitle title="告警趋势分析"
+    first-option="月" 
+    second-option="日" 
+    @changeFirstOption="handleFirstOptionChange"
+    @changeSecondOption="handleSecondOptionChange"  />
+    <div class="alarmChart" id="alarmReport"></div>
   </div>
+
 </template>
 
 <style scoped lang="less">
-
-.realTimePwoer{
-  margin-left: 150px;
-  width: 1350px;
-  height: 100%;
-  .lineChart {
+.alarmReport {
+  margin-top: 120px;
+  margin-left: 50px;
+  width: 1500px;
+  height: 820px;
+  .alarmChart{
+    margin-top: 50px;
     width: 100%;
     height: 700px;
   }

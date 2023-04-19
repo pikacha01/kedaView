@@ -66,5 +66,6 @@ export interface devStatus {
   alarm: number,
   normal: number,
   offline: number,
-  total: number
+  total: number,
+  [key: string]: number,
 }
