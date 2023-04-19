@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted,onUnmounted} from 'vue'
+import {computed, onMounted,onUnmounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
@@ -15,6 +15,14 @@ const handleSecondOptionChange = () => {
   store.getGenerateEnum = 4
   store.getGenerateElectricity()
 }
+
+const isChecked = computed(() => {
+  if (store.getGenerateEnum === 3) {
+    return true
+  }
+  return false
+})
+
 let echart = echarts
 
 onMounted(async () => {
@@ -113,6 +121,7 @@ function barChart() {
     sub-title="发电量分析" 
     first-option="月" 
     second-option="年" 
+    :is-checked="isChecked"
     @changeFirstOption="handleFirstOptionChange"
     @changeSecondOption="handleSecondOptionChange" />
     <div class="barChart" id="barChart"></div>

@@ -5,6 +5,7 @@ defineProps<{
   subTitle?: string,
   firstOption?: string,
   secondOption?: string
+  isChecked?: boolean
 }>()
 </script>
 
@@ -20,9 +21,9 @@ defineProps<{
       {{ subTitle }}
     </div>
     <div class="changeDate" >
-      <div class="firstOption" v-if="firstOption" @click="$emit
+      <div :style="`background: url(${isChecked? 'src/assets/img/tab1.png' : 'src/assets/img/tab2.png' }) no-repeat center center; `" class="firstOption" v-if="firstOption" @click="$emit
       ('changeFirstOption')">{{ firstOption }}</div>
-      <div class="secondOption" v-if="secondOption" @click="$emit('changeSecondOption')">{{ secondOption }}</div>
+      <div :style="`background: url(${!isChecked? 'src/assets/img/tab1.png' : 'src/assets/img/tab2.png' }) no-repeat center center; `"  class="secondOption" v-if="secondOption" @click="$emit('changeSecondOption')">{{ secondOption }}</div>
     </div>
   </div>
 </template>
@@ -70,7 +71,6 @@ defineProps<{
     .firstOption{
       height: 75px;
       width: 130px;
-      background: url("@/assets/img/tab1.png") no-repeat center center; 
       text-align: center;
       cursor: pointer;
       line-height: 75px;
@@ -78,7 +78,6 @@ defineProps<{
     .secondOption{
       height: 75px;
       width: 130px;
-      background: url("@/assets/img/tab2.png") no-repeat center center; 
       text-align: center;
       line-height: 75px;
       cursor: pointer;

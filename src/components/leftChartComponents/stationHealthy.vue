@@ -39,7 +39,8 @@ function initChart() {
         type: 'shadow'
       },
       backgroundColor: 'rgba(28, 212, 145, 0.2)', // 设置 Tooltip 的背景色
-      borderWidth: 1, // 设置 Tooltip 的边框宽度
+      borderWidth: 2, // 设置 Tooltip 的边框宽度
+      borderColor: '#065f9a', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
         html += '<div style="width: 365px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
