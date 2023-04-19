@@ -22,21 +22,32 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   // 能效PR
   const PRxData = ref<string[]>([])
   const PRyData = ref<string[]>([])
-  const HourYData = ref<string[]>([])
   const regex = /(\d{4})-(\d{2})-(\d{2})/;
   const getPR = async () => {
     PRxData.value = []
     PRyData.value = []
-    HourYData.value = []
     const data = await getPRApi()
-    const res = await getEnergyPhourApi()
     data.forEach(item=> {
       const match = regex.exec(item.title);
       const day = match![3]
       PRxData.value.push(day)
       PRyData.value.push(item.value)
     })
-    res.forEach(item => HourYData.value?.push(item.value))
+  }
+
+  // 实时发电功率
+  const HourYData = ref<string[]>([])
+  const HourXData = ref<string[]>([])
+  const getHourElectric = async () => {
+    HourXData.value = []
+    HourYData.value = []
+    const res = await getEnergyPhourApi()
+    res.forEach(item=> {
+      const match = regex.exec(item.title);
+      const day = match![3]
+      HourXData.value.push(day)
+      HourYData.value.push(item.value)
+    })
   }
 
   // 获取饼图需要数据的方法
@@ -184,6 +195,7 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const percentageComplete = ref<string>('')
   const getWorkOrder = async () => {
     workOrder.value = []
+    workOrderName.value = []
     const res = await getStationWorkOrderApi()
     workOrder.value.push({
       name: "待处理工单",
@@ -209,7 +221,7 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   
   return {
     generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,
-    getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData,
-    arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName
+    getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData, getHourElectric,
+    arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName,HourXData
   }
 })

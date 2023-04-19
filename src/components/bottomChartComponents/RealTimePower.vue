@@ -9,7 +9,7 @@ const store = bottomDataStore()
 let echart = echarts
 
 onMounted(async () => {
-  await store.getPR()
+  await store.getHourElectric()
   lineChart();
 });
 onUnmounted(() =>{
@@ -42,7 +42,7 @@ function lineChart() {
     },
     xAxis: {
       type: 'category',
-      data: store.PRxData,
+      data: store.HourXData,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {

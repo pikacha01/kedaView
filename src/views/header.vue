@@ -4,7 +4,6 @@ import { headerDataStore } from '@/store'
 const store = headerDataStore()
 
 onMounted(() => {
-  store.getPoverRealTime()
 })
 
 const title = "科达智慧能源智能管控系统"

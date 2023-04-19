@@ -25,8 +25,8 @@ function initBarChart(data: pieData) {
     title: [
       {
         text: (Number(data.value / store.devStatusTotal * 100).toFixed(2))+ "%",
-        x: "20%",
-        y: "35%",
+        x: "22%",
+        y: "45%",
         textStyle: {
           fontSize: "50",
           color: "#23f8ef",
@@ -39,8 +39,8 @@ function initBarChart(data: pieData) {
       
     ],
     polar: {
-      radius: ["95%", "70%"],
-      center: ["47%", "40%"],
+      radius: ["90%", "80%"],
+      center: ["50%", "50%"],
     },
     angleAxis: {
       max: store.devStatusTotal,
@@ -86,34 +86,6 @@ function initBarChart(data: pieData) {
           },
         },
       },
-      {
-        name: "",
-        type: "pie",
-        startAngle: 80,
-      //   radius: ["56%"],
-        hoverAnimation: false,
-        center: ["50%", "50%"],
-        itemStyle: {
-          color: "rgba(66, 66, 66, .1)",
-          borderWidth: 1,
-          // borderColor: "#5269EE",
-        },
-        data: [100],
-      },
-      {
-        name: "",
-        type: "pie",
-        startAngle: 80,
-      //   radius: ["38%"],
-        hoverAnimation: false,
-        center: ["50%", "50%"],
-        itemStyle: {
-          color: "rgba(66, 66, 66, .1)",
-          borderWidth: 1,
-          // borderColor: "#5269EE",
-        },
-        data: [100],
-      },
     ],
   })
   window.onresize = function() {
@@ -158,7 +130,7 @@ function initBarChart(data: pieData) {
     font-family: "Light";
     .chart {
       width: 100%; 
-      background: url("@/assets/img/设备工况统计1.png");
+      background: url("@/assets/img/设备工况统计1.png") no-repeat center center;
       height: 400px;
     }
     .text {
