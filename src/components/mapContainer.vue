@@ -61,27 +61,91 @@ const initMap = async () => {
   mapStore.stationList.forEach(item => {
     // let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 300px" display: inline-block;> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" ><span>' + item.content + "</span></div></div></div>";
     let extDataContent = `
-    <div style=" width: 1900px; height: 800px; display: flex;flex-direction: column; background-color: #1a232c;z-index: 9999;">
-      <div style="width: 100%; height: 100px; line-height: 100px; font-size: 56px;font-weight: bold;padding-left: 50px; color: #fff;">电站简介</div>
-      <div style="margin-top: 50px; display: flex;justify-content: center; align-items: center;height: 650px;">
-        <div style="width: 40%; height: 100%; background-color: #fff;"></div>
-        <div style="width: 60%; height: 100%;padding-left: 50px;">
-          <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">名称</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.name}</div></div>
-          <div style="width: 100%;display: flex;">
-            <div style="width: 50%;">
-              <div style="margin-top: 40px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">工厂</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.factory}</div></div>
-              <div style="margin-top: 40px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">健康</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.health}</div></div>
-              <div style="margin-top: 40px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">经纬度</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${Number(item.position[0]).toFixed(2)}N  ${Number(item.position[1]).toFixed(2)}E</div></div>
-              <div style="margin-top: 40px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">编号</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.sn}</div></div>
-            </div>
-            <div style="width: 50%;">
-              <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 270px;">状态</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.status}</div></div>
-              <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 270px;">今日发电量</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.todayPower} kWp</div></div>
-              <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 270px;">总发电量</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.totalPower} kWp</div></div>
-              <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 270px;">电站容量</div><div style="font-size: 40px; color: #94BBD1;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">${item.volume} kWp</div></div>
-            </div>
+    <div class="pop">
+      <div class="titlePop">
+        ${item.name}
+      </div>
+      <div class="addressPop">
+        <img src="src/assets/img/weizhi.png">
+        <span>${item.address}</span>
+      </div>
+      <div class="contentPop">
+        <div class="leftPop">
+          <img src="src/assets/img/guangfupng.png" alt="">
+        </div>
+        <div class="rightPop">
+          <div class="InfoLeft columnSpaceBetween">
+              <div class="grid">
+                <div class="caption">
+                  设备厂商
+                </div>
+                <div class="textPop">
+                  ${item.factory}
+                </div>
+              </div>
+              <div class="grid">
+                <div class="caption">
+                  经纬度
+                </div>
+                <div class="textPop">
+                  ${Number(item.position[0]).toFixed(2)}E  ${Number(item.position[1]).toFixed(2)}N
+                </div>
+              </div>
+              <div class="grid">
+                <div class="caption">
+                  今日发电量
+                </div>
+                <div class="textPop">
+                  ${item.todayPower}kWp
+                </div>
+              </div>
           </div>
-          <div style="margin-top: 20px;display: flex;"><div style="color: #1a232c;font-weight: bold; font-size: 45px; color: #C4EBF6 ; width: 200px;">地址</div><div style="font-size: 40px; color: #94BBD1;width:900px;">${item.address}</div></div>
+          <div class="InfoCenter columnSpaceBetween">
+            <div class="grid">
+                <div class="caption">
+                  状态
+                </div>
+                <div class="textPop">
+                  ${item.status}
+                </div>
+              </div>
+              <div class="grid">
+                <div class="caption">
+                  电站编号
+                </div>
+                <div class="textPop">
+                  ${item.sn}  
+                </div>
+              </div>
+              <div class="grid">
+                <div class="caption">
+                  总发电量
+                </div>
+                <div class="textPop">
+                  ${item.totalPower}kWp
+                </div>
+              </div>
+          </div>
+          <div class="InfoRight columnSpaceBetween">
+            <div class="grid">
+                <div class="caption">
+                  健康度
+                </div>
+                <div class="textPop">
+                  ${item.health}
+                </div>
+              </div>
+              <div class="grid">
+              </div>
+              <div class="grid">
+                <div class="caption">
+                  电站容量
+                </div>
+                <div class="textPop">
+                  ${item.volume}kWp
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>`
@@ -138,5 +202,86 @@ onMounted(async () => {
 }
 .amap-info-content{
   background-color: #1a232c !important;
+  width: 1950px !important;
+  height: 700px !important;
+}
+.pop{
+  width: 1950px;
+  height: 700px;
+  background: url(/src/assets/img/弹窗边角.png) no-repeat,
+              url("src/assets/img/弹窗背景.png") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  box-sizing: border-box;
+  .titlePop {
+    font-size: 45px;
+    width: 100%;
+    color: #fff;
+    font-family: Medium;
+    font-weight: bold;
+    height: 55px;
+  }
+  .addressPop {
+    width: 100%;
+    height: 45px;
+    margin-top: 35px;
+    line-height: 45px;
+    color:#23F7EE;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    span{
+      margin-left: 25px;
+    }
+  }
+  .contentPop {
+    width: 100%;
+    height: 100%;
+    margin-top: 45px;
+    display: flex;
+    .leftPop{
+      width: 587px;
+      height: 407px;
+      background: url("src/assets/img/883.png") no-repeat;
+      background-size: 100% 100%;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .rightPop {
+      margin-left: 65px;
+      height: 417px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex:1;
+      // 垂直等分
+      .columnSpaceBetween {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .caption {
+        color: #96D6E8;
+        font-size: 38px;
+        font-family: Light;
+      }
+      .textPop {
+        font-family: HRegular;
+        font-size: 45px;
+        color: #23F7EE
+      }
+      .InfoCenter {
+        margin-left: -50px;
+      }
+      .InfoRight {
+        margin-left: -25px;
+      }
+    }
+  }
 }
 </style>

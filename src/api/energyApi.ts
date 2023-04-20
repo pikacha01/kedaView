@@ -1,13 +1,13 @@
 import request from "./request"
-import { stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage,devStatus} from '@/api/data'
+import { title,kpi, stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage,devStatus} from '@/api/data'
 // 获取电站位置
 export const getStationListApi = (start: string, end: string) => {
   return request<stationList>(`/energy/plantList/${start}/${end}`, 'POST')
 }
 
 // 获取实时功率
-export const getEnergyPhourApi = () => {
-  return request<realTimePower[]>('/energy/phour')
+export const getEnergyPowerApi = () => {
+  return request<realTimePower[]>('/energy/power')
 }
 // 获取实时PR
 export const getPRApi = () => {
@@ -37,4 +37,15 @@ export const getStationWorkOrderApi = () => {
 export const getdevStatusApi = () => {
   return request<devStatus>(`/energy/devStatus`)
 }
-// 获取
+// 获取24小时实时功率
+export const getKpiApi = () => {
+  return request<kpi>(`/energy/kpi`)
+}
+//获取15小时等效小时
+export const getHourApi = () => {
+  return request<realTimePower[]>('/energy/phour')
+}
+// 获取标题
+export const getTitleApi = () => {
+  return request<title>('/energy/screenTitle')
+}

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getGenerateElectricityApi , getPRApi, getEnergyPhourApi,getVolumeApi,getStationWorkOrderApi } from "@/api/energyApi"
+import { getGenerateElectricityApi , getHourApi, getEnergyPowerApi,getVolumeApi,getStationWorkOrderApi } from "@/api/energyApi"
 import { pieData } from "@/api/data"
 
 export const bottomDataStore = defineStore("bottom-store", () => {
@@ -19,14 +19,14 @@ export const bottomDataStore = defineStore("bottom-store", () => {
     })
   }
 
-  // 能效PR
+  // 等效小时数
   const PRxData = ref<string[]>([])
   const PRyData = ref<string[]>([])
   const regex = /(\d{4})-(\d{2})-(\d{2})/;
   const getPR = async () => {
     PRxData.value = []
     PRyData.value = []
-    const data = await getPRApi()
+    const data = await getHourApi()
     data.forEach(item=> {
       const match = regex.exec(item.title);
       const day = match![3]
@@ -38,13 +38,14 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   // 实时发电功率
   const HourYData = ref<string[]>([])
   const HourXData = ref<string[]>([])
+  const pattern =  /\b(\d{2}):/;
   const getHourElectric = async () => {
     HourXData.value = []
     HourYData.value = []
-    const res = await getEnergyPhourApi()
+    const res = await getEnergyPowerApi()
     res.forEach(item=> {
-      const match = regex.exec(item.title);
-      const day = match![3]
+      const match = item.title.match(pattern)
+      const day = match![1]
       HourXData.value.push(day)
       HourYData.value.push(item.value)
     })

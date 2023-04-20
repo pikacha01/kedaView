@@ -77,3 +77,23 @@ export interface devStatus {
   total: number,
   [key: string]: number,
 }
+
+// 24小时功率
+export interface kpi {
+  energyMonth: string | number,
+  energyQuarter: string | number,
+  energyToday: string | number,
+  energyTotal: string | number,
+  energyYear: string | number,
+  maxPowerToday: string | number,
+  maxPowerYesterday: string | number,
+  powerNow: string | number ,
+  [key: string]: number | string,
+
+}
+
+export interface title{
+  msg : string,
+  status: number,
+  data: string
+}

@@ -1,15 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getEnergyPhourApi, getPRApi, getContributeApi,getalarmReportApi } from "@/api/energyApi"
+import {  getPRApi, getContributeApi,getalarmReportApi } from "@/api/energyApi"
 import {  energyContributeList } from "@/api/data"
 
 export const leftDataStore = defineStore(
   'left-store',
   () => {
-    const getPoverRealTime = async () => {
-      const res = await getEnergyPhourApi()
-      
-    }
     // 社会贡献
     const energyContribute = ref<energyContributeList[]>([{
         yearData: 0,
@@ -59,14 +55,16 @@ export const leftDataStore = defineStore(
 
     // 获取警报统计
     const alarmReport = ref(0)
-    const getalarmReport =async () => {
-      const res =await getalarmReportApi(2)
+    const getalarmReport = async () => {
+      // 昨日警报
+      const res = await getalarmReportApi(2)
+      console.log(res)
       alarmReport.value = 100 - Number(res[res.length-1].value)
     }
 
 
     return {
-      getPoverRealTime, energyContribute, getContributeData, getPRdata
+       energyContribute, getContributeData, getPRdata
       ,PRTitle,PRValue,getalarmReport,alarmReport,PRProgress}
   }
 )

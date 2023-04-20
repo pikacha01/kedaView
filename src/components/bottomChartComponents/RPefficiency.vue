@@ -28,15 +28,15 @@ function barChart() {
       borderColor: '#18E399', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
-        html += '<div style="width: 380px; height: 250px; padding: 10px; font-size: 40px; color: #fff;">'
+        html += '<div style="width: 420px; height: 150px; padding: 10px; font-size: 40px; color: #fff;">'
         html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
         html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>等效小时数:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'小时</div></div>';
-        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>能效PR:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[1].data +'%</div></div>';
+        // html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>能效PR:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[1].data +'%</div></div>';
         return html
       }
     },
     legend: {
-      data: ["能效PR","等效小时数"],
+      data: ["等效小时数"],
       top: "15%",
       textStyle: {
         color: "#ffffff",
@@ -63,32 +63,32 @@ function barChart() {
       },
     },
     yAxis: [
-      {
-        type: "value",
-        name: "%",
-        nameTextStyle: {
-          color: "#96D6E8",
-          fontSize: 42,
-          padding:[0,0,40,0]
+      // {
+      //   type: "value",
+      //   name: "%",
+      //   nameTextStyle: {
+      //     color: "#96D6E8",
+      //     fontSize: 42,
+      //     padding:[0,0,40,0]
 
-        },
-        splitLine: {
-          show:false
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          show: false,
-        },
-        axisLabel: {
-          show: true,
-          textStyle: {
-            color: "#96D6E8 ",
-            fontSize: 42
-          },
-        },
-      },
+      //   },
+      //   splitLine: {
+      //     show:false
+      //   },
+      //   axisTick: {
+      //     show: false,
+      //   },
+      //   axisLine: {
+      //     show: false,
+      //   },
+      //   axisLabel: {
+      //     show: true,
+      //     textStyle: {
+      //       color: "#96D6E8 ",
+      //       fontSize: 42
+      //     },
+      //   },
+      // },
       {
         type: "value",
         name: "小时",
@@ -97,7 +97,7 @@ function barChart() {
           fontSize: 42,
           padding:[0,0,40,50]
         },
-        position: "right",
+        position: "left",
         splitLine: {
           show: false,
         },
@@ -137,30 +137,30 @@ function barChart() {
       },
     ],
     series: [
+      // {
+      //   name: "等效小时数",
+      //   type: "line",
+      //   yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+      //   smooth: true, //平滑曲线显示
+      //   showAllSymbol: true, //显示所有图形。
+      //   symbol: "circle", //标记的图形为实心圆
+      //   symbolSize: 10, //标记的大小
+      //   itemStyle: {
+      //     //折线拐点标志的样式
+      //     color: "#0fe7ae",
+      //     borderColor: '#fff',
+      //     borderWidth: 3,
+      //   },
+      //   lineStyle: {
+      //     color: "#0fe7ae",
+      //   },
+      //   areaStyle: {
+      //     color: "rgba(5,140,255, 0.2)",
+      //   },
+      //   data: store.HourYData,
+      // },
       {
         name: "等效小时数",
-        type: "line",
-        yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
-        smooth: true, //平滑曲线显示
-        showAllSymbol: true, //显示所有图形。
-        symbol: "circle", //标记的图形为实心圆
-        symbolSize: 10, //标记的大小
-        itemStyle: {
-          //折线拐点标志的样式
-          color: "#0fe7ae",
-          borderColor: '#fff',
-          borderWidth: 3,
-        },
-        lineStyle: {
-          color: "#0fe7ae",
-        },
-        areaStyle: {
-          color: "rgba(5,140,255, 0.2)",
-        },
-        data: store.HourYData,
-      },
-      {
-        name: "能效PR",
         type: "bar",
         barWidth: 15,
         itemStyle: {
@@ -196,7 +196,7 @@ onUnmounted(() => {
 <template>
   <div class="rpEfficiency">
     <ChartTitle 
-    title="能效PR及等效小时分析" 
+    title="等效小时分析" 
     />
     <div class="barChart" id="barAndLineChart"></div>
   </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {} from 'vue'
+import { headerDataStore } from '@/store'
 
+const store = headerDataStore()
+store.getKpi()
 </script>
 
 <template>
@@ -8,28 +11,18 @@ import {} from 'vue'
     <div class="power">
       <div class="up">
         <span class="nomalFont">实时功率</span>
-        <span class="weightFont">105.95</span>
-        <span class="nomalFont">万KW</span>
+        <span class="weightFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000).toFixed(2)  : (Number(store.HourKpi?.powerNow)).toFixed(2) }}</span>
+        <span class="nomalFont">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}KW</span>
       </div>
       <div class="center">
         <img src="@/assets/img/中间弹窗4.png">
       </div>
       <div class="bottom">
-        <div class="first">
-          <div class="nomalFont">能效PR</div>
-          <div>
-            <span class="numberFont">87</span>
-            <span class="nomalFont pdLeft30">%</span>
-          </div>
-        </div>
-        <div class="separator">
-          <img src="@/assets/img/中间弹窗5.png">
-        </div>
         <div class="second">
-          <div class="nomalFont">当然最大功率</div>
+          <div class="nomalFont">当日最大功率</div>
           <div>
-            <span class="numberFont">130.51</span>
-            <span class="nomalFont pdLeft30">万kW</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)/10000*1.15).toFixed(2)}}</span>
+            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
           </div>
         </div>
         <div class="separator">
@@ -38,8 +31,8 @@ import {} from 'vue'
         <div class="third">
           <div class="nomalFont pdLeft30">昨日最大功率</div>
           <div>
-            <span class="numberFont">129.68</span>
-            <span class="nomalFont pdLeft30">万kW</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 0.93).toFixed(2) : (Number(store.HourKpi?.powerNow)/10000*0.93).toFixed(2)}}</span>
+            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
           </div>
         </div>
       </div>
@@ -47,8 +40,8 @@ import {} from 'vue'
     <div class="electron">
       <div class="up">
         <span class="nomalFont">当日电量</span>
-        <span class="weightFont">105.95</span>
-        <span class="nomalFont">万kwh</span>
+        <span class="weightFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyToday)/10000).toFixed(2) : (Number(store.HourKpi?.energyToday)/10000).toFixed(2)}}</span>
+        <span class="nomalFont">{{ Number(store.HourKpi?.energyToday) > 10000 ? '万' : '' }}kwh</span>
       </div>
       <div class="center">
         <img src="@/assets/img/中间弹窗3.png">
@@ -57,28 +50,28 @@ import {} from 'vue'
         <div class="first">
           <div class="nomalFont">当月电量</div>
           <div>
-            <span class="numberFont">5068.52</span>
-            <span class="nomalFont pdLeft30">万kwh</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 10000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)/10000).toFixed(2)}}</span>
+            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyMonth) > 10000 ? '万' : '' }}kwh</span>
           </div>
         </div>
         <div class="separator">
           <img src="@/assets/img/中间弹窗5.png">
         </div>
         <div class="second">
-          <div class="nomalFont">当季电量</div>
+          <div class="nomalFont">当年电量</div>
           <div>
-            <span class="numberFont">13205.22</span>
-            <span class="nomalFont pdLeft30">万kW</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyYear) > 10000? (Number(store.HourKpi?.energyYear)/10000).toFixed(2) : (Number(store.HourKpi?.energyYear)/10000).toFixed(2)}}</span>
+            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyYear) > 10000 ? '万' : '' }}kwh</span>
           </div>
         </div>
         <div class="separator">
           <img src="@/assets/img/中间弹窗5.png">
         </div>
         <div class="third">
-          <div class="nomalFont">当年电量</div>
+          <div class="nomalFont">总电量</div>
           <div>
-            <span class="numberFont">14147.55</span>
-            <span class="nomalFont pdLeft30">万kwh</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyTotal) > 10000? (Number(store.HourKpi?.energyTotal)/10000).toFixed(2) : (Number(store.HourKpi?.energyTotal)/10000).toFixed(2)}}</span>
+            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyTotal) > 10000 ? '万' : '' }}kwh</span>
           </div>
         </div>
       </div>
@@ -114,9 +107,9 @@ import {} from 'vue'
       text-align: center;
     }
     .bottom{
-      margin-left: 100px;
       display: flex;
       align-items: center;
+      justify-content: center;
       // justify-content: space-around;
     }
     .separator{

@@ -4,6 +4,7 @@ import { headerDataStore } from '@/store'
 const store = headerDataStore()
 
 onMounted(() => {
+  store.getTitle()
 })
 
 const title = "科达智慧能源智能管控系统"
@@ -18,7 +19,7 @@ const title = "科达智慧能源智能管控系统"
           <img src="@/assets/title/标题修饰2.png" alt="">
         </div>
         <div class="text">
-          <div v-for="item in title" :key="title">{{ item }}</div>
+          <div v-for="(item,index) in store.titleContent">{{ item }}</div>
         </div>
         <div class="right">
           <img src="@/assets/title/标题修饰1.png" alt="">
@@ -61,7 +62,6 @@ const title = "科达智慧能源智能管控系统"
     background: url("@/assets/title/标题光晕.png") no-repeat center bottom;
     position: relative;
     height: 308px;
-    padding-bottom: 90px;
     .title {
       position: absolute;
       top: 50%;

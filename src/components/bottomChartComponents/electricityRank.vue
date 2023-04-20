@@ -39,6 +39,7 @@ function barChart() {
     grid: {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
+      left:200
     },
     xAxis: {
       type: 'value',
@@ -75,6 +76,13 @@ function barChart() {
           color: "#96D6E8", //X轴文字颜色
           fontSize: 25
         },
+        formatter: function (value: any) {
+          var texts = value;
+          if (texts.length > 6) { // 字数限制
+            texts = texts.substr(0, 6) + '...';
+          }
+          return texts;
+        }
       },
       data: store.generateYData
     },
