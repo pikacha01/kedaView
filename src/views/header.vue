@@ -1,13 +1,50 @@
 <script setup lang="ts">
-import { onMounted} from 'vue'
+import { onMounted , ref, onUnmounted } from 'vue'
 import { headerDataStore } from '@/store'
 const store = headerDataStore()
 
+let now = new Date();
+let year = ref(now.getFullYear());
+let month = ref(now.getMonth() + 1);
+let date = ref(now.getDate());
+let day = ref(now.getDay());
+let hour = ref<any>(now.getHours());
+let minute = ref<any>(now.getMinutes());
+let second = ref<any>(now.getSeconds());
+// 将星期转换为中文
+let days = ["日", "一", "二", "三", "四", "五", "六"];
+let weekend = ref(days[day.value]);
+
+let time : any = null
 onMounted(() => {
   store.getTitle()
+  time = setInterval(() => {
+    now = new Date();
+    year.value = now.getFullYear();
+    month.value = now.getMonth() + 1;
+    date.value =now.getDate();
+    day.value = now.getDay();
+    hour.value = now.getHours();
+    if (hour.value < 10) {
+      hour.value = '0' + hour.value
+    }
+    minute.value = now.getMinutes();
+    if (minute.value < 10) {
+      minute.value = '0' + minute.value
+    }
+    second.value = now.getSeconds();
+    if (second.value < 10) {
+      second.value = '0' + second.value
+    }
+    weekend.value = days[day.value]
+  },500)
 })
 
-const title = "科达智慧能源智能管控系统"
+onUnmounted(() => {
+  window.clearInterval(time)
+  time = null
+})
+
 
 </script>
 
@@ -19,7 +56,7 @@ const title = "科达智慧能源智能管控系统"
           <img src="@/assets/title/标题修饰2.png" alt="">
         </div>
         <div class="text">
-          <div v-for="(item,index) in store.titleContent">{{ item }}</div>
+          <div v-for="(item) in store.titleContent">{{ item }}</div>
         </div>
         <div class="right">
           <img src="@/assets/title/标题修饰1.png" alt="">
@@ -28,10 +65,10 @@ const title = "科达智慧能源智能管控系统"
       <div class="rightHeader">
         <div class="date">
           <div class="time">
-            14:54:45
+            {{ hour }}:{{ minute }}:{{ second }}
           </div>
           <div class="weekend smallSize">
-            2022/5/19 星期三
+            {{ year }}/{{ month }}/{{ date }} 星期{{ weekend }}
           </div>
         </div>
         <div class="separate">
