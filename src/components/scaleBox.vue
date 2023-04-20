@@ -25,7 +25,7 @@ const setScale = () => {
 }
 const debounce =(fn : Function, delay: number)=> {
       let delays = delay || 500;
-      let timer : number | undefined | null;
+      let timer : any
       return function (this: unknown) {
         let th = this;
         let args = arguments;
