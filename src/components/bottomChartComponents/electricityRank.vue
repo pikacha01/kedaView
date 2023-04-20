@@ -31,7 +31,8 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("barChart") as HTMLElement);
+  echart.dispose(chart);
 });
 function barChart() {
   let chart = echart.init(document.getElementById("barChart") as HTMLElement);

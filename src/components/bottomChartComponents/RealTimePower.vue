@@ -12,8 +12,9 @@ onMounted(async () => {
   await store.getHourElectric()
   lineChart();
 });
-onUnmounted(() =>{
-  echart.dispose;
+onUnmounted(() => {
+  let chart = echart.init(document.getElementById("LineChart") as HTMLElement);
+  echart.dispose(chart);
 }
 )
 

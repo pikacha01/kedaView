@@ -14,7 +14,8 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
+  echart.dispose(chart);
 });
 
 

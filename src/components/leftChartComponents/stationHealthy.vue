@@ -21,7 +21,8 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
+  echart.dispose(chart);
 });
 
   // 基础配置一下Echarts

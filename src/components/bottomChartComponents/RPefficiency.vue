@@ -189,7 +189,8 @@ function barChart() {
 }
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
+  echart.dispose(chart);
 });
 </script>
 

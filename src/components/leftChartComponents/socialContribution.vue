@@ -7,7 +7,6 @@ const store = leftDataStore()
 
 onMounted(async () => {
   await store.getContributeData()
-
 })
 
 

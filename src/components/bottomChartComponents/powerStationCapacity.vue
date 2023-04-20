@@ -15,7 +15,8 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("pieChart") as HTMLElement);
+  echart.dispose(chart);
 });
 
 

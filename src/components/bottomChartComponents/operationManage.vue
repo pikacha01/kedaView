@@ -84,7 +84,8 @@ function cakeChart() {
 }
 
 onUnmounted(() => {
-  echart.dispose;
+  let chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
+  echart.dispose(chart);
 });
 </script>
 

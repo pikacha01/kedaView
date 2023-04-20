@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import { pieData } from '@/api/data'
 import * as echarts from "echarts";
@@ -13,8 +13,23 @@ onMounted(async () => {
   })
 })
 
+watch(() => {
+  return store.devStatusData
+}, () => {
+  store.devStatusData.forEach(item => {
+    let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
+    echart.dispose(chart);
+  })
+  store.devStatusData.forEach(item => {
+    initBarChart(item)
+  })
+})
+
 onUnmounted(() => {
-  echart.dispose;
+  store.devStatusData.forEach(item => {
+    let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
+    echart.dispose(chart);
+  })
 });
 
 let echart = echarts
