@@ -36,14 +36,18 @@ export const rightDataStore = defineStore(
 
     // 设备告警趋势
     const alarmxData = ref<string[]>([])
-    const alarmyData = ref<string[]>([])
+    // 日数据
+    const alarmyDataDay = ref<string[]>([])
+    // 月份数据
+    const alarmyDataMonth = ref<string[]>([])
     const type = ref<number>(3)
-    const pattern =  /\b(\d{2}):/;
     const regex = /(\d{4})-(\d{2})-(\d{2})/;
     const getAlarmReport = async () => {
       const tempX : string[] =  []
       const tempY : string[] =  []
-      const data = await getalarmReportApi(type.value)
+      const tempYDay : string[] =  []
+      const data = await getalarmReportApi(3)
+      const res = await getalarmReportApi(2)
       data.forEach(item => {
         let day =''
         if (type.value === 3) {
@@ -55,13 +59,17 @@ export const rightDataStore = defineStore(
         tempX.push(day)
         tempY.push(item.value)
       })
+      res.forEach(item => {
+        tempYDay.push(item.value)
+      })
       alarmxData.value = tempX
-      alarmyData.value = tempY
+      alarmyDataMonth.value = tempY
+      alarmyDataDay.value = tempYDay
     }
 
     return {
-      getDevStatus, devStatusData, devStatusTotal, alarmxData, alarmyData,
-      getAlarmReport,type
+      getDevStatus, devStatusData, devStatusTotal, alarmxData, alarmyDataMonth,
+      getAlarmReport,type,alarmyDataDay
     }
   }
 )

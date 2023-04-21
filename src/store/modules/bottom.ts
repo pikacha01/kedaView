@@ -7,15 +7,24 @@ export const bottomDataStore = defineStore("bottom-store", () => {
 
   // 发电量排行
   const generateXData = ref<string[]>()
+  // 月数据
   const generateYData = ref<string[]>()
+  // 年数据
+  const generateXDataYear = ref<string[]>()
+  // 3为月 4为年
   const getGenerateEnum = ref<number>(3)
   const getGenerateElectricity = async () => {
-    const res =await  getGenerateElectricityApi(getGenerateEnum.value)
+    const res =await  getGenerateElectricityApi(3)
+    const data =await  getGenerateElectricityApi(4)
     generateXData.value = []
     generateYData.value = []
+    generateXDataYear.value = []
     res.forEach(item => {
       generateXData.value?.push(item.value)
       generateYData.value?.push(item.title)
+    })
+    data.forEach(item => {
+      generateXDataYear.value?.push(item.value)
     })
   }
 
@@ -227,6 +236,6 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   return {
     generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,capacity,
     getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData, getHourElectric,
-    arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName,HourXData
+    arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName,HourXData,generateXDataYear
   }
 })

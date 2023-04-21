@@ -7,41 +7,40 @@ import { computed } from '@vue/reactivity';
 const store = rightDataStore()
 
 let echart = echarts
+let timer : any = null
 
 onMounted(async () => {
   await store.getAlarmReport()
   alarmChart()
+  timer = setInterval(() => {
+    store.type = store.type === 3 ? 2 : 3
+  },2000)
 })
 
 onUnmounted(() => {
+  window.clearInterval(timer)
+  timer = null
   let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   echart.dispose(chart);
 });
 
 watch(() => {
-  return store.alarmyData
+  return store.type
 }, () => {
   let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   const option: any = chart.getOption()// 获取当前配置项
   if (!option) {
     return 
   }
-  option.series[0].data = store.alarmyData
+  if (store.type === 3) {
+    option.series[0].data = store.alarmyDataMonth
+  } else {
+    option.series[0].data = store.alarmyDataDay
+  }
   option.xAxis[0].data = store.alarmxData
   chart.setOption(option)
 })
 
-
-// 月
-const handleFirstOptionChange = () => {
-  store.type = 3
-  store.getAlarmReport()
-}
-// 日
-const handleSecondOptionChange = () => {
-  store.type = 2
-  store.getAlarmReport()
-}
 
 const isChecked = computed(() => {
   if (store.type === 3) {
@@ -118,7 +117,7 @@ function alarmChart() {
     },
     series: [
       {
-        data: store.alarmyData,
+        data: store.alarmyDataMonth,
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
@@ -162,8 +161,6 @@ function alarmChart() {
     <ChartTitle title="告警趋势分析"
     first-option="月" 
     second-option="日" 
-    @changeFirstOption="handleFirstOptionChange"
-    @changeSecondOption="handleSecondOptionChange" 
     :is-checked="isChecked"
     />
     <div class="alarmChart" id="alarmReport"></div>

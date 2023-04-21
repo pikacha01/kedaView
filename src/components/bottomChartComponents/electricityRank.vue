@@ -5,16 +5,6 @@ import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
 
 const store = bottomDataStore()
-// 月
-const handleFirstOptionChange = () => {
-  store.getGenerateEnum = 3
-  store.getGenerateElectricity()
-}
-// 年
-const handleSecondOptionChange = () => {
-  store.getGenerateEnum = 4
-  store.getGenerateElectricity()
-}
 
 const isChecked = computed(() => {
   if (store.getGenerateEnum === 3) {
@@ -25,26 +15,37 @@ const isChecked = computed(() => {
 
 let echart = echarts
 
+let timer: any = null
+
 onMounted(async () => {
   await store.getGenerateElectricity()
   barChart();
   watch(() => {
-    return store.generateYData![0]
+    return store.getGenerateEnum  
   }, () => {
     let chart = echart.init(document.getElementById("barChart") as HTMLElement);
     const option:any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
     }
+    if (store.getGenerateEnum === 3) {
+      option.series[0].data = store.generateXData
+    } else {
+      option.series[0].data = store.generateXDataYear
+    }
     option.yAxis[0].data = store.generateYData
-    option.series[0].data = store.generateXData
     chart.setOption(option)
   })
+  timer = setInterval(() => {
+    store.getGenerateEnum = store.getGenerateEnum === 3 ? 4 : 3
+  }, 2000)
 });
 
 onUnmounted(() => {
   let chart = echart.init(document.getElementById("barChart") as HTMLElement);
   echart.dispose(chart);
+  window.clearInterval(timer)
+  timer = null;
 });
 function barChart() {
   let chart = echart.init(document.getElementById("barChart") as HTMLElement);
@@ -143,8 +144,7 @@ function barChart() {
     first-option="月" 
     second-option="年" 
     :is-checked="isChecked"
-    @changeFirstOption="handleFirstOptionChange"
-    @changeSecondOption="handleSecondOptionChange" />
+    />
     <div class="barChart" id="barChart"></div>
   </div>
 </template>

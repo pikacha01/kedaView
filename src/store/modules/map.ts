@@ -19,8 +19,9 @@ export const mapDataStore = defineStore(
   'map-store',
   () => {
     const stationListData = ref<stationList>({
+      data: [],
       start: 0,
-      end: 0,
+      end: 20,
       total: 0
     })
     const stationList = computed(() => {
@@ -44,11 +45,20 @@ export const mapDataStore = defineStore(
       return tempList
     })
     const getStationList =async () => {
-      const res = await getStationListApi('0','100')
-      stationListData.value.data = res.data
+      const res = await getStationListApi(''+stationListData.value.start,''+stationListData.value.end)
+      res.data?.forEach(item => {
+        stationListData.value.data?.push(item)
+      })
       stationListData.value.start = res.start
       stationListData.value.end = res.end
       stationListData.value.total = res.total
+      console.log(stationListData.value.start)
+      console.log(stationListData.value.end)
+      if (stationListData.value.data!.length < stationListData.value.total) {
+        stationListData.value.start += 20
+        stationListData.value.end += 20
+        getStationList()
+      }
     }
     return {stationListData ,getStationList,stationList}
   }
