@@ -22,13 +22,13 @@ onMounted(async () => {
           年度
         </div>
         <div class="Number">
-          {{ item.yearData }}
+          {{ item.yearData > 10000 ? (item.yearData / 10000).toFixed(2)+"万" : item.yearData}}
         </div>
         <div class="text">
           累计
         </div>
         <div class="Number">
-          {{ item.total }}
+          {{ item.total > 10000 ? (item.total / 10000).toFixed(2)+"万" : item.total }}
         </div>
         <div class="image">
           <img :src=item.image alt="">

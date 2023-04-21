@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { rightDataStore } from '@/store'
@@ -18,6 +18,19 @@ onUnmounted(() => {
   echart.dispose(chart);
 });
 
+watch(() => {
+  return store.alarmyData
+}, () => {
+  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
+  const option: any = chart.getOption()// 获取当前配置项
+  if (!option) {
+    return 
+  }
+  option.series[0].data = store.alarmyData
+  option.xAxis[0].data = store.alarmxData
+  chart.setOption(option)
+})
+
 
 // 月
 const handleFirstOptionChange = () => {
@@ -26,7 +39,7 @@ const handleFirstOptionChange = () => {
 }
 // 日
 const handleSecondOptionChange = () => {
-  store.type = 4
+  store.type = 2
   store.getAlarmReport()
 }
 
@@ -46,7 +59,16 @@ function alarmChart() {
     },
     tooltip: {
       trigger: "axis",
-
+      backgroundColor: 'rgba(28, 212, 145, 0.2)', // 设置 Tooltip 的背景色
+      borderWidth: 2, // 设置 Tooltip 的边框宽度
+      borderColor: '#18E399', // 设置 Tooltip 的边框颜色
+      formatter: function (params: any) {
+        let html =''
+        html += '<div style="width: 380px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
+        html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
+        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'万kw</div></div>';
+        return html
+      }
     },
     xAxis: {
       type: 'category',
@@ -70,7 +92,7 @@ function alarmChart() {
     },
     yAxis: {
       type: 'value',
-      name: "万kwh",
+      name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
           fontSize: 42,

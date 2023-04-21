@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {} from 'vue'
-import { headerDataStore } from '@/store'
+import { headerDataStore,bottomDataStore } from '@/store'
 
 const store = headerDataStore()
 store.getKpi()
+const bottomStore = bottomDataStore()
+
 </script>
 
 <template>
@@ -18,6 +20,16 @@ store.getKpi()
         <img src="@/assets/img/中间弹窗4.png">
       </div>
       <div class="bottom">
+        <div class="first">
+          <div class="nomalFont">并网容量</div>
+          <div>
+            <span class="numberFont">3.24</span>
+            <span class="nomalFont pdLeft30">万kW</span>
+          </div>
+        </div>
+        <div class="separator">
+          <img src="@/assets/img/中间弹窗5.png">
+        </div>
         <div class="second">
           <div class="nomalFont">当日最大功率</div>
           <div>
@@ -40,7 +52,7 @@ store.getKpi()
     <div class="electron">
       <div class="up">
         <span class="nomalFont">当日电量</span>
-        <span class="weightFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyToday)/10000).toFixed(2) : (Number(store.HourKpi?.energyToday)/10000).toFixed(2)}}</span>
+        <span class="weightFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyToday)/10000).toFixed(2) : (Number(store.HourKpi?.energyToday)).toFixed(2)}}</span>
         <span class="nomalFont">{{ Number(store.HourKpi?.energyToday) > 10000 ? '万' : '' }}kwh</span>
       </div>
       <div class="center">

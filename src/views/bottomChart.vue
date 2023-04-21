@@ -5,6 +5,7 @@ import RPefficiency from '@/components/bottomChartComponents/RPefficiency.vue';
 import RealTimePower from '@/components/bottomChartComponents/RealTimePower.vue';
 import PowerStationCapacity from '@/components/bottomChartComponents/powerStationCapacity.vue';
 import OperationManage from '@/components/bottomChartComponents/operationManage.vue'
+import RealTime from '@/components/bottomChartComponents/realTime.vue';
 </script>
 
 <template>
@@ -12,7 +13,8 @@ import OperationManage from '@/components/bottomChartComponents/operationManage.
     <ElectricityRank />
     <RPefficiency />
     <RealTimePower />
-    <PowerStationCapacity />
+    <RealTime />
+    <!-- <PowerStationCapacity /> -->
     <OperationManage />
   </div>
 </template>

@@ -11,19 +11,28 @@ onMounted(async () => {
   store.devStatusData.forEach(item => {
     initBarChart(item)
   })
+  watch(() => {
+  return store.devStatusData[0].value
+  }, () => {
+    let chart = echart.init(document.getElementById(`proChart正常设备`) as HTMLElement);
+    const option:any = chart.getOption()// 获取当前配置项
+    if (!option) {
+        return 
+    }
+    store.devStatusData.forEach(item => {
+      let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
+      const option:any = chart.getOption()// 获取当前配置项
+      if (!option) {
+        return 
+      }
+      option.title[0].text = (Number(item.value / store.devStatusTotal * 100).toFixed(2))+ "%"
+      option.angleAxis[0].max = store.devStatusTotal
+      option.series[0].data = [item.value]
+      chart.setOption(option)
+    })
+  })
 })
 
-watch(() => {
-  return store.devStatusData
-}, () => {
-  store.devStatusData.forEach(item => {
-    let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
-    echart.dispose(chart);
-  })
-  store.devStatusData.forEach(item => {
-    initBarChart(item)
-  })
-})
 
 onUnmounted(() => {
   store.devStatusData.forEach(item => {
@@ -33,6 +42,8 @@ onUnmounted(() => {
 });
 
 let echart = echarts
+
+
 
 function initBarChart(data: pieData) {
   let chart = echart.init(document.getElementById(`proChart${data.name}`) as HTMLElement);

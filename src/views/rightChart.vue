@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted ,} from 'vue'
+import { } from 'vue'
 import DevStatus from '@/components/rightChartComponents/devStatus.vue';
 import AlarmReport from '@/components/rightChartComponents/alarmReport.vue';
 

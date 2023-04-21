@@ -39,6 +39,9 @@ let map :any = null;
 
 // 地图画点和弹出框
 const dotting = () => {
+  if (!map) {
+   return 
+  }
   // 清除之前的标记
   map.clearMap()
   //将地图中心点设置为新标记的位置
@@ -135,7 +138,7 @@ const dotting = () => {
       </div>
     </div>`
     var marker = new AMap.Marker({
-        icon: '/src/assets/img/定位点1.png', // 添加 Icon 图标 URL
+        icon: 'src/assets/img/11.gif', // 添加 Icon 图标 URL
         position: item.position, // 基点位置
         extData: {
             content: extDataContent
@@ -201,6 +204,9 @@ onMounted(async () => {
   <LeftChart />
   <BottomChart />
   <RightChart />
+  <div class="leftCover"></div>
+  <div class="rightCover"></div>
+  <div class="bottomCover"></div>
 </div>
 </template>
 
@@ -295,5 +301,29 @@ onMounted(async () => {
       }
     }
   }
+}
+.leftCover {
+  width: 25%;
+  height: 100%;
+  z-index: 200;
+  position: absolute;
+  left: 0%;
+  background: linear-gradient(to right, rgba(7, 24, 31, 1), rgba(7, 24, 31, 0.1));
+}
+.rightCover {
+  width: 25%;
+  height: 100%;
+  z-index: 200;
+  position: absolute;
+  right: 0%;
+  background: linear-gradient(to left, rgba(7, 24, 31, 1), rgba(7, 24, 31, 0.1));
+}
+.bottomCover {
+  width: 100%;
+  height: 35%;
+  z-index: 200;
+  position: absolute;
+  bottom: 0%;
+  background: linear-gradient(to top, rgba(7, 24, 31, 1), rgba(7, 24, 31, 0.1));
 }
 </style>

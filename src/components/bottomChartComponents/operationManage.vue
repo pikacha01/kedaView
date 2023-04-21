@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted,onUnmounted} from 'vue'
+import {onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import { bottomDataStore } from "@/store"
 import * as echarts from "echarts";
@@ -12,6 +12,17 @@ let echart = echarts
 onMounted(async () => {
   await store.getWorkOrder()
   cakeChart();
+  watch(() => {
+    return store.workOrder
+  }, () => {
+    let chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
+    const option: any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.series[0].data = store.workOrder
+    chart.setOption(option)
+    })
 });
 
 function cakeChart() {

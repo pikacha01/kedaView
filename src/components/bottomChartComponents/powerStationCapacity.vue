@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted,onUnmounted,computed } from 'vue'
+import { onMounted,onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
@@ -12,6 +12,17 @@ let echart = echarts
 onMounted(async () => {
   await store.getVolume()
   pieChart();
+  watch(() => {
+    return store.optionData.series
+  }, () => {
+    let chart = echart.init(document.getElementById("pieChart") as HTMLElement);
+    const option: any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.series = store.optionData.series
+    chart.setOption(option)
+  })
 });
 
 onUnmounted(() => {
@@ -56,11 +67,11 @@ function pieChart() {
             }
         },
     },
-    tooltip: {
-        show: true,
-        trigger: "item",
-        formatter: "{a}<br>{b}:{c}({d}%)"
-    },
+    // tooltip: {
+    //     show: true,
+    //     trigger: "item",
+    //     formatter: "{a}<br>{b}:{c}({d}%)"
+    // },
     color: ['#1472bb', '#00c6ff', '#22ff89'],
     xAxis: [{
         show: false

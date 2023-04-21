@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted,onUnmounted} from 'vue'
+import {computed, onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
@@ -28,6 +28,18 @@ let echart = echarts
 onMounted(async () => {
   await store.getGenerateElectricity()
   barChart();
+  watch(() => {
+    return store.generateYData![0]
+  }, () => {
+    let chart = echart.init(document.getElementById("barChart") as HTMLElement);
+    const option:any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.yAxis[0].data = store.generateYData
+    option.series[0].data = store.generateXData
+    chart.setOption(option)
+  })
 });
 
 onUnmounted(() => {

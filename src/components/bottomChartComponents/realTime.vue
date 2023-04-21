@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted,onUnmounted,watch } from 'vue'
+import { onMounted,onUnmounted,watch,ref } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import { bottomDataStore } from '@/store';
 import * as echarts from "echarts";
@@ -7,31 +7,48 @@ import * as echarts from "echarts";
 
 const store = bottomDataStore()
 let echart = echarts
+const data= ref([502,456,351,102,0,0,0,0,0,0,0,0,125,225,325,456,478,520,550,600,650,700,697,657,620])
+let timer : any  =null 
 
 onMounted(async () => {
   await store.getHourElectric()
-  realEleChart();
-  // watch(() => {
-  //   return store.HourYData
-  //   }, () => {
-  //   let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
-  //   const option: any = chart.getOption()// 获取当前配置项
-  //   if (!option) {
-  //     return 
-  //   }
-  //   option.xAxis[0].data = store.HourXData
-  //   option.series[0].data = store.HourYData
-  //   chart.setOption(option)
-  // })
+  realTimeChart();
+  watch(() => {
+    return data.value
+    }, () => {
+    console.log('watch')
+    let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
+    const option: any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.xAxis[0].data = store.HourXData
+    option.series[0].data = data.value
+    chart.setOption(option)
+  })
+  // timer = setInterval(() => {
+  //   console.log("Timeout")
+  //   data.value = data.value.map(item => {
+  //     return item * 0.9
+  //   })
+  //   setTimeout(() => {
+  //     console.log("Timeout2")
+  //     data.value = data.value.map(item => {
+  //       return item * 5
+  //     })
+  //   },2000)
+  // },10000)
 });
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
+  timer = null
+  window.clearInterval(timer)
+  let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
   echart.dispose(chart);
 }
 )
 
-function realEleChart() {
-  let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
+function realTimeChart() {
+  let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",
@@ -101,35 +118,23 @@ function realEleChart() {
     },
     series: [
       {
-        data: store.HourYData,
-        // data: [499,456,371,222,0,0,0,0,0,0,0,0,245,321,425,456,478,520,550,600,650,700,697,657,620],
-        type: 'line',
-        smooth: true, //平滑曲线显示
-        showAllSymbol: true, //显示所有图形。
-        symbol: "circle", //标记的图形为实心圆
-        symbolSize: 10, //标记的大小
+        // data: store.HourYData,
+        data: data.value,
+        type: 'bar',
         itemStyle: {
-          //折线拐点标志的样式
-          color: "#0fe7ae",
-          borderColor: '#fff',
-          borderWidth: 3,
-        },
-        lineStyle: {
-          color: "#0fe7ae",
-        },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "rgba(28, 212, 145, 0.5)",
+                color: "#22e7e4",
               },
               {
                 offset: 1,
-                color: "rgba(0, 255, 210, 0.2)",
+                color: "#04417d",
               },
             ]),
+          },
         },
-        name: "等效小时数",
       }
     ]
   }
@@ -143,19 +148,19 @@ function realEleChart() {
 </script>
 
 <template>
-  <div class="realTimePwoer">
-    <ChartTitle title="实时发电量" />
-    <div class="lineChart" id="realEleChart"></div>
+  <div class="realPower">
+    <ChartTitle title="实时功率" />
+    <div class="realPowerChart" id="realPowerChart"></div>
   </div>
 </template>
 
 <style scoped lang="less">
 
-.realTimePwoer{
+.realPower{
   margin-left: 150px;
   width: 1350px;
   height: 100%;
-  .lineChart {
+  .realPowerChart {
     width: 100%;
     height: 700px;
   }

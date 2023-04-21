@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed,ref, onMounted,onUnmounted} from 'vue'
+import {computed,ref, onMounted,onUnmounted, watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { leftDataStore } from '@/store';
@@ -24,6 +24,20 @@ onUnmounted(() => {
   let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
   echart.dispose(chart);
 });
+
+// 数据更新配置
+watch(() => {
+  return store.PRValue
+}, () => {
+  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
+  const option:any = chart.getOption()// 获取当前配置项
+  if (!option) {
+    return 
+  }
+  option.series[0].data = store.PRValue
+  option.xAxis[0].data = store.PRTitle
+  chart.setOption(option,true)
+})
 
   // 基础配置一下Echarts
 function initChart() {
@@ -175,6 +189,7 @@ function initChart() {
           },
         },
         data: store.PRValue,
+        // data: [23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20],
       }
     ],
   }
@@ -215,7 +230,7 @@ function initChart() {
               </div>
             </div>
           </div>
-          <div class="percent">{{ store.alarmReport }} <span>%</span></div>
+          <div class="percent">{{ store.alarmReport.toFixed(2) }} <span>%</span></div>
           <div class="healthyHI">
               健康度HI
               <div>

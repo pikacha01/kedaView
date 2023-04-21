@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import {  getPRApi, getContributeApi,getalarmReportApi } from "@/api/energyApi"
+import {  getPRApi, getContributeApi,getdevStatusApi } from "@/api/energyApi"
 import {  energyContributeList } from "@/api/data"
 
 export const leftDataStore = defineStore(
@@ -41,24 +41,29 @@ export const leftDataStore = defineStore(
     // PR进度条
     const PRProgress = ref<number>(0)
     const getPRdata = async () => {
-      PRTitle.value = []
-      PRValue.value = []
+      const tempX:string[] = [] 
+      const tempY:string[] = [] 
       const res = await getPRApi()
       PRProgress.value =  Number(res[res.length-1].value)
       res.forEach(item => {
         const match = regex.exec(item.title);
         const day = match![3]
-        PRTitle.value.push(day)
-        PRValue.value.push(item.value)
+        tempX.push(day)
+        tempY.push(item.value)
       })
+      if (tempX.length !== 0) {
+        PRTitle.value = tempX
+        PRValue.value = tempY
+      }
     }
 
     // 获取警报统计
     const alarmReport = ref(0)
     const getalarmReport = async () => {
       // 昨日警报
-      const res = await getalarmReportApi(2)
-      alarmReport.value = 100 - Number(res[res.length-1].value)
+      const res = await getdevStatusApi()
+      console.log(res)
+      alarmReport.value = 100 - res.alarm  / res.total * 100
     }
 
 

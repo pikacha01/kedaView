@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted,onUnmounted} from 'vue'
+import {onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
@@ -10,6 +10,18 @@ let echart = echarts
 onMounted(async () => {
   await store.getPR()
   barChart();
+  watch(() => {
+    return store.PRyData
+  }, () => {
+    let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
+    const option: any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.xAxis[0].data = store.PRxData
+    option.series[0].data = store.PRyData
+  chart.setOption(option)
+  })
 });
 function barChart() {
   let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
