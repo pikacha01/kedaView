@@ -17,13 +17,14 @@ let echart = echarts
 
 let timer: any = null
 
+let chart : any = null
+
 onMounted(async () => {
   await store.getGenerateElectricity()
   barChart();
   watch(() => {
     return store.getGenerateEnum  
   }, () => {
-    let chart = echart.init(document.getElementById("barChart") as HTMLElement);
     const option:any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
@@ -42,13 +43,12 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("barChart") as HTMLElement);
   echart.dispose(chart);
   window.clearInterval(timer)
   timer = null;
 });
 function barChart() {
-  let chart = echart.init(document.getElementById("barChart") as HTMLElement);
+  chart = echart.init(document.getElementById("barChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",

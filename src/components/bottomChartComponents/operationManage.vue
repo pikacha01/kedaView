@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted,onUnmounted,watch} from 'vue'
+import {onMounted,onUnmounted,ref,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import { bottomDataStore } from "@/store"
 import * as echarts from "echarts";
@@ -8,25 +8,54 @@ const store = bottomDataStore()
 
 let echart = echarts
 
+let chart : any = null
 
 onMounted(async () => {
   await store.getWorkOrder()
   cakeChart();
+  circulation();
+  const option: any = chart.getOption()// 获取当前配置项
   watch(() => {
     return store.workOrder
   }, () => {
-    let chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
-    const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
     }
     option.series[0].data = store.workOrder
     chart.setOption(option)
-    })
+  })
 });
 
+// 实现动态效果
+let index = 0
+let timer: any = null
+
+function circulation() {
+  timer && window.clearTimeout(timer);
+  if (store.workOrder.length === 0) return;
+  // 取消高亮指定的数据图形
+  chart.dispatchAction({
+    type: "downplay",
+    seriesIndex: 0,
+    dataIndex: index === 0 ? 3 : index - 1,
+  });
+  chart.dispatchAction({
+    type: "highlight",
+    seriesIndex: 0,
+    dataIndex: index,
+  });
+  if (index >= store.workOrder.length - 1) {
+    index = 0;
+  } else {
+    index = index + 1;
+  }
+  timer = window.setTimeout(function () {
+    circulation();
+  }, 3000);
+}
+
 function cakeChart() {
-  let chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
+  chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
   chart.setOption({
     legend: {
       show: true,
@@ -38,35 +67,38 @@ function cakeChart() {
       textStyle: {
           rich: {
             title: {
-                fontSize: 25,
+                fontSize: 40,
                 color: "#23f8ef"
             },
             value: {
-                fontSize: 25,
+                fontSize: 40,
                 color: "#F6FF00"
             },
             text: {
-              fontSize: 25,
+              fontSize: 40,
               color:"#93bad0"
             }
           }
       },
-      top: "23%",
+      top: "20%",
       left: "55%",
       padding: [20, 30, 20, 0],
     },
     series: [
       {
         name: 'Access From',
-        
         type: 'pie',
-        radius: ['70%', '78%'],
+        radius: ['60%', '75%'],
         left: "-45%",
         avoidLabelOverlap: false,
         itemStyle: {
-          borderRadius: 10,
-          borderWidth: 2
+          borderRadius: 30,
+          normal: {
+            borderWidth: 25, // 间距的宽度
+            borderColor: '#06171e', //背景色
+          }
         },
+        hoverAnimation: true,
         label: {
           show: false,
           position: 'center'
@@ -78,7 +110,9 @@ function cakeChart() {
             fontSize: 50,
             fontWeight: 'bold',
             color:"#36befc"
-          }
+          },
+          sclae: true,
+          scaleSize: 15,
         },
         labelLine: {
           show: false
@@ -97,6 +131,8 @@ function cakeChart() {
 onUnmounted(() => {
   let chart = echart.init(document.getElementById("cakeChart") as HTMLElement);
   echart.dispose(chart);
+  window.clearTimeout(timer);
+  timer = null;
 });
 </script>
 

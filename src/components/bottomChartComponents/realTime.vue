@@ -10,14 +10,14 @@ let echart = echarts
 const data= ref([502,456,351,102,0,0,0,0,0,0,0,0,125,225,325,456,478,520,550,600,650,700,697,657,620])
 let timer : any  =null 
 
+let chart : any = null
+
 onMounted(async () => {
   await store.getHourElectric()
   realTimeChart();
   watch(() => {
     return data.value
     }, () => {
-    console.log('watch')
-    let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
     const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
@@ -42,13 +42,12 @@ onMounted(async () => {
 onUnmounted(() => {
   timer = null
   window.clearInterval(timer)
-  let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
   echart.dispose(chart);
 }
 )
 
 function realTimeChart() {
-  let chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
+  chart = echart.init(document.getElementById("realPowerChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",

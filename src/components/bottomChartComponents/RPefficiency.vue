@@ -6,6 +6,7 @@ import { bottomDataStore } from '@/store';
 
 const store = bottomDataStore()
 let echart = echarts
+let chart : any = null
 
 onMounted(async () => {
   await store.getPR()
@@ -13,7 +14,6 @@ onMounted(async () => {
   watch(() => {
     return store.PRyData
   }, () => {
-    let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
     const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
@@ -24,7 +24,7 @@ onMounted(async () => {
   })
 });
 function barChart() {
-  let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
+  chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",
@@ -201,7 +201,6 @@ function barChart() {
 }
 
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("barAndLineChart") as HTMLElement);
   echart.dispose(chart);
 });
 </script>

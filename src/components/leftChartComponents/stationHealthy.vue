@@ -11,6 +11,8 @@ const rotate = computed(() => {
   const rotateTotal = 405 - 159
   return (rotateTotal * store.alarmReport / 100  + 159).toFixed(2)
 })
+let chart : any = null
+
 
 let echart = echarts
 
@@ -21,7 +23,6 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
   echart.dispose(chart);
 });
 
@@ -29,7 +30,6 @@ onUnmounted(() => {
 watch(() => {
   return store.PRValue
 }, () => {
-  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
   const option:any = chart.getOption()// 获取当前配置项
   if (!option) {
     return 
@@ -41,7 +41,7 @@ watch(() => {
 
   // 基础配置一下Echarts
 function initChart() {
-  let chart = echart.init(document.getElementById("lineChart") as HTMLElement);
+  chart = echart.init(document.getElementById("lineChart") as HTMLElement);
   // 把配置和数据
   chart.setOption({
     grid: {

@@ -8,6 +8,7 @@ const store = bottomDataStore()
 
 let echart = echarts
 
+let chart : any = null
 
 onMounted(async () => {
   await store.getVolume()
@@ -15,7 +16,6 @@ onMounted(async () => {
   watch(() => {
     return store.optionData.series
   }, () => {
-    let chart = echart.init(document.getElementById("pieChart") as HTMLElement);
     const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
@@ -26,13 +26,12 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("pieChart") as HTMLElement);
   echart.dispose(chart);
 });
 
 
 function pieChart() {
-  let chart = echart.init(document.getElementById("pieChart") as HTMLElement);
+  chart = echart.init(document.getElementById("pieChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",

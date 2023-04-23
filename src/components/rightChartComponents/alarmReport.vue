@@ -8,6 +8,7 @@ const store = rightDataStore()
 
 let echart = echarts
 let timer : any = null
+let chart : any = null
 
 onMounted(async () => {
   await store.getAlarmReport()
@@ -20,14 +21,12 @@ onMounted(async () => {
 onUnmounted(() => {
   window.clearInterval(timer)
   timer = null
-  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   echart.dispose(chart);
 });
 
 watch(() => {
   return store.type
 }, () => {
-  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   const option: any = chart.getOption()// 获取当前配置项
   if (!option) {
     return 
@@ -50,7 +49,7 @@ const isChecked = computed(() => {
 })
 
 function alarmChart() {
-  let chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
+  chart = echart.init(document.getElementById("alarmReport") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",

@@ -52,8 +52,6 @@ export const mapDataStore = defineStore(
       stationListData.value.start = res.start
       stationListData.value.end = res.end
       stationListData.value.total = res.total
-      console.log(stationListData.value.start)
-      console.log(stationListData.value.end)
       if (stationListData.value.data!.length < stationListData.value.total) {
         stationListData.value.start += 20
         stationListData.value.end += 20

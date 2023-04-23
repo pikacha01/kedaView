@@ -7,31 +7,30 @@ import * as echarts from "echarts";
 
 const store = bottomDataStore()
 let echart = echarts
+let chart : any = null
 
 onMounted(async () => {
   await store.getHourElectric()
   realEleChart();
-  // watch(() => {
-  //   return store.HourYData
-  //   }, () => {
-  //   let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
-  //   const option: any = chart.getOption()// 获取当前配置项
-  //   if (!option) {
-  //     return 
-  //   }
-  //   option.xAxis[0].data = store.HourXData
-  //   option.series[0].data = store.HourYData
-  //   chart.setOption(option)
-  // })
+  watch(() => {
+    return store.HourYData
+    }, () => {
+    const option: any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.xAxis[0].data = store.HourXData
+    option.series[0].data = store.HourYData
+    chart.setOption(option)
+  })
 });
 onUnmounted(() => {
-  let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
   echart.dispose(chart);
 }
 )
 
 function realEleChart() {
-  let chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
+  chart = echart.init(document.getElementById("realEleChart") as HTMLElement);
   chart.setOption({
     grid: {
       top: "25%",

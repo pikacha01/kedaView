@@ -62,7 +62,6 @@ export const leftDataStore = defineStore(
     const getalarmReport = async () => {
       // 昨日警报
       const res = await getdevStatusApi()
-      console.log(res)
       alarmReport.value = 100 - res.alarm  / res.total * 100
     }
 

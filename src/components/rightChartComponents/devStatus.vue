@@ -5,6 +5,7 @@ import { pieData } from '@/api/data'
 import * as echarts from "echarts";
 import { rightDataStore } from '@/store'
 const store = rightDataStore()
+let chart : any = null
 
 onMounted(async () => {
   await store.getDevStatus()
@@ -14,13 +15,11 @@ onMounted(async () => {
   watch(() => {
   return store.devStatusData[0].value
   }, () => {
-    let chart = echart.init(document.getElementById(`proChart正常设备`) as HTMLElement);
     const option:any = chart.getOption()// 获取当前配置项
     if (!option) {
         return 
     }
     store.devStatusData.forEach(item => {
-      let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
       const option:any = chart.getOption()// 获取当前配置项
       if (!option) {
         return 
@@ -36,7 +35,6 @@ onMounted(async () => {
 
 onUnmounted(() => {
   store.devStatusData.forEach(item => {
-    let chart = echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
     echart.dispose(chart);
   })
 });
@@ -46,7 +44,7 @@ let echart = echarts
 
 
 function initBarChart(data: pieData) {
-  let chart = echart.init(document.getElementById(`proChart${data.name}`) as HTMLElement);
+  chart = echart.init(document.getElementById(`proChart${data.name}`) as HTMLElement);
   chart.setOption({
     title: [
       {

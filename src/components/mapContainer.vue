@@ -45,7 +45,7 @@ const dotting = () => {
   // 清除之前的标记
   map.clearMap()
   //将地图中心点设置为新标记的位置
-  map.setCenter(mapStore.stationList[0].position)
+  // map.setCenter(mapStore.stationList[0].position)
   mapStore.stationList.forEach(item => {
     // let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 300px" display: inline-block;> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" ><span>' + item.content + "</span></div></div></div>";
     let extDataContent = `
@@ -168,13 +168,19 @@ const initMap = async () => {
       key:"21197c9fef143c98f6d08bf2ebab8488",             // 申请好的Web端开发者Key，首次调用 load 时必填
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-    })
-    map = new AMap.Map("mapContainer",{  //设置地图容器id
-        viewMode:"2D",    //是否为3D地图模式
-        zoom:12,           //初始化地图级别
-        center:mapStore.stationList[0].position, //初始化地图中心点位置
-        mapStyle: 'amap://styles/grey'
-    });
+  })
+  let centerPlot : any  = null
+  mapStore.stationList.forEach(item => {
+    if (item.name = "马鞍山胜售1.3MWp分布式光伏项目") {
+      centerPlot = item
+    }
+  })
+  map = new AMap.Map("mapContainer",{  //设置地图容器id
+      viewMode:"2D",    //是否为3D地图模式
+      zoom:12,           //初始化地图级别
+      center:centerPlot.position, //初始化地图中心点位置
+      mapStyle: 'amap://styles/grey'
+  });
   // lineData.forEach(item => {
   //       let path = item.path;
   //       // 创建折线实例
