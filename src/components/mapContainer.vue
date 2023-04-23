@@ -145,7 +145,6 @@ const dotting = () => {
           // content:markerContent
           // offset: new AMap.Pixel(-10, -32), // 相对于基点的偏移位置
     });
-    console.log(marker)
     marker.setMap(map);
     //点击地图点标记的方法
     //鼠标悬停地图点标记
@@ -156,9 +155,9 @@ const dotting = () => {
       });
       infoWindow.open(map, e.target.getPosition());
     });
-    // marker.on('mouseout', function (e: any) {
-    //   map.clearInfoWindow();
-    // });
+    marker.on('mouseout', function (e: any) {
+      map.clearInfoWindow();
+    });
   })
 }
 
@@ -177,9 +176,9 @@ const initMap = async () => {
   })
   map = new AMap.Map("mapContainer",{  //设置地图容器id
       viewMode:"2D",    //是否为3D地图模式
-      zoom:10,           //初始化地图级别
+      zoom:9,           //初始化地图级别
       center:centerPlot.position, //初始化地图中心点位置
-      mapStyle: 'amap://styles/grey'
+      mapStyle: 'amap://styles/grey',
   });
   // lineData.forEach(item => {
   //       let path = item.path;
