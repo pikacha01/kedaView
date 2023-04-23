@@ -9,6 +9,10 @@ export const getStationListApi = (start: string, end: string) => {
 export const getEnergyPowerApi = () => {
   return request<realTimePower[]>('/energy/power')
 }
+// 获取实时功率
+export const getEnergyHourApi= () => {
+  return request<realTimePower[]>('/energy/energy')
+}
 // 获取实时PR
 export const getPRApi = () => {
   return request<realTimePower[]>('/energy/pr')

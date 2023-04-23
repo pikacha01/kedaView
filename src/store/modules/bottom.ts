@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getGenerateElectricityApi , getHourApi, getEnergyPowerApi,getVolumeApi,getStationWorkOrderApi } from "@/api/energyApi"
+import { getEnergyHourApi,getGenerateElectricityApi , getHourApi, getEnergyPowerApi,getVolumeApi,getStationWorkOrderApi } from "@/api/energyApi"
 import { pieData } from "@/api/data"
 
 export const bottomDataStore = defineStore("bottom-store", () => {
@@ -20,11 +20,11 @@ export const bottomDataStore = defineStore("bottom-store", () => {
     generateYData.value = []
     generateXDataYear.value = []
     res.forEach(item => {
-      generateXData.value?.push(item.value)
-      generateYData.value?.push(item.title)
+      generateXData.value?.unshift(item.value)
+      generateYData.value?.unshift(item.title)
     })
     data.forEach(item => {
-      generateXDataYear.value?.push(item.value)
+      generateXDataYear.value?.unshift(item.value)
     })
   }
 
@@ -44,12 +44,12 @@ export const bottomDataStore = defineStore("bottom-store", () => {
     })
   }
 
-  // 实时发电功率
+  // 24小时实时发电量
   const HourYData = ref<string[]>([])
   const HourXData = ref<string[]>([])
   const pattern =  /\b(\d{2}):/;
   const getHourElectric = async () => {
-    const res = await getEnergyPowerApi()
+    const res = await getEnergyHourApi()
     HourXData.value = []
     HourYData.value = []
     res.forEach(item=> {
@@ -59,6 +59,9 @@ export const bottomDataStore = defineStore("bottom-store", () => {
       HourYData.value.push(item.value)
     })
   }
+
+  // 实时发电功率
+  // const 
 
   // 获取饼图需要数据的方法
   function array2obj(array : pieData[], key:keyof pieData) {

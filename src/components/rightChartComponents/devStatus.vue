@@ -20,6 +20,7 @@ onMounted(async () => {
         return 
     }
     store.devStatusData.forEach(item => {
+      echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
       const option:any = chart.getOption()// 获取当前配置项
       if (!option) {
         return 

@@ -65,7 +65,7 @@ function realTimeChart() {
         let html =''
         html += '<div style="width: 450px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
         html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
-        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'万kw</div></div>';
+        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
         return html
       }
     },
@@ -91,7 +91,7 @@ function realTimeChart() {
     },
     yAxis: {
       type: 'value',
-      name: "万kwh",
+      name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
           fontSize: 42,
