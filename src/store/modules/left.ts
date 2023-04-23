@@ -42,15 +42,24 @@ export const leftDataStore = defineStore(
     const PRProgress = ref<number>(0)
     const getPRdata = async () => {
       const tempX:string[] = [] 
-      const tempY:string[] = [] 
+      const tempY: string[] = [] 
       const res = await getPRApi()
-      PRProgress.value =  Number(res[res.length-1].value)
       res.forEach(item => {
         const match = regex.exec(item.title);
         const day = match![3]
         tempX.push(day)
         tempY.push(item.value)
       })
+      for (let i = res.length - 1; i >= 0; i--){
+        if (Number(res[i].value) > 0) {
+          PRProgress.value = Number(res[i].value)
+          console.log(PRProgress.value)
+          break
+        }
+        if (i === 0) {
+          PRProgress.value = Number(res[i].value)
+        }
+      }
       if (tempX.length !== 0) {
         PRTitle.value = tempX
         PRValue.value = tempY
