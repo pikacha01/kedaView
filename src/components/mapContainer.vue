@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {onMounted , watch} from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader';
-import { shallowRef } from '@vue/reactivity'
 import Header from '../views/header.vue';
 import BodyContainer from '@/views/BodyContainer.vue';
 import LeftChart from '@/views/leftChart.vue';
@@ -149,14 +148,14 @@ const dotting = () => {
     marker.setMap(map);
     //点击地图点标记的方法
     //鼠标悬停地图点标记
-    marker.on("mouseover", function (e) {
+    marker.on("mouseover", function (e : any) {
       let infoWindow = new AMap.InfoWindow({
           content: e.target.getExtData().content,
           offset: new AMap.Pixel(0, -30)
       });
       infoWindow.open(map, e.target.getPosition());
     });
-    marker.on('mouseout', function (e) {
+    marker.on('mouseout', function (e: any) {
       map.clearInfoWindow();
     });
   })
@@ -169,10 +168,11 @@ const initMap = async () => {
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
   })
-  let centerPlot : any  = null
+  let centerPlot:any = null
   mapStore.stationList.forEach(item => {
-    if (item.name = "马鞍山胜售1.3MWp分布式光伏项目") {
+    if (item.address === "安徽省马鞍山市雨山区银塘镇湖西南路82号信成大厦") {
       centerPlot = item
+      console.log(centerPlot)
     }
   })
   map = new AMap.Map("mapContainer",{  //设置地图容器id

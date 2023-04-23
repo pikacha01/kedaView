@@ -42,6 +42,8 @@ export const mapDataStore = defineStore(
           })
         })
       }
+      console.log(stationListData.value.data)
+      console.log(tempList)
       return tempList
     })
     const getStationList =async () => {

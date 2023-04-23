@@ -20,24 +20,25 @@ onMounted(async () => {
   await store.getPRdata()
   await store.getalarmReport()
   initChart();
+  // 数据更新配置
+  watch(() => {
+    return store.PRValue
+  }, () => {
+    const option:any = chart.getOption()// 获取当前配置项
+    if (!option) {
+      return 
+    }
+    option.series[0].data = store.PRValue
+    option.xAxis[0].data = store.PRTitle
+    chart.setOption(option,true)
+  })
 });
 
 onUnmounted(() => {
   echart.dispose(chart);
 });
 
-// 数据更新配置
-watch(() => {
-  return store.PRValue
-}, () => {
-  const option:any = chart.getOption()// 获取当前配置项
-  if (!option) {
-    return 
-  }
-  option.series[0].data = store.PRValue
-  option.xAxis[0].data = store.PRTitle
-  chart.setOption(option,true)
-})
+
 
   // 基础配置一下Echarts
 function initChart() {

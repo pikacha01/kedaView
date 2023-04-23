@@ -53,7 +53,6 @@ export const leftDataStore = defineStore(
       for (let i = res.length - 1; i >= 0; i--){
         if (Number(res[i].value) > 0) {
           PRProgress.value = Number(res[i].value)
-          console.log(PRProgress.value)
           break
         }
         if (i === 0) {
