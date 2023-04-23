@@ -145,6 +145,7 @@ const dotting = () => {
           // content:markerContent
           // offset: new AMap.Pixel(-10, -32), // 相对于基点的偏移位置
     });
+    console.log(marker)
     marker.setMap(map);
     //点击地图点标记的方法
     //鼠标悬停地图点标记
@@ -155,9 +156,9 @@ const dotting = () => {
       });
       infoWindow.open(map, e.target.getPosition());
     });
-    marker.on('mouseout', function (e: any) {
-      map.clearInfoWindow();
-    });
+    // marker.on('mouseout', function (e: any) {
+    //   map.clearInfoWindow();
+    // });
   })
 }
 
@@ -172,12 +173,11 @@ const initMap = async () => {
   mapStore.stationList.forEach(item => {
     if (item.address === "安徽省马鞍山市雨山区银塘镇湖西南路82号信成大厦") {
       centerPlot = item
-      console.log(centerPlot)
     }
   })
   map = new AMap.Map("mapContainer",{  //设置地图容器id
       viewMode:"2D",    //是否为3D地图模式
-      zoom:12,           //初始化地图级别
+      zoom:10,           //初始化地图级别
       center:centerPlot.position, //初始化地图中心点位置
       mapStyle: 'amap://styles/grey'
   });
@@ -331,5 +331,11 @@ onMounted(async () => {
   position: absolute;
   bottom: 0%;
   background: linear-gradient(to top, rgba(7, 24, 31, 1), rgba(7, 24, 31, 0.1));
+}
+.amap-info-close{
+  display: none;
+}
+.amap-info-sharp {
+  display: none;
 }
 </style>

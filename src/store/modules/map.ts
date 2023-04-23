@@ -21,7 +21,7 @@ export const mapDataStore = defineStore(
     const stationListData = ref<stationList>({
       data: [],
       start: 0,
-      end: 20,
+      end: 50,
       total: 0
     })
     const stationList = computed(() => {
@@ -42,8 +42,6 @@ export const mapDataStore = defineStore(
           })
         })
       }
-      console.log(stationListData.value.data)
-      console.log(tempList)
       return tempList
     })
     const getStationList =async () => {

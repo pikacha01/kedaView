@@ -24,10 +24,10 @@ onMounted(() => {
     rightStore.getDevStatus()
     mapStore.stationListData.data = []
     mapStore.stationListData.start= 0
-    mapStore.stationListData.end = 20
+    mapStore.stationListData.end = 50
     mapStore.getStationList()
     headerStore.getTitle()
-  },1000*35)
+  },1000*60*60)
 })
 onUnmounted(() => {
   window.clearInterval(time)
