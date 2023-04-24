@@ -61,7 +61,6 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   }
 
   // 实时发电功率
-  // const 
 
   // 获取饼图需要数据的方法
   function array2obj(array : pieData[], key:keyof pieData) {
@@ -180,7 +179,7 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const objData = ref<any>()
   const arrName = ref<any>()
   const optionData = ref<any>()
-  const capacity  = ref()
+  const capacity  = ref<number>(0)
   const getVolume =async  () => {
     const res = await getVolumeApi()
     volumeValue.value = []

@@ -7,30 +7,58 @@ import { rightDataStore } from '@/store'
 const store = rightDataStore()
 let chart : any = null
 
+let timer :any = null
+
 onMounted(async () => {
   await store.getDevStatus()
   store.devStatusData.forEach(item => {
     initBarChart(item)
   })
   watch(() => {
-  return store.devStatusData[0].value
+    return store.devStatusData[0][0]
   }, () => {
     const option:any = chart.getOption()// 获取当前配置项
     if (!option) {
         return 
     }
     store.devStatusData.forEach(item => {
-      echart.init(document.getElementById(`proChart${item.name}`) as HTMLElement);
+      chart = echart.init(document.getElementById(`proChart${item[0].name}`) as HTMLElement);
       const option:any = chart.getOption()// 获取当前配置项
       if (!option) {
         return 
       }
-      option.title[0].text = (Number(item.value / store.devStatusTotal * 100).toFixed(2))+ "%"
-      option.angleAxis[0].max = store.devStatusTotal
-      option.series[0].data = [item.value]
+      option.series[0].data = item
       chart.setOption(option)
     })
   })
+
+  // 动态效果实现
+
+  // 当前下标
+  let i = 0 
+  timer = setInterval(() => {
+    // 上一个下表
+    const lastIndex = i === 0 ? 2 : i - 1
+    chart  = echart.init(document.getElementById(`proChart${store.devStatusData[lastIndex][0].name}`) as HTMLElement);
+    chart.dispatchAction({
+      type: 'downplay',
+      seriesIndex: 0,
+      dataIndex: 0
+    });
+    let option: any = chart.getOption()
+    option.title[0].text = (store.devStatusData[lastIndex][0].value / store.devStatusTotal * 100).toFixed(2) + "%"
+    chart.setOption(option)
+    chart  = echart.init(document.getElementById(`proChart${store.devStatusData[i][0].name}`) as HTMLElement);
+    option = chart.getOption()
+    option.title[0].text = ''
+    chart.dispatchAction({
+      type: "highlight",
+      seriesIndex: 0,
+      dataIndex: 0,
+    });
+    i = i === 2 ? 0 : i + 1
+    chart.setOption(option)
+  },3000)
 })
 
 
@@ -38,80 +66,54 @@ onUnmounted(() => {
   store.devStatusData.forEach(item => {
     echart.dispose(chart);
   })
+  clearInterval(timer)
+  timer  = null
 });
 
 let echart = echarts
 
 
 
-function initBarChart(data: pieData) {
-  chart = echart.init(document.getElementById(`proChart${data.name}`) as HTMLElement);
+function initBarChart(data: pieData[]) {
+  chart = echart.init(document.getElementById(`proChart${data[0].name}`) as HTMLElement);
   chart.setOption({
-    title: [
-      {
-        text: (Number(data.value / store.devStatusTotal * 100).toFixed(2))+ "%",
-        x: "22%",
-        y: "45%",
-        textStyle: {
-          fontSize: "50",
-          color: "#23f8ef",
-          foontWeight: "600",
-        },
-        image: "@/assets/img/设备工况统计2.png",
-        width: 32,
-        height: 41, 
-      },
-      
-    ],
-    polar: {
-      radius: ["90%", "80%"],
-      center: ["50%", "50%"],
+    title: {
+      text: (data[0].value / store.devStatusTotal * 100).toFixed(2) + "%",
+      top: "center",
+      left: "center",
+      textStyle: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color:"#23f8ef"
+      }
     },
-    angleAxis: {
-      max: store.devStatusTotal,
-      show: false,
-    },
-    radiusAxis: {
-      type: "category",
-      show: true,
-      axisLabel: {
+    series: [{
+      name: 'Access From',
+      type: 'pie',
+      avoidLabelOverlap: false,
+      hoverAnimation: true,
+      label: {
         show: false,
+        position: 'center'
       },
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-    },
-    series: [
-      {
-        name: "",
-        type: "bar",
-      //   roundCap: true,
-        barWidth: 30,
-        showBackground: true,
-        backgroundStyle: {
-          color: "#0a3142",
+      radius: ['80%', '91%'],
+      emphasis: {
+        label: {
+          show: true,
+          formatter: "{d}%",
+          fontSize: 50,
+          fontWeight: 'bold',
+          color:"#23f8ef"
         },
-        data: [data.value],
-        coordinateSystem: "polar",
-        itemStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-              {
-                offset: 0,
-                color: "#12575c",
-              },
-              {
-                offset: 1,
-                color: "#09ada4",
-              },
-            ]),
-          },
-        },
+        sclae: true,
+        scaleSize: 15,
       },
-    ],
+      labelLine: {
+        show: false
+      },
+      color: ["#09b8ae","#0a3142"],
+      data: data
+    }]
   })
   window.onresize = function() {
     //自适应大小
@@ -125,12 +127,12 @@ function initBarChart(data: pieData) {
   <div class="devStatus">
     <ChartTitle title="设备工况统计" />
     <div class="content">
-      <div class="box" v-for="(item) in store.devStatusData" :key="item.name">
-        <div class="chart"  :id="`proChart${item.name}`">
+      <div class="box" v-for="(item) in store.devStatusData" :key="item[0].name">
+        <div class="chart"  :id="`proChart${item[0].name}`">
         </div>
-        <div class="text">{{ item.value }} <span> / {{ store.devStatusTotal }}</span></div>
+        <div class="text">{{ item[0].value }} <span> / {{ store.devStatusTotal }}</span></div>
         <div class="title">
-          {{ item.name }}
+          {{ item[0].name }}
         </div>
       </div>
     </div>
@@ -161,7 +163,7 @@ function initBarChart(data: pieData) {
     .text {
       font-size: 65px;
       text-align: center;
-      margin-top: -50px;
+      margin-top: -30px;
       color: #FFF000;
       span{
         color: #09aea5;

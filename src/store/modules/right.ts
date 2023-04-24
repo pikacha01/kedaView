@@ -7,27 +7,42 @@ export const rightDataStore = defineStore(
   'right-store',
   () => {
     // 设备工况统计
-    const devStatusData = ref<pieData[]>([])
+    const devStatusData = ref<pieData[][]>([])
     const devStatusTotal = ref<number>(0)
     const getDevStatus = async () => {
       const res = await getdevStatusApi()
       if (devStatusData.value.length === 0) {
-        devStatusData.value.push({
+        devStatusData.value.push([{
           name: "正常设备",
           value: res.normal
-        })
-        devStatusData.value.push({
+        }, {
+          name: "总和",
+          value: res.total - res.normal
+        }])
+        devStatusData.value.push([{
           name: "离线设备",
           value: res.offline
-        })
-        devStatusData.value.push({
+        },{
+          name: "总和",
+          value: res.total - res.offline
+        }])
+        devStatusData.value.push([{
           name: "告警设备",
           value: res.alarm
-        })
+        },{
+          name: "总和",
+          value: res.total - res.alarm
+        }])
       } else {
-        devStatusData.value[0].value = res.normal
-        devStatusData.value[1].value = res.offline
-        devStatusData.value[2].value = res.alarm
+        devStatusData.value[0][0] = {
+          name: "正常设备",
+          value: res.normal
+        }
+        devStatusData.value[1][0].value = res.offline
+        devStatusData.value[2][0].value = res.alarm
+        devStatusData.value[0][1].value = res.total - res.normal
+        devStatusData.value[1][1].value = res.total - res.offline
+        devStatusData.value[2][1].value = res.total - res.alarm
         devStatusData.value =  devStatusData.value
       }
       

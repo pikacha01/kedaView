@@ -58,7 +58,7 @@ function barChart() {
     xAxis: {
       type: 'value',
       boundaryGap: [0, 0.01],
-      name: "万kwh",
+      name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
           fontSize: 30,

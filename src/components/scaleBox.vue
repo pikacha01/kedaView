@@ -8,7 +8,6 @@ const height = ref(3240)
 const getScale = () => {
       let wh = window.innerHeight / height.value;
       let ww = window.innerWidth / width.value;
-      console.log(ww < wh ? ww : wh);
       return ww < wh ? ww : wh;
 }
 const setScale = () => {

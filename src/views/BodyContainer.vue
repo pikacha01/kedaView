@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import {} from 'vue'
+import { onMounted } from 'vue'
 import { headerDataStore,bottomDataStore } from '@/store'
 
 const store = headerDataStore()
 store.getKpi()
 const bottomStore = bottomDataStore()
 
+onMounted(() => {
+  bottomStore.getVolume()
+
+})
 </script>
 
 <template>
@@ -23,8 +27,8 @@ const bottomStore = bottomDataStore()
         <div class="first">
           <div class="nomalFont">并网容量</div>
           <div>
-            <span class="numberFont">3.24</span>
-            <span class="nomalFont pdLeft30">万kW</span>
+            <span class="numberFont">{{ Number(bottomStore.capacity) > 10000? (Number(bottomStore.capacity)/10000).toFixed(2)  : (Number(bottomStore.capacity)).toFixed(2) }}</span>
+            <span class="nomalFont pdLeft30">{{ Number(bottomStore.capacity) > 10000 ? '万' : '' }}kW</span>
           </div>
         </div>
         <div class="separator">
@@ -99,15 +103,15 @@ const bottomStore = bottomDataStore()
   transform: translate(-50%, -50%);
   display: flex;
   .power{
-    background: url("@/assets/img/中间弹窗1.png") no-repeat center center;
+    background: url("@/assets/img/中间弹窗2.png") no-repeat center center;
     background-size: 100% 100%;
-    width: 1200px;
+    width: 1400px;
     height: 500px;
   }
   .electron {
     background: url("@/assets/img/中间弹窗2.png") no-repeat center center;
     background-size: 100% 100%;
-    width: 1650px;
+    width: 1400px;
     height: 500px;
   }
   .up {
