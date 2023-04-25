@@ -158,7 +158,7 @@ const closeDropDown = () => {
         </div>
       </div>
     </div>
-    <div class="selectOption" v-show="drownDownisShow" @mousemove="showDropDown" @mouseleave="closeDropDown">
+    <!-- <div class="selectOption" v-show="drownDownisShow" @mousemove="showDropDown" @mouseleave="closeDropDown">
       <a-dropdown :trigger="['click']">
         <div class="selectContent">
           <div class="pitch">
@@ -177,7 +177,7 @@ const closeDropDown = () => {
           </a-menu>
         </template>
       </a-dropdown>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -186,7 +186,7 @@ const closeDropDown = () => {
   width: 1500px;
   height: 820px;
   margin-left: 50px;
-  // position: relative;
+  position: relative;
   .content {
      margin-top: 100px;
      display: flex;
@@ -225,54 +225,54 @@ const closeDropDown = () => {
       font-size: 50px;
     }
   }
-  .selectOption{
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    height: 70px;
-    width: 500px;
-    background: rgba(14,69,85,0.5);
-    border: 2px solid #16AEC5;
-    border-radius: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .selectContent{
-      width: 500px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .pitch {
-      width: 350px;
-      overflow:hidden; //超出的文本隐藏
-      text-overflow:ellipsis; //溢出用省略号显示
-      white-space:nowrap; //溢出不换行
-      text-align: center;
-      font-size: 40px;
-      color: #96D6E8;
-      line-height: 70px;
-    }
-  }
+  // .selectOption{
+  //   position: absolute;
+  //   top: 0%;
+  //   right: 0%;
+  //   height: 70px;
+  //   width: 500px;
+  //   background: rgba(14,69,85,0.5);
+  //   border: 2px solid #16AEC5;
+  //   border-radius: 35px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .selectContent{
+  //     width: 500px;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //   }
+  //   .pitch {
+  //     width: 350px;
+  //     overflow:hidden; //超出的文本隐藏
+  //     text-overflow:ellipsis; //溢出用省略号显示
+  //     white-space:nowrap; //溢出不换行
+  //     text-align: center;
+  //     font-size: 40px;
+  //     color: #96D6E8;
+  //     line-height: 70px;
+  //   }
+  // }
 }
-.ant-dropdown-menu  {
-  background-color: rgba(7, 24, 31, 1);
-  height: 500px;
-  overflow-y: scroll;
-  // overflow:hidden;
-}
+// .ant-dropdown-menu  {
+//   background-color: rgba(7, 24, 31, 1);
+//   height: 500px;
+//   overflow-y: scroll;
+//   // overflow:hidden;
+// }
 
-/* 隐藏滚动条 */
-.ant-dropdown-menu::-webkit-scrollbar {
-  display: none;
-}
-:deep(.ant-dropdown-menu-item) {
-  color: #96D6E8 !important;
-  font-size: 35px;
-  padding: 15px 12px;
-}
-/* 设置下拉菜单选项的鼠标悬停样式 */
-:deep(.ant-dropdown-menu-item:hover) {
-  background-color: #0bdea5;
-}
+// /* 隐藏滚动条 */
+// .ant-dropdown-menu::-webkit-scrollbar {
+//   display: none;
+// }
+// :deep(.ant-dropdown-menu-item) {
+//   color: #96D6E8 !important;
+//   font-size: 35px;
+//   padding: 15px 12px;
+// }
+// /* 设置下拉菜单选项的鼠标悬停样式 */
+// :deep(.ant-dropdown-menu-item:hover) {
+//   background-color: #0bdea5;
+// }
 </style>

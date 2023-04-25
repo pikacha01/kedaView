@@ -161,9 +161,10 @@ const dotting = () => {
   })
 }
 
+let AMap :any  = null
 
 const initMap = async () => {
-  const AMap = await AMapLoader.load({
+  AMap = await AMapLoader.load({
       key:"21197c9fef143c98f6d08bf2ebab8488",             // 申请好的Web端开发者Key，首次调用 load 时必填
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等

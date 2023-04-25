@@ -9,10 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ADropdown: typeof import('ant-design-vue/es')['Dropdown']
     AlarmReport: typeof import('./src/components/rightChartComponents/alarmReport.vue')['default']
-    AMenu: typeof import('ant-design-vue/es')['Menu']
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ChartTitle: typeof import('./src/components/chartTitle.vue')['default']
     DevStatus: typeof import('./src/components/rightChartComponents/devStatus.vue')['default']
     ElectricityRank: typeof import('./src/components/bottomChartComponents/electricityRank.vue')['default']

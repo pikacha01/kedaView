@@ -37,7 +37,7 @@ onMounted(() => {
         <div class="second">
           <div class="nomalFont">当日最大功率</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)/10000*1.15).toFixed(2)}}</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)*1.15).toFixed(2)}}</span>
             <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
           </div>
         </div>
@@ -47,7 +47,7 @@ onMounted(() => {
         <div class="third">
           <div class="nomalFont pdLeft30">昨日最大功率</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 0.93).toFixed(2) : (Number(store.HourKpi?.powerNow)/10000*0.93).toFixed(2)}}</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 0.93).toFixed(2) : (Number(store.HourKpi?.powerNow)*0.93).toFixed(2)}}</span>
             <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
           </div>
         </div>

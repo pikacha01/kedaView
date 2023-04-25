@@ -36,9 +36,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- <ScaleBox> -->
+  <ScaleBox>
     <Home></Home>
-  <!-- </ScaleBox> -->
+  </ScaleBox>
 </template>
 
 <style scoped>
