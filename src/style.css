@@ -29,7 +29,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: rgba(7, 24, 31, 1);
+  background-color: rgba(7, 24, 31, 1) !important;
 }
 
 h1 {

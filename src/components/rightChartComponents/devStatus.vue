@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted,watch } from 'vue'
+import { onMounted, onUnmounted,watch,ref } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import { pieData } from '@/api/data'
 import * as echarts from "echarts";
-import { rightDataStore } from '@/store'
+import { rightDataStore, mapDataStore } from '@/store'
+import { DownOutlined } from '@ant-design/icons-vue'
+
 const store = rightDataStore()
+const mapStore = mapDataStore()
+
 let chart : any = null
 
-let timer :any = null
+let timer: any = null
+
+const pitchOn = ref<string>("全部")
 
 onMounted(async () => {
   await store.getDevStatus()
@@ -37,7 +43,7 @@ onMounted(async () => {
   // 当前下标
   let i = 0 
   timer = setInterval(() => {
-    // 上一个下表
+    // 上一个下标
     const lastIndex = i === 0 ? 2 : i - 1
     chart  = echart.init(document.getElementById(`proChart${store.devStatusData[lastIndex][0].name}`) as HTMLElement);
     chart.dispatchAction({
@@ -121,6 +127,22 @@ function initBarChart(data: pieData[]) {
   };
 }
 
+// 选项改变
+const changeSelect = (name:string) => {
+  pitchOn.value = name
+}
+// drownDown是否展示
+let drownDownisShow = true
+
+// 鼠标移入移出
+const showDropDown = () => {
+  drownDownisShow = true
+}
+const closeDropDown = () => {
+  drownDownisShow = false
+}
+
+
 </script>
 
 <template>
@@ -136,6 +158,26 @@ function initBarChart(data: pieData[]) {
         </div>
       </div>
     </div>
+    <div class="selectOption" v-show="drownDownisShow" @mousemove="showDropDown" @mouseleave="closeDropDown">
+      <a-dropdown :trigger="['click']">
+        <div class="selectContent">
+          <div class="pitch">
+            {{ pitchOn }}
+          </div>
+          <DownOutlined style="font-size: 40px;color: #96D6E8; margin-left: 20px;" />
+        </div>
+        <template #overlay>
+          <a-menu  overlayClassName="dropDown">
+            <a-menu-item  @click="changeSelect('全部')">
+              全部
+            </a-menu-item>
+            <a-menu-item @click="changeSelect(item.name)" v-for="item in mapStore.stationListData.data" >
+              {{ item.name }}
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
+    </div>
   </div>
 </template>
 
@@ -144,6 +186,7 @@ function initBarChart(data: pieData[]) {
   width: 1500px;
   height: 820px;
   margin-left: 50px;
+  // position: relative;
   .content {
      margin-top: 100px;
      display: flex;
@@ -182,5 +225,54 @@ function initBarChart(data: pieData[]) {
       font-size: 50px;
     }
   }
+  .selectOption{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    height: 70px;
+    width: 500px;
+    background: rgba(14,69,85,0.5);
+    border: 2px solid #16AEC5;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .selectContent{
+      width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .pitch {
+      width: 350px;
+      overflow:hidden; //超出的文本隐藏
+      text-overflow:ellipsis; //溢出用省略号显示
+      white-space:nowrap; //溢出不换行
+      text-align: center;
+      font-size: 40px;
+      color: #96D6E8;
+      line-height: 70px;
+    }
+  }
+}
+.ant-dropdown-menu  {
+  background-color: rgba(7, 24, 31, 1);
+  height: 500px;
+  overflow-y: scroll;
+  // overflow:hidden;
+}
+
+/* 隐藏滚动条 */
+.ant-dropdown-menu::-webkit-scrollbar {
+  display: none;
+}
+:deep(.ant-dropdown-menu-item) {
+  color: #96D6E8 !important;
+  font-size: 35px;
+  padding: 15px 12px;
+}
+/* 设置下拉菜单选项的鼠标悬停样式 */
+:deep(.ant-dropdown-menu-item:hover) {
+  background-color: #0bdea5;
 }
 </style>

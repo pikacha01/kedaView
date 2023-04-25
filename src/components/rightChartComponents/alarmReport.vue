@@ -163,7 +163,6 @@ function alarmChart() {
     :is-checked="isChecked"
     />
     <div class="alarmChart" id="alarmReport"></div>
-
   </div>
 
 </template>
