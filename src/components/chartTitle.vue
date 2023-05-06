@@ -21,8 +21,8 @@ defineProps<{
       {{ subTitle }}
     </div>
     <div class="changeDate" >
-      <div :style="`background: url(${isChecked? 'src/assets/img/tab1.png' : 'src/assets/img/tab2.png' }) no-repeat center center; `" class="firstOption" v-if="firstOption">{{ firstOption }}</div>
-      <div :style="`background: url(${!isChecked? 'src/assets/img/tab1.png' : 'src/assets/img/tab2.png' }) no-repeat center center; `"  class="secondOption" v-if="secondOption">{{ secondOption }}</div>
+      <div :style="`background: url(${isChecked? '/view/img/tab1.png' : '/view/img/tab2.png' }) no-repeat center center; `" class="firstOption" v-if="firstOption">{{ firstOption }}</div>
+      <div :style="`background: url(${!isChecked? '/view/img/tab1.png' : '/view/img/tab2.png' }) no-repeat center center; `"  class="secondOption" v-if="secondOption">{{ secondOption }}</div>
     </div>
   </div>
 </template>

@@ -53,12 +53,12 @@ const dotting = () => {
         ${item.name}
       </div>
       <div class="addressPop">
-        <img src="src/assets/img/weizhi.png">
+        <img src="/view/img/weizhi.png">
         <span>${item.address}</span>
       </div>
       <div class="contentPop">
         <div class="leftPop">
-          <img src="src/assets/img/guangfupng.png" alt="">
+          <img src="/view/img/guangfupng.png" alt="">
         </div>
         <div class="rightPop">
           <div class="InfoLeft columnSpaceBetween">
@@ -137,7 +137,7 @@ const dotting = () => {
       </div>
     </div>`
     var marker = new AMap.Marker({
-        icon: 'src/assets/img/11.gif', // 添加 Icon 图标 URL
+        icon: '/view/img/11.gif', // 添加 Icon 图标 URL
         position: item.position, // 基点位置
         extData: {
             content: extDataContent
@@ -232,8 +232,8 @@ onMounted(async () => {
 .pop{
   width: 1950px;
   height: 700px;
-  background: url(/src/assets/img/弹窗边角.png) no-repeat,
-              url("src/assets/img/弹窗背景.png") no-repeat;
+  background: url("@/assets/img/弹窗边角.png") no-repeat,
+              url("/view/img/弹窗背景.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -268,7 +268,7 @@ onMounted(async () => {
     .leftPop{
       width: 587px;
       height: 407px;
-      background: url("src/assets/img/883.png") no-repeat;
+      background: url("/view/img/883.png") no-repeat;
       background-size: 100% 100%;
       padding: 5px;
       display: flex;
