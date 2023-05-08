@@ -15,79 +15,51 @@ onMounted(() => {
 <template>
   <div class="bodyContainer addZIndex">
     <div class="power">
-      <div class="up">
-        <span class="nomalFont">实时功率</span>
-        <span class="weightFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000).toFixed(2)  : (Number(store.HourKpi?.powerNow)).toFixed(2) }}</span>
-        <span class="nomalFont">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}KW</span>
-      </div>
-      <div class="center">
-        <img src="@/assets/img/中间弹窗4.png">
-      </div>
       <div class="bottom">
         <div class="first">
-          <div class="nomalFont">并网容量</div>
+          <div class="nomalFont">实时功率</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}KW</div>
           <div>
-            <span class="numberFont">{{ Number(bottomStore.capacity) > 10000? (Number(bottomStore.capacity)/10000).toFixed(2)  : (Number(bottomStore.capacity)).toFixed(2) }}</span>
-            <span class="nomalFont pdLeft30">{{ Number(bottomStore.capacity) > 10000 ? '万' : '' }}kW</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000).toFixed(2)  : (Number(store.HourKpi?.powerNow)).toFixed(2) }}</span>
           </div>
-        </div>
-        <div class="separator">
-          <img src="@/assets/img/中间弹窗5.png">
         </div>
         <div class="second">
-          <div class="nomalFont">当日最大功率</div>
+          <div class="nomalFont">能效PR</div>
+          <div class="nomalFont">%</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)*1.15).toFixed(2)}}</span>
-            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
+            <span class="numberFont">87 </span>
           </div>
         </div>
-        <div class="separator">
-          <img src="@/assets/img/中间弹窗5.png">
-        </div>
         <div class="third">
-          <div class="nomalFont pdLeft30">昨日最大功率</div>
+          <div class="nomalFont">当日最大功率</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 0.93).toFixed(2) : (Number(store.HourKpi?.powerNow)*0.93).toFixed(2)}}</span>
-            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)*0.93).toFixed(2)}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="electron">
-      <div class="up">
-        <span class="nomalFont">当日电量</span>
-        <span class="weightFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyToday)/10000).toFixed(2) : (Number(store.HourKpi?.energyToday)).toFixed(2)}}</span>
-        <span class="nomalFont">{{ Number(store.HourKpi?.energyToday) > 10000 ? '万' : '' }}kwh</span>
-      </div>
-      <div class="center">
-        <img src="@/assets/img/中间弹窗3.png">
-      </div>
       <div class="bottom">
         <div class="first">
-          <div class="nomalFont">当月电量</div>
+          <div class="nomalFont">当日电量</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.energyToday) > 10000 ? '万' : '' }}kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 10000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)/10000).toFixed(2)}}</span>
-            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyMonth) > 10000 ? '万' : '' }}kwh</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyTotal)/10000).toFixed(2) : (Number(store.HourKpi?.energyTotal)/10000).toFixed(2)}}</span>
           </div>
-        </div>
-        <div class="separator">
-          <img src="@/assets/img/中间弹窗5.png">
         </div>
         <div class="second">
-          <div class="nomalFont">当年电量</div>
+          <div class="nomalFont">当月电量</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.energyMonth) > 10000 ? '万' : '' }}kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyYear) > 10000? (Number(store.HourKpi?.energyYear)/10000).toFixed(2) : (Number(store.HourKpi?.energyYear)/10000).toFixed(2)}}</span>
-            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyYear) > 10000 ? '万' : '' }}kwh</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 10000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)/10000).toFixed(2)}}</span>
           </div>
         </div>
-        <div class="separator">
-          <img src="@/assets/img/中间弹窗5.png">
-        </div>
         <div class="third">
-          <div class="nomalFont">总电量</div>
+          <div class="nomalFont">当年电量</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.energyYear) > 10000 ? '万' : '' }}kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyTotal) > 10000? (Number(store.HourKpi?.energyTotal)/10000).toFixed(2) : (Number(store.HourKpi?.energyTotal)/10000).toFixed(2)}}</span>
-            <span class="nomalFont pdLeft30">{{ Number(store.HourKpi?.energyTotal) > 10000 ? '万' : '' }}kwh</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyYear) > 10000? (Number(store.HourKpi?.energyYear)/10000).toFixed(2) : (Number(store.HourKpi?.energyYear)/10000).toFixed(2)}}</span>
           </div>
         </div>
       </div>
@@ -103,21 +75,18 @@ onMounted(() => {
   transform: translate(-50%, -50%);
   display: flex;
   .power{
-    background: url("@/assets/img/中间弹窗2.png") no-repeat center center;
-    background-size: 100% 100%;
-    width: 1400px;
-    height: 500px;
+    width: 342px;
+    height: 96px;
+    background-color: rgba(4, 53, 64, 0.8);
+    margin-right: 15px;
+    text-align: center;
   }
   .electron {
-    background: url("@/assets/img/中间弹窗2.png") no-repeat center center;
-    background-size: 100% 100%;
-    width: 1400px;
-    height: 500px;
+    width: 342px;
+    height: 96px;
+    margin-left: 15px;
+    background-color: rgba(4, 53, 64, 0.8);
   }
-  .up {
-      padding-top: 70px;
-      text-align: center;
-    }
     .center{
       width: 100%;
       text-align: center;
@@ -125,17 +94,20 @@ onMounted(() => {
     .bottom{
       display: flex;
       align-items: center;
-      justify-content: center;
-      // justify-content: space-around;
-    }
-    .separator{
-     padding-left: 50px;
-     padding-right: 50px;
+      justify-content: space-between;
+      height: 100%;
+      text-align: center;
     }
   .nomalFont{
     font-family: "Light";
-    font-size: 45px;
+    font-size: 15px;
     color: #96d6e8;
+  }
+  .first {
+    padding-left: 30px;
+  }
+  .third {
+    padding-right: 30px;
   }
   .weightFont{
     font-size: 85px;
@@ -145,7 +117,7 @@ onMounted(() => {
     padding-right: 30px;  
   }
   .numberFont{
-    font-size: 65px;
+    font-size: 22px;
     font-family: "DRegular";
     color: #23f8ef;
   }

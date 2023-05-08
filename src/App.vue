@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ScaleBox from './components/scaleBox.vue';
 import Home from './views/index.vue'
+import ScaleBox from '@/components/scaleBox.vue'
 import { onMounted,onUnmounted } from 'vue'
 import { mapDataStore,leftDataStore,rightDataStore,headerDataStore,bottomDataStore } from '@/store'
 const leftStore = leftDataStore()
