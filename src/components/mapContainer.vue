@@ -19,23 +19,6 @@ watch(() => {
 
 let map :any = null;
 
-// const lineData=[
-//         {
-//           path: [
-//             [118.715995, 32.0219131],
-//             [118.735995, 32.0219131],
-//           ],
-//           content: "第一个线路",
-//         },
-//         {
-//           path: [
-//             [118.745995, 32.1219131],
-//             [118.745995, 32.0219131],
-//           ],
-//           content: "第二个线路",
-//         },
-// ]
-
 // 地图画点和弹出框
 const dotting = () => {
   if (!map) {
@@ -206,13 +189,13 @@ onMounted(async () => {
 <template>
 <div id="mapContainer" class="mapContainer">
   <Header></Header>
-  <BodyContainer></BodyContainer>
+  <!-- <BodyContainer></BodyContainer>
   <LeftChart />
   <BottomChart />
   <RightChart />
   <div class="leftCover"></div>
   <div class="rightCover"></div>
-  <div class="bottomCover"></div>
+  <div class="bottomCover"></div> -->
 </div>
 </template>
 
@@ -220,8 +203,8 @@ onMounted(async () => {
 #mapContainer{
   padding:0px;
   margin: 0px;
-  width: 7680px;
-  height: 3240px;
+  width: 1920px;
+  height: 1080px;
   position: relative;
 }
 .amap-info-content{

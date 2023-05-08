@@ -52,31 +52,25 @@ onUnmounted(() => {
   <div class="header">
     <div class="container">
       <div class="title">
-        <div class="left">
-          <img src="@/assets/title/标题修饰2.png" alt="">
-        </div>
         <div class="text">
           <div v-for="(item) in store.titleContent">{{ item }}</div>
-        </div>
-        <div class="right">
-          <img src="@/assets/title/标题修饰1.png" alt="">
         </div>
       </div>
       <div class="rightHeader">
         <div class="date">
-          <div class="time">
-            {{ hour }}:{{ minute }}:{{ second }}
-          </div>
           <div class="weekend smallSize">
             {{ year }}/{{ month }}/{{ date }} 星期{{ weekend }}
           </div>
+          <div class="time">
+            {{ hour }}:{{ minute }}:{{ second }}
+          </div>
         </div>
         <div class="separate">
-          <img src="@/assets/title/标题竖线.png" alt="">
+          <img src="@/assets/images/标题竖线.png" alt="">
         </div>
         <div class="weateher">
           <div class="left">
-            <img src="@/assets/title/天气.png" alt="">
+            <img src="@/assets/images/天气.png" alt="">
           </div>
           <div class="right">
             <div>27℃</div>
@@ -92,13 +86,12 @@ onUnmounted(() => {
 .header{
   position: absolute;
   width: 100%;
-  background: url("@/assets/title/标题背景.png") no-repeat center center;
+  background: url("@/assets/images/标题背景.png") no-repeat center center;
   z-index: 999;
-  height: 308px;
+  height: 94px;
   .container{
-    background: url("@/assets/title/标题光晕.png") no-repeat center bottom;
     position: relative;
-    height: 308px;
+    height: 94px;
     .title {
       position: absolute;
       top: 50%;
@@ -114,8 +107,8 @@ onUnmounted(() => {
       .text {
         display: flex;
         justify-content: space-between;
-        font-size: 120px;
-        width: 2000px;
+        font-size: 30px;
+        width: 500px;
         color: #9FF6F4
       }
       .right{
@@ -126,25 +119,26 @@ onUnmounted(() => {
     }
     .rightHeader {
       float: right;
-      font-size: 80px;
-      color: #fff;
+      font-size: 26px;
+      color: #96D6E8;
       display: flex;
+      margin-top: 7px;
       .separate{
-        padding: 40px 80px 0 80px;
+        padding: 12px 25px 0 17px;
       }
       .smallSize{
-        font-size: 40px;
+        font-size: 14px;
+        color: #83BAC8;
       }
       .weateher{
         display: flex;
         justify-content: center;
         align-items: center;
         .left{
-          margin-top: 40px;
-          margin-right: 50px;
+          margin-right: 13px;
         }
         .right {
-          margin-right: 100px;
+          margin-right: 23px;
         }
       }
     }
