@@ -190,12 +190,12 @@ onMounted(async () => {
 <div id="mapContainer" class="mapContainer">
   <Header></Header>
   <BodyContainer></BodyContainer>
-  <!-- <LeftChart />
-  <BottomChart />
-  <RightChart />
+  <LeftChart />
+  <!-- <BottomChart />
+  <RightChart /> -->
   <div class="leftCover"></div>
   <div class="rightCover"></div>
-  <div class="bottomCover"></div> -->
+  <div class="bottomCover"></div>
 </div>
 </template>
 

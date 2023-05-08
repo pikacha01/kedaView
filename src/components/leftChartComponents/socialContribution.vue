@@ -44,45 +44,42 @@ onMounted(async () => {
 
 <style scoped lang="less">
 .container {
-  width: 1600px;
+  width: 500px;
   .body{
-    margin-left: 50px;
-    margin-top: 30px;
     display: flex;
     .box{
-      width: 430px;
-      height: 650px;
-      background: url("@/assets/img/社会贡献1.png") no-repeat center center;
+      width: 118px;
+      height: 190px;
+      background: url("@/assets/images/社会贡献1.png") no-repeat center center;
       background-size: 100% 100%;
-      margin-top: 40px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       margin-right: 40px;
       align-items: center;
       .text {
         font-family: "Light";
-        font-size: 50px;
+        font-size: 15px;
         color: #96d6e8;
-        margin-top: 20px;
+        margin-top: 10px;
       }
       .Number{
         font-family: "DRegular";
-        font-size: 72px;
+        font-size: 22px;
         color: #1bbeb9;
       }
       .image{
-        margin-top: 20px;
+        margin-top: 10px;
       }
       .title{
-        margin-top: 20px;
-        width: 360px;
-        height: 90px;
+        width: 110px;
+        height: 34px;
         font-family: "Light";
         text-align: center;
-        line-height: 90px;
-        color: #fff;
-        font-size: 45px;
-        background: url("@/assets/img/社会贡献5.png") no-repeat center center;
+        line-height: 34px;
+        color: #55BEBE;
+        font-size: 14px;
+        background: url("@/assets/images/社会贡献5.png") no-repeat center center;
         background-size: 100% 100%;
       }
     }
