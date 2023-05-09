@@ -191,7 +191,7 @@ onMounted(async () => {
   <Header></Header>
   <BodyContainer></BodyContainer>
   <LeftChart />
-  <!-- <BottomChart /> -->
+  <BottomChart />
   <RightChart />
   <div class="leftCover"></div>
   <div class="rightCover"></div>

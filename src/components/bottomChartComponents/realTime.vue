@@ -7,23 +7,22 @@ import * as echarts from "echarts";
 
 const store = bottomDataStore()
 let echart = echarts
-const data= ref([502,456,351,102,0,0,0,0,0,0,0,0,125,225,325,456,478,520,550,600,650,700,697,657,620])
 let timer : any  =null 
 
 let chart : any = null
 
 onMounted(async () => {
-  await store.getHourElectric()
+  await store.getEnergyPower()
   realTimeChart();
   watch(() => {
-    return data.value
+    return store.PowerY
     }, () => {
     const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
     }
-    option.xAxis[0].data = store.HourXData
-    option.series[0].data = data.value
+    option.xAxis[0].data = store.PowerX
+    option.series[0].data = store.PowerY
     chart.setOption(option)
   })
   // timer = setInterval(() => {
@@ -63,15 +62,15 @@ function realTimeChart() {
       borderColor: '#18E399', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
-        html += '<div style="width: 450px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
-        html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
-        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
+        html += '<div style="width: 150px; height: 46px; font-size: 14px; color: #fff;">'
+        html += '<div style="margin-top: 20x;">' + params[0].name + '时</div>';
+        html += '<div style="margin-top: 50x; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
         return html
       }
     },
     xAxis: {
       type: 'category',
-      data: store.HourXData,
+      data: store.PowerX,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -85,7 +84,7 @@ function realTimeChart() {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
-          fontSize: 25
+          fontSize: 14
         },
       },
     },
@@ -94,7 +93,7 @@ function realTimeChart() {
       name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 42,
+          fontSize: 14,
           padding:[0,0,40,0]
 
       },
@@ -111,14 +110,14 @@ function realTimeChart() {
         show: true,
         textStyle: {
           color: "#96D6E8 ",
-          fontSize: 42
+          fontSize: 14
         },
       },
     },
     series: [
       {
         // data: store.HourYData,
-        data: data.value,
+        data: store.PowerY,
         type: 'bar',
         itemStyle: {
           normal: {
@@ -148,7 +147,7 @@ function realTimeChart() {
 
 <template>
   <div class="realPower">
-    <ChartTitle title="实时功率" />
+    <ChartTitle title="逆变器小时功率" />
     <div class="realPowerChart" id="realPowerChart"></div>
   </div>
 </template>
@@ -156,12 +155,11 @@ function realTimeChart() {
 <style scoped lang="less">
 
 .realPower{
-  margin-left: 150px;
-  width: 1350px;
+  width: 450px;
   height: 100%;
   .realPowerChart {
     width: 100%;
-    height: 700px;
+    height: 230px;
   }
 }
 </style>

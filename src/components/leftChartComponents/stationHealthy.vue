@@ -59,7 +59,7 @@ function initChart() {
       borderColor: '#065f9a', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
-        html += '<div style="width: 86.5px; height: 46px; font-size: 14px; color: #fff;">'
+        html += '<div style="width: 100px; height: 46px; font-size: 14px; color: #fff;">'
         html += '<div style="margin-top: 2px;">' + params[0].name + '日</div>';
         html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>能效PR</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ Number(params[0].data).toFixed(2) +'</div></div>';
         return html
@@ -215,7 +215,7 @@ function initChart() {
           <div class="strip">
             <img src="@/assets/images/电站健康分析5.png" :style="{width: store.PRProgress+'%'}" alt="">
           </div>
-          <div class="percent">{{ store.PRProgress.toFixed(0) }}<span style="font-size: 16px;">%</span></div>
+          <div class="percent">{{ store.PRProgress.toFixed(2) }}<span style="font-size: 16px;">%</span></div>
         </div>
       </div>
       <div class="chart">
@@ -247,21 +247,22 @@ function initChart() {
 
 <style scoped lang="less">
 .container {
-  width: 500px;
-  margin-top: 50px;
+  width: 490px;
+  margin-top: 80px;
   .body{
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     .progress{
-      width: 390px;
+      width: 430px;
       height: 30px;
       display: flex;
+      margin-left: 20px;
       align-items: center;
       background: url("@/assets/images/电站健康分析1.png") no-repeat center center;
       background-size: 100% 100%;
       .title{
-        margin-left: 10px;
+        margin-left: 15px;
         width: 65px;
         font-family: Medium;
         background-size: 100% 100%;
@@ -277,7 +278,7 @@ function initChart() {
         display: flex;
         align-items: center;
         .strip{
-          width: 245px;
+          width: 201px;
           height: 18px;
           background: url("@/assets/images/电站健康分析4.png") no-repeat center center;
           background-size: 100% 100%;
@@ -285,7 +286,6 @@ function initChart() {
           transition: width 1s ease-out;
           position: relative;
           img {
-            margin-left: 10px;
             position: absolute;
             top: 0;
             left: 0;
@@ -295,8 +295,7 @@ function initChart() {
           }
         }
         .percent{
-          padding-right: 5px;
-          padding-left: 15px;
+          padding-left: 25px;
           font-family: "DRegular";
           color: #23f8ef;
           font-size: 16px;
@@ -368,8 +367,8 @@ function initChart() {
         }
       }
       .lineChart{
-        height: 200px;
-        width: 390px;
+        height: 230px;
+        width: 490px;
       }
     }
   }

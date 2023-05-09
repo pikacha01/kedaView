@@ -185,11 +185,11 @@ const closeDropDown = () => {
 .devStatus {
   width: 500px;
   height: 180px;
-  // margin-left: 50px;
+  margin-left: 50px;
   position: relative;
   .content {
-    //  margin-top: 100px;
      display: flex;
+     justify-content: center;
   }
   .box{
     margin-top: -20px;

@@ -120,7 +120,8 @@ function alarmChart() {
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
-        symbol: "circle", //标记的图形为实心圆
+        // symbol: "circle", //标记的图形为实心圆
+        symbol: "none", //标记的图形为实心圆
         symbolSize: 10, //标记的大小
         itemStyle: {
           //折线拐点标志的样式

@@ -61,6 +61,20 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   }
 
   // 实时发电功率
+  const PowerX = ref<string[]>([])
+  const PowerY = ref<string[]>([])
+  const getEnergyPower = async () => {
+    const res = await getEnergyPowerApi()
+    PowerX.value = []
+    PowerY.value = []
+    res.forEach(item=> {
+      const match = item.title.match(pattern)
+      const day = match![1]
+      PowerX.value.push(day)
+      PowerY.value.push(item.value)
+    })
+  }
+
 
   // 获取饼图需要数据的方法
   function array2obj(array : pieData[], key:keyof pieData) {
@@ -236,8 +250,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   }
   
   return {
-    generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,capacity,
-    getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData, getHourElectric,
+    generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,capacity,PowerX,PowerY,
+    getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData, getHourElectric,getEnergyPower,
     arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName,HourXData,generateXDataYear
   }
 })

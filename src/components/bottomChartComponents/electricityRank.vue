@@ -51,9 +51,9 @@ function barChart() {
   chart = echart.init(document.getElementById("barChart") as HTMLElement);
   chart.setOption({
     grid: {
-      top: "25%",
+      top: "15%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
-      left:200
+      left:100
     },
     xAxis: {
       type: 'value',
@@ -61,8 +61,7 @@ function barChart() {
       name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 30,
-          padding:[0,20,60,20]
+          fontSize: 15,
       },
       axisLine: {
         show: false, //隐藏X轴轴线
@@ -78,7 +77,7 @@ function barChart() {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
-          fontSize: 25
+          fontSize: 14
         },
       },
     },
@@ -88,12 +87,12 @@ function barChart() {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
-          fontSize: 25
+          fontSize: 15
         },
         formatter: function (value: any) {
           var texts = value;
-          if (texts.length > 6) { // 字数限制
-            texts = texts.substr(0, 6) + '...';
+          if (texts.length > 4) { // 字数限制
+            texts = texts.substr(0, 4) + '...';
           }
           return texts;
         }
@@ -107,10 +106,10 @@ function barChart() {
         label: {
           show: true,
           position: ['95%', '-70%'],
-          fontSize: 20,
+          fontSize: 15,
           color:"#23F8EF "
         },
-        barMaxWidth: 30,
+        barMaxWidth: 15,
         itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
@@ -140,7 +139,6 @@ function barChart() {
   <div class="electricityRank">
     <ChartTitle 
     title="发电量排名" 
-    sub-title="发电量分析" 
     first-option="月" 
     second-option="年" 
     :is-checked="isChecked"
@@ -151,12 +149,12 @@ function barChart() {
 
 <style scoped lang="less">
 .electricityRank{
-  margin-left: 75px;
-  width: 1450px;
+  margin-left: 10px;
+  width: 490px;
   height: 100%;
   .barChart {
     width: 100%;
-    height: 700px;
+    height: 230px;
   }
 }
 </style>

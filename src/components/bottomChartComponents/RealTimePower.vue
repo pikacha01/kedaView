@@ -46,9 +46,9 @@ function realEleChart() {
       borderColor: '#18E399', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
-        html += '<div style="width: 450px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
-        html += '<div style="margin-top: 20px;">' + params[0].name + '时</div>';
-        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
+        html += '<div style="width: 150px; height: 46px; font-size: 14px; color: #fff;">'
+        html += '<div style="margin-top: 2px;">' + params[0].name + '时</div>';
+        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
         return html
       }
     },
@@ -68,7 +68,7 @@ function realEleChart() {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
-          fontSize: 25
+          fontSize: 14
         },
       },
     },
@@ -77,7 +77,7 @@ function realEleChart() {
       name: "kwh",
       nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 42,
+          fontSize: 14,
           padding:[0,0,40,0]
 
       },
@@ -94,7 +94,7 @@ function realEleChart() {
         show: true,
         textStyle: {
           color: "#96D6E8 ",
-          fontSize: 42
+          fontSize: 14
         },
       },
     },
@@ -105,14 +105,14 @@ function realEleChart() {
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
-        symbol: "circle", //标记的图形为实心圆
-        symbolSize: 10, //标记的大小
-        itemStyle: {
-          //折线拐点标志的样式
-          color: "#0fe7ae",
-          borderColor: '#fff',
-          borderWidth: 3,
-        },
+        symbol: "none", //标记的图形为实心圆
+        // symbolSize: 10, //标记的大小
+        // itemStyle: {
+        //   //折线拐点标志的样式
+        //   color: "#0fe7ae",
+        //   borderColor: '#fff',
+        //   borderWidth: 3,
+        // },
         lineStyle: {
           color: "#0fe7ae",
         },
@@ -143,7 +143,7 @@ function realEleChart() {
 
 <template>
   <div class="realTimePwoer">
-    <ChartTitle title="实时发电量" />
+    <ChartTitle title="电站小时发电量" />
     <div class="lineChart" id="realEleChart"></div>
   </div>
 </template>
@@ -151,12 +151,12 @@ function realEleChart() {
 <style scoped lang="less">
 
 .realTimePwoer{
-  margin-left: 150px;
-  width: 1350px;
+  margin-left: 40px;
+  width: 450px;
   height: 100%;
   .lineChart {
     width: 100%;
-    height: 700px;
+    height: 230px;
   }
 }
 </style>

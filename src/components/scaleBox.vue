@@ -14,7 +14,7 @@ const setScale = () => {
   if(window.innerHeight == 1080){
         height.value = 1080
       }else{
-        height.value = 937
+        height.value = 1080
 
       }
       scale.value = ""+getScale();

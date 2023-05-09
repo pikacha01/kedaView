@@ -7,7 +7,7 @@ export const getStationListApi = (start: string, end: string) => {
 
 // 获取实时功率
 export const getEnergyPowerApi = () => {
-  return request<realTimePower[]>('/energy/power')
+  return request<realTimePower[]>('/energy/power/0')
 }
 // 获取实时功率
 export const getEnergyHourApi= () => {

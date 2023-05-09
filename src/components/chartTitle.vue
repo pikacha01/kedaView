@@ -32,7 +32,7 @@ defineProps<{
   display: flex;
   align-items: center;
   font-family: HRegular;
-  width: 500px;
+  width: 490px;
   .title{
     font-weight: 400;
     display: flex;
@@ -54,13 +54,13 @@ defineProps<{
     }
   }
   .subTitle{
-    margin-left: 65px;
+    margin-left: 15px;
     color:#96D6E8;
     font-size: 18px;
-    padding-left: 60px;
+    padding-left: 15px;
     border-left: 1px solid rgba(119, 124, 126, 0.5);;
-    height: 70px;
-    line-height: 70px;
+    height: 18px;
+    line-height: 18px;
   }
   .changeDate{
     display: flex;

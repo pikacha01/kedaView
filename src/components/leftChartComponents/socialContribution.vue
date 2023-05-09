@@ -52,10 +52,10 @@ onMounted(async () => {
       height: 180px;
       background: url("@/assets/images/社会贡献1.png") no-repeat center center;
       background-size: 100% 100%;
-      margin-top: 10px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
-      margin-right: 20px;
+      margin-right: 45px;
       align-items: center;
       .text {
         font-family: "Light";
