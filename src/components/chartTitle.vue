@@ -21,8 +21,8 @@ defineProps<{
       {{ subTitle }}
     </div>
     <div class="changeDate" >
-      <div :style="`background: url(${isChecked? '/view/img/tab1.png' : '/view/img/tab2.png' }) no-repeat center center; `" class="firstOption" v-if="firstOption">{{ firstOption }}</div>
-      <div :style="`background: url(${!isChecked? '/view/img/tab1.png' : '/view/img/tab2.png' }) no-repeat center center; `"  class="secondOption" v-if="secondOption">{{ secondOption }}</div>
+      <div :style="`background: ${isChecked? '#006773' : '#014c55' };color: ${isChecked? '#00FFF0' : '#96D6E8' }`" class="firstOption" v-if="firstOption">{{ firstOption }}</div>
+      <div :style="`background: ${!isChecked? '#006773' : '#014c55' } ; color: ${!isChecked? '#00FFF0' : '#96D6E8' }`"  class="secondOption" v-if="secondOption">{{ secondOption }}</div>
     </div>
   </div>
 </template>
@@ -70,18 +70,18 @@ defineProps<{
     font-size: 15px;
     margin-left: auto;
     .firstOption{
-      height: 75px;
-      width: 130px;
+      height: 24px;
+      width: 34px;
       text-align: center;
-      cursor: pointer;
-      line-height: 75px;
+      line-height: 24px;
+      border-radius: 6px 0px 0px 6px;
     }
     .secondOption{
-      height: 75px;
-      width: 130px;
+      height: 24px;
+      width: 34px;
       text-align: center;
-      line-height: 75px;
-      cursor: pointer;
+      line-height: 24px;
+      border-radius: 0px 6px 6px 0px;
     }
   }
 }

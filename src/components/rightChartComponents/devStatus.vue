@@ -88,7 +88,7 @@ function initBarChart(data: pieData[]) {
       top: "center",
       left: "center",
       textStyle: {
-        fontSize: 30,
+        fontSize: 15,
         fontWeight: 'bold',
         color:"#23f8ef"
       }
@@ -102,17 +102,17 @@ function initBarChart(data: pieData[]) {
         show: false,
         position: 'center'
       },
-      radius: ['80%', '91%'],
+      radius: ['73%', '88%'],
       emphasis: {
         label: {
           show: true,
           formatter: "{d}%",
-          fontSize: 50,
+          fontSize: 23,
           fontWeight: 'bold',
           color:"#23f8ef"
         },
         sclae: true,
-        scaleSize: 15,
+        scaleSize: 5,
       },
       labelLine: {
         show: false
@@ -183,46 +183,47 @@ const closeDropDown = () => {
 
 <style scoped lang="less">
 .devStatus {
-  width: 1500px;
-  height: 820px;
-  margin-left: 50px;
+  width: 500px;
+  height: 180px;
+  // margin-left: 50px;
   position: relative;
   .content {
-     margin-top: 100px;
+    //  margin-top: 100px;
      display: flex;
   }
   .box{
-    width: 350px;
+    margin-top: -20px;
+    width: 118px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 150px;
+    margin-right: 20px;
     font-family: "Light";
     .chart {
       width: 100%; 
-      background: url("@/assets/img/设备工况统计1.png") no-repeat center center;
-      height: 400px;
-    }
+      background: url("@/assets/images/设备工况统计1.png") no-repeat center center;
+      height: 200px;
+    } 
     .text {
-      font-size: 65px;
+      font-size: 24px;
       text-align: center;
-      margin-top: -30px;
+      margin-top: -38px;
       color: #FFF000;
       span{
         color: #09aea5;
-        font-size: 50px;
+        font-size: 14px;
       }
     }
     .title {
-      margin-top: 60px;
-      background: url('@/assets/img/设备工况统计3.png') no-repeat center center;
+      margin-top: 18px;
+      background: url('@/assets/images/设备工况统计2.png') no-repeat center center;
       background-size: 100% 100%;
-      width: 400px;
-      height: 100px;
+      width: 90px;
+      height: 29px;
       color: #96D6E8;
       text-align: center;
-      line-height: 100px;
-      font-size: 50px;
+      line-height: 29px;
+      font-size: 14px;
     }
   }
   // .selectOption{
