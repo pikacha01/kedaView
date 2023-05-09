@@ -7,7 +7,7 @@ import StationHealthy from '@/components/leftChartComponents/stationHealthy.vue'
 <template>
   <div class="leftChart addZIndex">
     <SocialContribution />
-    <!-- <StationHealthy /> -->
+    <StationHealthy />
   </div>
 </template>
 

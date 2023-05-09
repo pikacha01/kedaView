@@ -49,13 +49,13 @@ onMounted(async () => {
     display: flex;
     .box{
       width: 118px;
-      height: 190px;
+      height: 180px;
       background: url("@/assets/images/社会贡献1.png") no-repeat center center;
       background-size: 100% 100%;
-      margin-top: 20px;
+      margin-top: 10px;
       display: flex;
       flex-direction: column;
-      margin-right: 40px;
+      margin-right: 20px;
       align-items: center;
       .text {
         font-family: "Light";
@@ -66,7 +66,7 @@ onMounted(async () => {
       .Number{
         font-family: "DRegular";
         font-size: 22px;
-        color: #1bbeb9;
+        color: #23F8EF;
       }
       .image{
         margin-top: 10px;
@@ -77,7 +77,7 @@ onMounted(async () => {
         font-family: "Light";
         text-align: center;
         line-height: 34px;
-        color: #55BEBE;
+        color: #96D6E8;
         font-size: 14px;
         background: url("@/assets/images/社会贡献5.png") no-repeat center center;
         background-size: 100% 100%;

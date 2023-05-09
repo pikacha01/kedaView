@@ -46,8 +46,8 @@ function initChart() {
   // 把配置和数据
   chart.setOption({
     grid: {
-      top: "25%",
-      bottom: "10%", //也可设置left和right设置距离来控制图表的大小
+      top: "20%",
+      bottom: "20%", //也可设置left和right设置距离来控制图表的大小
     },
     tooltip: {
       trigger: "axis",
@@ -59,9 +59,9 @@ function initChart() {
       borderColor: '#065f9a', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
-        html += '<div style="width: 365px; height: 155px; padding: 10px; font-size: 40px; color: #fff;">'
-        html += '<div style="margin-top: 20px;">' + params[0].name + '日</div>';
-        html += '<div style="margin-top: 50px; display:flex; align-items: center"><div>能效PR</div><div style="font-size: 50px;margin-left:10px;color:#F6FF00">'+ params[0].data +'</div></div>';
+        html += '<div style="width: 86.5px; height: 46px; font-size: 14px; color: #fff;">'
+        html += '<div style="margin-top: 2px;">' + params[0].name + '日</div>';
+        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>能效PR</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ Number(params[0].data).toFixed(2) +'</div></div>';
         return html
       }
     },
@@ -69,8 +69,8 @@ function initChart() {
       data: ["能效PR"],
       top: "15%",
       textStyle: {
-        color: "#ffffff",
-        fontSize: 25
+        color: "#96D6E8",
+        fontSize: 14
       },
     },
     xAxis: {
@@ -88,7 +88,7 @@ function initChart() {
         show: true,
         textStyle: {
           color: "#96D6E8", //X轴文字颜色
-          fontSize: 25
+          fontSize: 15
         },
       },
     },
@@ -98,7 +98,7 @@ function initChart() {
         name: "",
         nameTextStyle: {
           color: "#96D6E8",
-          fontSize: 42
+          fontSize: 14
         },
         splitLine: {
           show:false
@@ -113,7 +113,7 @@ function initChart() {
           show: true,
           textStyle: {
             color: "#96D6E8 ",
-            fontSize: 42
+            fontSize: 14
           },
         },
       },
@@ -122,8 +122,8 @@ function initChart() {
         name: "%",
         nameTextStyle: {
           color: "#96D6E8 ",
-          fontSize: 42,
-          padding:[0,0,40,50]
+          fontSize: 14,
+          // padding:[0,0,40,50]
         },
         position: "right",
         min: 0,
@@ -143,7 +143,7 @@ function initChart() {
           formatter: "{value}", //右侧Y轴文字显示
           textStyle: {
             color: "#96D6E8",
-            fontSize: 42
+            fontSize: 14
           },
         },
       },
@@ -209,17 +209,17 @@ function initChart() {
     <div class="body">
       <div class="progress">
         <div class="title">
-          能效PR
+          健康度HI
         </div>
         <div class="content">
           <div class="strip">
-            <img src="@/assets/img/电站健康分析4.png" :style="{width: store.PRProgress+'%'}" alt="">
+            <img src="@/assets/images/电站健康分析5.png" :style="{width: store.PRProgress+'%'}" alt="">
           </div>
-          <div class="percent">{{ store.PRProgress }}<span style="font-size: 45px;">%</span></div>
+          <div class="percent">{{ store.PRProgress.toFixed(0) }}<span style="font-size: 16px;">%</span></div>
         </div>
       </div>
       <div class="chart">
-        <div class="pointer">
+        <!-- <div class="pointer">
           <div class="pointerChart">
             <div class="image">
               <div class="content">
@@ -237,9 +237,9 @@ function initChart() {
                 <img src="@/assets/img/电站健康分析5.png" alt="">
               </div>
           </div>
-        </div>
+        </div> -->
         <div class="lineChart" id="lineChart">
-        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -247,42 +247,41 @@ function initChart() {
 
 <style scoped lang="less">
 .container {
-  width: 1600px;
-  margin-top: 120px;
+  width: 500px;
+  margin-top: 50px;
   .body{
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     .progress{
-      width: 100%;
-      height: 90px;
+      width: 390px;
+      height: 30px;
       display: flex;
       align-items: center;
+      background: url("@/assets/images/电站健康分析1.png") no-repeat center center;
+      background-size: 100% 100%;
       .title{
-        width:250px;
+        margin-left: 10px;
+        width: 65px;
         font-family: Medium;
-        background: url("@/assets/img/电站健康分析1.png") no-repeat center center;
         background-size: 100% 100%;
-        font-size: 45px;
-        color: #c4ebf6;
+        font-size: 16px;
+        color: #00FFEA;
         text-align: center;
         height: 100%;
-        line-height: 90px;
+        line-height: 30px;
       }
       .content {
-        width: 1185px;
-        background: url("@/assets/img/电站健康分析2.png") no-repeat center center;
         background-size: 100% 100%;
-        height: 90px;
+        height: 18px;
         display: flex;
         align-items: center;
-        
         .strip{
-          width: 940px;
-          height: 55px;
-          background: url("@/assets/img/电站健康分析3.png") no-repeat center center;
+          width: 245px;
+          height: 18px;
+          background: url("@/assets/images/电站健康分析4.png") no-repeat center center;
           background-size: 100% 100%;
-          margin-left: 25px;
+          margin-left: 10px;
           transition: width 1s ease-out;
           position: relative;
           img {
@@ -294,22 +293,13 @@ function initChart() {
             height: 100%;
             object-fit: cover;
           }
-          &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            background: url("@/assets/img/电站健康分析2.png") no-repeat center center;
-          }
         }
         .percent{
-          padding-right: 80px;
-          padding-left: 40px;
+          padding-right: 5px;
+          padding-left: 15px;
           font-family: "DRegular";
           color: #23f8ef;
-          font-size: 60px;
+          font-size: 16px;
         }
       }
     }
@@ -378,10 +368,8 @@ function initChart() {
         }
       }
       .lineChart{
-        margin-top: 50px;
-        margin-left: 50px;
-        height: 600px;
-        width: 1030px;
+        height: 200px;
+        width: 390px;
       }
     }
   }

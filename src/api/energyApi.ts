@@ -11,15 +11,15 @@ export const getEnergyPowerApi = () => {
 }
 // 获取实时功率
 export const getEnergyHourApi= () => {
-  return request<realTimePower[]>('/energy/energy')
+  return request<realTimePower[]>('/energy/energy/0')
 }
 // 获取实时PR
 export const getPRApi = () => {
-  return request<realTimePower[]>('/energy/pr')
+  return request<realTimePower[]>('/energy/pr/0')
 }
 // 获取社会贡献
 export const getContributeApi = () => {
-  return request<energyContribute>('/energy/contribute')
+  return request<energyContribute>('/energy/contribute/0')
 }
 // 发电量排名
 export const getGenerateElectricityApi= (type : date) => {
@@ -27,27 +27,27 @@ export const getGenerateElectricityApi= (type : date) => {
 }
 //获取警报统计
 export const getalarmReportApi = (type: date) => {
-  return request<realTimePower[]>(`/energy/alarmReport/${type}`)
+  return request<realTimePower[]>(`/energy/alarmReport/${type}/0`)
 }
 // 获取电站容量
 export const getVolumeApi = () => {
-  return request<VolumeCapacity>(`/energy/volume`)
+  return request<VolumeCapacity>(`/energy/volume/0`)
 }
 // 获取电站工单
 export const getStationWorkOrderApi = () => {
-  return request<operationManage>(`/energy/workOrder`)
+  return request<operationManage>(`/energy/workOrder/0`)
 }
 //获取设备工况
 export const getdevStatusApi = () => {
-  return request<devStatus>(`/energy/devStatus`)
+  return request<devStatus>(`/energy/devStatus/0`)
 }
 // 获取24小时实时功率
 export const getKpiApi = () => {
-  return request<kpi>(`/energy/kpi`)
+  return request<kpi>(`/energy/kpi/0`)
 }
 //获取15小时等效小时
 export const getHourApi = () => {
-  return request<realTimePower[]>('/energy/phour')
+  return request<realTimePower[]>('/energy/phour/0')
 }
 // 获取标题
 export const getTitleApi = () => {
