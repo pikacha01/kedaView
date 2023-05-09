@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {computed, onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
+import PowerStationCapacity from '@/components/bottomChartComponents/powerStationCapacity.vue';
 import * as echarts from "echarts";
 import { bottomDataStore } from '@/store';
 
@@ -136,7 +137,7 @@ function barChart() {
 </script>
 
 <template>
-  <div class="electricityRank">
+  <!-- <div class="electricityRank">
     <ChartTitle 
     title="发电量排名" 
     first-option="月" 
@@ -144,7 +145,8 @@ function barChart() {
     :is-checked="isChecked"
     />
     <div class="barChart" id="barChart"></div>
-  </div>
+  </div> -->
+  <PowerStationCapacity />
 </template>
 
 <style scoped lang="less">

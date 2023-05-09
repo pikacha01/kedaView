@@ -7,12 +7,12 @@ import { rightDataStore, mapDataStore } from '@/store'
 import { DownOutlined } from '@ant-design/icons-vue'
 
 const store = rightDataStore()
-const mapStore = mapDataStore()
 
 let chart : any = null
 
 let timer: any = null
 
+const mapStore = mapDataStore()
 const pitchOn = ref<string>("全部")
 
 onMounted(async () => {
@@ -130,16 +130,7 @@ function initBarChart(data: pieData[]) {
 // 选项改变
 const changeSelect = (name:string) => {
   pitchOn.value = name
-}
-// drownDown是否展示
-let drownDownisShow = true
-
-// 鼠标移入移出
-const showDropDown = () => {
-  drownDownisShow = true
-}
-const closeDropDown = () => {
-  drownDownisShow = false
+  console.log(name)
 }
 
 
@@ -158,7 +149,7 @@ const closeDropDown = () => {
         </div>
       </div>
     </div>
-    <!-- <div class="selectOption" v-show="drownDownisShow" @mousemove="showDropDown" @mouseleave="closeDropDown">
+    <!-- <div class="selectOption">
       <a-dropdown :trigger="['click']">
         <div class="selectContent">
           <div class="pitch">

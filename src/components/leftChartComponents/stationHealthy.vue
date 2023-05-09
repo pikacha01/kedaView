@@ -175,6 +175,7 @@ function initChart() {
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
         symbol: "circle", //标记的图形为实心圆
+        barMaxWidth: 15,
         itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -213,9 +214,9 @@ function initChart() {
         </div>
         <div class="content">
           <div class="strip">
-            <img src="@/assets/images/电站健康分析5.png" :style="{width: store.PRProgress+'%'}" alt="">
+            <img src="@/assets/images/电站健康分析5.png" :style="{width: store.alarmReport.toFixed(2)+'%'}" alt="">
           </div>
-          <div class="percent">{{ store.PRProgress.toFixed(2) }}<span style="font-size: 16px;">%</span></div>
+          <div class="percent">{{ store.alarmReport.toFixed(2) }}<span style="font-size: 16px;">%</span></div>
         </div>
       </div>
       <div class="chart">

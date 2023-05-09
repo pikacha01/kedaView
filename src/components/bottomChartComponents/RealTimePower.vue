@@ -35,6 +35,7 @@ function realEleChart() {
     grid: {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
+      left: 55
     },
     tooltip: {
       trigger: "axis",
@@ -43,7 +44,7 @@ function realEleChart() {
       },
       backgroundColor: 'rgba(28, 212, 145, 0.2)', // 设置 Tooltip 的背景色
       borderWidth: 2, // 设置 Tooltip 的边框宽度
-      borderColor: '#18E399', // 设置 Tooltip 的边框颜色
+      borderColor: '#065f9a', // 设置 Tooltip 的边框颜色
       formatter: function (params: any) {
         let html =''
         html += '<div style="width: 150px; height: 46px; font-size: 14px; color: #fff;">'
@@ -101,8 +102,7 @@ function realEleChart() {
     series: [
       {
         data: store.HourYData,
-        // data: [499,456,371,222,0,0,0,0,0,0,0,0,245,321,425,456,478,520,550,600,650,700,697,657,620],
-        type: 'line',
+        type: 'bar',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。
         symbol: "none", //标记的图形为实心圆
@@ -116,15 +116,15 @@ function realEleChart() {
         lineStyle: {
           color: "#0fe7ae",
         },
-        areaStyle: {
+        itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "rgba(28, 212, 145, 0.5)",
+                color: "#22e7e4",
               },
               {
                 offset: 1,
-                color: "rgba(0, 255, 210, 0.2)",
+                color: "#04417d",
               },
             ]),
         },

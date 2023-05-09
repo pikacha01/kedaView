@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted , ref, onUnmounted } from 'vue'
-import { headerDataStore } from '@/store'
+import { headerDataStore,mapDataStore } from '@/store'
 const store = headerDataStore()
+const mapStore = mapDataStore()
 
 let now = new Date();
 let year = ref(now.getFullYear());
@@ -73,8 +74,13 @@ onUnmounted(() => {
             <img src="@/assets/images/天气.png" alt="">
           </div>
           <div class="right">
-            <div>27℃</div>
-            <div class="smallSize">晴转多云</div>
+            <div>
+              <span>
+                {{ mapStore.stationListData.data[0]?.weather }}</span>
+              <span style="margin-left: 15px;">
+                {{ mapStore.stationListData.data[0]?.weatherStatus }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -128,6 +134,7 @@ onUnmounted(() => {
       }
       .smallSize{
         font-size: 14px;
+        text-align: center;
         color: #83BAC8;
       }
       .weateher{
@@ -139,6 +146,7 @@ onUnmounted(() => {
         }
         .right {
           margin-right: 23px;
+          font-size: 22px;
         }
       }
     }

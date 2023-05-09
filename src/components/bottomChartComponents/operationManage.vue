@@ -61,7 +61,7 @@ function cakeChart() {
       show: true,
       data: store.workOrderName,
       formatter: function(name:string) {
-            return "      {text|" + name + "}       {value|"+ ((store.objDataWorkeOrder[name].value / store.sumValueOrderName * 100).toFixed(2)) +"%}         {title|" + (store.objDataWorkeOrder[name].value) + "} {title|条}"
+            return "    {text|" + name + "}    {value|"+ ((store.objDataWorkeOrder[name].value / store.sumValueOrderName * 100).toFixed(2)) +"%}      {title|" + (store.objDataWorkeOrder[name].value) + "} {title|条}"
       },
       itemGap: 10,
       textStyle: {

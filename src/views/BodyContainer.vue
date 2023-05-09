@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { headerDataStore,bottomDataStore } from '@/store'
+import { headerDataStore,bottomDataStore,leftDataStore } from '@/store'
 
 const store = headerDataStore()
 store.getKpi()
 const bottomStore = bottomDataStore()
+const leftStore = leftDataStore()
 
 onMounted(() => {
   bottomStore.getVolume()
@@ -27,14 +28,14 @@ onMounted(() => {
           <div class="nomalFont">能效PR</div>
           <div class="nomalFont">%</div>
           <div>
-            <span class="numberFont">87 </span>
+            <span class="numberFont">{{ leftStore.PRProgress.toFixed(2) }} </span>
           </div>
         </div>
         <div class="third">
           <div class="nomalFont">当日最大功率</div>
-          <div class="nomalFont">{{ Number(store.HourKpi?.powerNow) > 10000 ? '万' : '' }}kW</div>
+          <div class="nomalFont">{{ Number(store.HourKpi?.maxPowerToday) > 10000 ? '万' : '' }}kW</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.powerNow) > 10000? (Number(store.HourKpi?.powerNow)/10000 * 1.15).toFixed(2) : (Number(store.HourKpi?.powerNow)*0.93).toFixed(2)}}</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.maxPowerToday) > 10000? (Number(store.HourKpi?.maxPowerToday)/10000).toFixed(2) : (Number(store.HourKpi?.maxPowerToday)).toFixed(2)}}</span>
           </div>
         </div>
       </div>
@@ -45,7 +46,7 @@ onMounted(() => {
           <div class="nomalFont">当日电量</div>
           <div class="nomalFont">{{ Number(store.HourKpi?.energyToday) > 10000 ? '万' : '' }}kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyTotal)/10000).toFixed(2) : (Number(store.HourKpi?.energyTotal)/10000).toFixed(2)}}</span>
+            <span class="numberFont">{{ Number(store.HourKpi?.energyToday) > 10000? (Number(store.HourKpi?.energyToday)/10000).toFixed(2) : (Number(store.HourKpi?.energyToday)/10000).toFixed(2)}}</span>
           </div>
         </div>
         <div class="second">

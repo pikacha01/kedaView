@@ -12,70 +12,127 @@ let chart : any = null
 
 onMounted(async () => {
   await store.getVolume()
-  pieChart();
+  cakeChart();
+  circulation();
   watch(() => {
-    return store.optionData.series
+    return store.volumeValue
   }, () => {
     const option: any = chart.getOption()// 获取当前配置项
     if (!option) {
       return 
     }
-    option.series = store.optionData.series
+    option.series[0].data = store.volumeValue
+    console.log(option.series)
     chart.setOption(option)
   })
 });
+
+// 实现动态效果
+let index = 0
+let timer: any = null
+
+function circulation() {
+  timer && window.clearTimeout(timer);
+  if (store.volumeValue.length === 0) return;
+  // 取消高亮指定的数据图形
+  chart.dispatchAction({
+    type: "downplay",
+    seriesIndex: 0,
+    dataIndex: index === 0 ? 2 : index - 1,
+  });
+  chart.dispatchAction({
+    type: "highlight",
+    seriesIndex: 0,
+    dataIndex: index,
+  });
+  if (index >= store.volumeValue.length - 1) {
+    index = 0;
+  } else {
+    index = index + 1;
+  }
+  timer = window.setTimeout(function () {
+    circulation();
+  }, 3000);
+}
 
 onUnmounted(() => {
   echart.dispose(chart);
 });
 
 
-function pieChart() {
+function cakeChart() {
   chart = echart.init(document.getElementById("pieChart") as HTMLElement);
   chart.setOption({
-    grid: {
-      top: "25%",
-      bottom: "10%", //也可设置left和right设置距离来控制图表的大小
-    },
     legend: {
-        show: true,
-        icon: "circle",
-        top: "18%",
-        left: "30%",
-        data: store.arrName,
-        width: 40,
-        padding: [0, 0, 0 , 50],
-        itemGap: 25,
-        formatter: function(name:string) {
-            return "{text|" + name + "}  {value|"+ ((store.objData[name].value / store.sumValue * 100).toFixed(2)) +"%}    {title|" + (store.objData[name].value) + "} {title|万kWp}"
-        },
-        textStyle: {
+      show: true,
+      data: store.volumeValue,
+      formatter: function (name: string) {
+        let data : any = null
+        store.volumeValue.forEach(item => {
+          if (item.name === name) {
+            data = item
+          }
+        })
+        return "   {text|" + name + "}     {value|"+ ((data.value / store.sumValue * 100).toFixed(2)) +"%}      {title|" + (data.value) + "} {title|kw}"
+      },
+      itemGap: 15,
+      textStyle: {
           rich: {
             title: {
-                fontSize: 25,
+                fontSize: 14,
                 color: "#23f8ef"
             },
             value: {
-                fontSize: 25,
+                fontSize: 14,
                 color: "#F6FF00"
             },
             text: {
-              fontSize: 25,
+              fontSize: 14,
               color:"#93bad0"
             }
-            }
-        },
+          }
+      },
+      top: "30%",
+      left: "40%",
+      // padding: [20, 30, 20, 0],
     },
-    // tooltip: {
-    //     show: true,
-    //     trigger: "item",
-    //     formatter: "{a}<br>{b}:{c}({d}%)"
-    // },
-    color: ['#1472bb', '#00c6ff', '#22ff89'],
-    xAxis: [{
-        show: false
-    }],
-    series:store.optionData.series
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '55%'],
+        left: "-62%",
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 5,
+          normal: {
+            borderWidth: 5, // 间距的宽度
+            borderColor: '#06171e', //背景色
+          }
+        },
+        hoverAnimation: true,
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            formatter: "{b}\n\n{d}%",
+            fontSize: 14,
+            fontWeight: 'bold',
+            color:"#36befc"
+          },
+          sclae: true,
+          scaleSize:5,
+        },
+        labelLine: {
+          show: false
+        },
+        color: ["#36befc","#1975ff","#0bdea5"],
+        data: store.volumeValue
+      }
+    ]
   }),
   window.onresize = function() {
     //自适应大小
@@ -93,12 +150,13 @@ function pieChart() {
 
 <style scoped lang="less">
 .powerStationCapacity{
-  margin-left: 150px;
-  width: 1350px;
+  margin-left: 10px;
+  width: 490px;
   height: 100%;
   .pieChart {
     width: 100%;
-    height: 700px;
+    height: 230px;
+    background: url('@/assets/images/运维管理分析4.png') no-repeat 9% center, 
   }
 }
 </style>

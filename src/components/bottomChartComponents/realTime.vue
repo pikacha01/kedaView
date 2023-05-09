@@ -51,6 +51,7 @@ function realTimeChart() {
     grid: {
       top: "25%",
       bottom: "10%", //也可设置left和right设置距离来控制图表的大小
+      left: 55
     },
     tooltip: {
       trigger: "axis",
@@ -116,22 +117,34 @@ function realTimeChart() {
     },
     series: [
       {
+        name: "等效功率",
         // data: store.HourYData,
         data: store.PowerY,
-        type: 'bar',
-        itemStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        type: 'line',
+        smooth: true, //平滑曲线显示
+        showAllSymbol: true, //显示所有图形。
+        symbol: "none", //标记的图形为实心圆
+        // symbolSize: 10, //标记的大小
+        // itemStyle: {
+        //   //折线拐点标志的样式
+        //   color: "#0fe7ae",
+        //   borderColor: '#fff',
+        //   borderWidth: 3,
+        // },
+        lineStyle: {
+          color: "#0fe7ae",
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "#22e7e4",
+                color: "rgba(28, 212, 145, 0.5)",
               },
               {
                 offset: 1,
-                color: "#04417d",
+                color: "rgba(0, 255, 210, 0.2)",
               },
             ]),
-          },
         },
       }
     ]

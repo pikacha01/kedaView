@@ -31,96 +31,98 @@ const dotting = () => {
   mapStore.stationList.forEach(item => {
     // let markerContent = "<div style='display:flex;align-items: center;'><div style='text-align: center'><img src='\/src/assets/img/定位点1.png\'></div>"+'<div style="background: url(\'src/assets/img/电站名称2.png\') no-repeat center center;height: 120px; background-size: 100% 100%; min-width: 300px" display: inline-block;> <div style="height: 120px;padding-left: 40px;padding-right: 40px;text-align: center;line-height: 148px; min-width: 292px; font-size: 45px; color: #fced00;display: inline-block;line-height: 120px" ><span>' + item.content + "</span></div></div></div>";
     let extDataContent = `
-    <div class="pop">
-      <div class="titlePop">
-        ${item.name}
-      </div>
-      <div class="addressPop">
-        <img src="/view/img/weizhi.png">
-        <span>${item.address}</span>
-      </div>
-      <div class="contentPop">
-        <div class="leftPop">
-          <img src="/view/img/guangfupng.png" alt="">
+    <div class="scale">
+      <div class="pop">
+        <div class="titlePop">
+          ${item.name}
         </div>
-        <div class="rightPop">
-          <div class="InfoLeft columnSpaceBetween">
-              <div class="grid">
-                <div class="caption">
-                  设备厂商
-                </div>
-                <div class="textPop">
-                  ${item.factory}
-                </div>
-              </div>
-              <div class="grid">
-                <div class="caption">
-                  经纬度
-                </div>
-                <div class="textPop">
-                  ${Number(item.position[0]).toFixed(2)}E  ${Number(item.position[1]).toFixed(2)}N
-                </div>
-              </div>
-              <div class="grid">
-                <div class="caption">
-                  今日发电量
-                </div>
-                <div class="textPop">
-                  ${item.todayPower}kWp
-                </div>
-              </div>
+        <div class="addressPop">
+          <img src="/view/img/weizhi.png">
+          <span>${item.address}</span>
+        </div>
+        <div class="contentPop">
+          <div class="leftPop">
+            <img src="/view/img/guangfupng.png" alt="">
           </div>
-          <div class="InfoCenter columnSpaceBetween">
-            <div class="grid">
-                <div class="caption">
-                  状态
+          <div class="rightPop">
+            <div class="InfoLeft columnSpaceBetween">
+                <div class="grid">
+                  <div class="caption">
+                    设备厂商
+                  </div>
+                  <div class="textPop">
+                    ${item.factory}
+                  </div>
                 </div>
-                <div class="textPop">
-                  ${item.status}
+                <div class="grid">
+                  <div class="caption">
+                    经纬度
+                  </div>
+                  <div class="textPop">
+                    ${Number(item.position[0]).toFixed(2)}E  ${Number(item.position[1]).toFixed(2)}N
+                  </div>
                 </div>
-              </div>
+                <div class="grid">
+                  <div class="caption">
+                    今日发电量
+                  </div>
+                  <div class="textPop">
+                    ${item.todayPower}kWp
+                  </div>
+                </div>
+            </div>
+            <div class="InfoCenter columnSpaceBetween">
               <div class="grid">
-                <div class="caption">
-                  电站编号
+                  <div class="caption">
+                    状态
+                  </div>
+                  <div class="textPop">
+                    ${item.status}
+                  </div>
                 </div>
-                <div class="textPop">
-                  ${item.sn}  
+                <div class="grid">
+                  <div class="caption">
+                    电站编号
+                  </div>
+                  <div class="textPop">
+                    ${item.sn}  
+                  </div>
                 </div>
-              </div>
+                <div class="grid">
+                  <div class="caption">
+                    总发电量
+                  </div>
+                  <div class="textPop">
+                    ${item.totalPower}kWp
+                  </div>
+                </div>
+            </div>
+            <div class="InfoRight columnSpaceBetween">
               <div class="grid">
-                <div class="caption">
-                  总发电量
+                  <div class="caption">
+                    健康度
+                  </div>
+                  <div class="textPop">
+                    ${item.health}
+                  </div>
                 </div>
-                <div class="textPop">
-                  ${item.totalPower}kWp
+                <div class="grid">
                 </div>
-              </div>
-          </div>
-          <div class="InfoRight columnSpaceBetween">
-            <div class="grid">
-                <div class="caption">
-                  健康度
+                <div class="grid">
+                  <div class="caption">
+                    电站容量
+                  </div>
+                  <div class="textPop">
+                    ${item.volume}kWp
+                  </div>
                 </div>
-                <div class="textPop">
-                  ${item.health}
-                </div>
-              </div>
-              <div class="grid">
-              </div>
-              <div class="grid">
-                <div class="caption">
-                  电站容量
-                </div>
-                <div class="textPop">
-                  ${item.volume}kWp
-                </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>`
+      </div>`
     var marker = new AMap.Marker({
-        icon: '/view/img/11.gif', // 添加 Icon 图标 URL
+        icon: '/view/img/icon1.png', // 添加 Icon 图标 URL
         position: item.position, // 基点位置
         extData: {
             content: extDataContent
@@ -137,12 +139,28 @@ const dotting = () => {
           offset: new AMap.Pixel(0, -30)
       });
       infoWindow.open(map, e.target.getPosition());
+      //   const box = document.querySelector('.amap-info') as HTMLDivElement;
+      //   const transFormStr = changeScale(box.style.cssText, 0.3)
+      //   box.style.transform = transFormStr as string;
     });
     marker.on('mouseout', function (e: any) {
       map.clearInfoWindow();
     });
   })
 }
+
+// 改变高德地图中的scale方法
+// const changeScale = (changeStr: string,scale: number) => {
+//   // 正则规则
+//   const transformRegex = /transform:\s*(.*?);/;
+//   const transformMatch = changeStr.match(transformRegex);
+//   if (transformMatch) {
+//     const transformValue = transformMatch[1];
+//     // 改变scale
+//     const newTransformValue = transformValue.replace(/scale\([^)]*\)/, `scale(${scale})`);
+//     return newTransformValue;
+//   }
+// }
 
 let AMap :any  = null
 
@@ -209,10 +227,16 @@ onMounted(async () => {
 }
 .amap-info-content{
   background-color: #1a232c !important;
-  width: 1950px !important;
-  height: 700px !important;
+  width: 650px !important;
+  height: 250px !important;
+}
+.scale {
+  width: 650px;
+  height: 250px;
 }
 .pop{
+  transform: scale(0.3);
+  transform-origin: 0 0;
   width: 1950px;
   height: 700px;
   background: url("@/assets/img/弹窗边角.png") no-repeat,
