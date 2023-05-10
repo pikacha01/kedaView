@@ -227,12 +227,12 @@ onMounted(async () => {
 }
 .amap-info-content{
   background-color: #1a232c !important;
-  width: 650px !important;
-  height: 250px !important;
+  width: 585px !important;
+  height: 210px !important;
 }
 .scale {
-  width: 650px;
-  height: 250px;
+  width: 585px;
+  height: 210px;
 }
 .pop{
   transform: scale(0.3);
