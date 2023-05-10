@@ -255,7 +255,7 @@ function initChart() {
     display: flex;
     flex-direction: column;
     .progress{
-      width: 430px;
+      width: 400px;
       height: 30px;
       display: flex;
       margin-left: 20px;

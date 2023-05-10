@@ -14,7 +14,7 @@ import StationHealthy from '@/components/leftChartComponents/stationHealthy.vue'
 <style scoped lang="less">
 .leftChart{
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 1%;
 }
 </style>

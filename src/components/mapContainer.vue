@@ -345,4 +345,8 @@ onMounted(async () => {
 .amap-info-sharp {
   display: none;
 }
+.amap-icon img {
+  width: 40px;
+  height: 40px;
+}
 </style>

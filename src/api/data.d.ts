@@ -15,7 +15,7 @@ export interface stationListInfo  {
   weatherStatus: string
 }
 export interface stationList {
-  data?: stationListInfo[],
+  data: stationListInfo[],
   end: number,
   start: number,
   total: number

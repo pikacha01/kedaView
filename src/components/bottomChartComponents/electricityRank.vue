@@ -137,7 +137,7 @@ function barChart() {
 </script>
 
 <template>
-  <!-- <div class="electricityRank">
+  <div class="electricityRank">
     <ChartTitle 
     title="发电量排名" 
     first-option="月" 
@@ -145,8 +145,8 @@ function barChart() {
     :is-checked="isChecked"
     />
     <div class="barChart" id="barChart"></div>
-  </div> -->
-  <PowerStationCapacity />
+  </div>
+  <!-- <PowerStationCapacity /> -->
 </template>
 
 <style scoped lang="less">

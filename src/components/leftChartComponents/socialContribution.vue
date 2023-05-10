@@ -70,6 +70,10 @@ onMounted(async () => {
       }
       .image{
         margin-top: 10px;
+        img {
+          width: 36px;
+          height: 36px;
+        }
       }
       .title{
         width: 110px;
