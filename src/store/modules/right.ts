@@ -9,8 +9,8 @@ export const rightDataStore = defineStore(
     // 设备工况统计
     const devStatusData = ref<pieData[][]>([])
     const devStatusTotal = ref<number>(0)
-    const getDevStatus = async () => {
-      const res = await getdevStatusApi()
+    const getDevStatus = async (stationId:number) => {
+      const res = await getdevStatusApi(stationId)
       if (devStatusData.value.length === 0) {
         devStatusData.value.push([{
           name: "正常设备",
@@ -57,12 +57,12 @@ export const rightDataStore = defineStore(
     const alarmyDataMonth = ref<string[]>([])
     const type = ref<number>(3)
     const regex = /(\d{4})-(\d{2})-(\d{2})/;
-    const getAlarmReport = async () => {
+    const getAlarmReport = async (stationId:number) => {
       const tempX : string[] =  []
       const tempY : string[] =  []
       const tempYDay : string[] =  []
-      const data = await getalarmReportApi(3)
-      const res = await getalarmReportApi(2)
+      const data = await getalarmReportApi(3,stationId)
+      const res = await getalarmReportApi(2,stationId)
       data.forEach(item => {
         let day =''
         if (type.value === 3) {

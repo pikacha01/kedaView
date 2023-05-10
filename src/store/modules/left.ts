@@ -24,8 +24,8 @@ export const leftDataStore = defineStore(
         image:"/view/img/社会贡献4.png"
       }
     ])
-    const getContributeData = async () => {
-      const contribute = await getContributeApi()
+    const getContributeData = async (stationId:number) => {
+      const contribute = await getContributeApi(stationId)
       energyContribute.value[0].yearData = contribute.coalYear as number
       energyContribute.value[0].total = contribute.coalTotal as number
       energyContribute.value[1].yearData = contribute.co2Year as number
@@ -40,10 +40,10 @@ export const leftDataStore = defineStore(
     const regex = /(\d{4})-(\d{2})-(\d{2})/;
     // PR进度条
     const PRProgress = ref<number>(0)
-    const getPRdata = async () => {
+    const getPRdata = async (stationId:number) => {
       const tempX:string[] = [] 
       const tempY: string[] = [] 
-      const res = await getPRApi()
+      const res = await getPRApi(stationId)
       res.forEach(item => {
         const match = regex.exec(item.title);
         const day = match![3]
@@ -67,9 +67,9 @@ export const leftDataStore = defineStore(
 
     // 获取警报统计
     const alarmReport = ref(0)
-    const getalarmReport = async () => {
+    const getalarmReport = async (stationId:number) => {
       // 昨日警报
-      const res = await getdevStatusApi()
+      const res = await getdevStatusApi(stationId)
       alarmReport.value = 100 - res.alarm  / res.total * 100
     }
 

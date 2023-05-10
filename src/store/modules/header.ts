@@ -7,8 +7,8 @@ export const headerDataStore = defineStore(
   () => {
     const energyContribute = ref<energyContribute>()
     // 获取社会贡献
-    const getContributeData = async () => {
-      const contribute = await getContributeApi()
+    const getContributeData = async (stationId:number) => {
+      const contribute = await getContributeApi(stationId)
       energyContribute.value = contribute
     } 
 
@@ -23,8 +23,8 @@ export const headerDataStore = defineStore(
       maxPowerYesterday: "0",
       powerNow: "0",
     })
-    const getKpi = async () => {
-      const res = await getKpiApi()
+    const getKpi = async (stationId:number) => {
+      const res = await getKpiApi(stationId)
       HourKpi.value = res
     }
 

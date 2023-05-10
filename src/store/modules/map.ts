@@ -12,7 +12,8 @@ interface stationListDetail {
   sn: string,
   status: string,
   todayPower: string,
-  totalPower: string
+  totalPower: string,
+  id: number,
 }
 
 export const mapDataStore = defineStore(
@@ -38,7 +39,8 @@ export const mapDataStore = defineStore(
             sn: item.sn,
             status: item.status,
             todayPower: item.todayPower,
-            totalPower: item.totalPower
+            totalPower: item.totalPower,
+            id: item.id
           })
         })
       }
@@ -58,6 +60,9 @@ export const mapDataStore = defineStore(
         getStationList()
       }
     }
-    return {stationListData ,getStationList,stationList}
+
+    // 选择电站 默认为0 0为全部
+    const selectStation = ref<number>(0)
+    return {stationListData ,getStationList,stationList,selectStation}
   }
 )

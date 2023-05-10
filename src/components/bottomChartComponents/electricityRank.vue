@@ -3,8 +3,9 @@ import {computed, onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import PowerStationCapacity from '@/components/bottomChartComponents/powerStationCapacity.vue';
 import * as echarts from "echarts";
-import { bottomDataStore } from '@/store';
+import { bottomDataStore,mapDataStore } from '@/store';
 
+const mapStore = mapDataStore()
 const store = bottomDataStore()
 
 const isChecked = computed(() => {
@@ -137,7 +138,7 @@ function barChart() {
 </script>
 
 <template>
-  <div class="electricityRank">
+  <div class="electricityRank" v-show="!mapStore.selectStation">
     <ChartTitle 
     title="发电量排名" 
     first-option="月" 
@@ -146,7 +147,7 @@ function barChart() {
     />
     <div class="barChart" id="barChart"></div>
   </div>
-  <!-- <PowerStationCapacity /> -->
+  <PowerStationCapacity v-show="mapStore.selectStation" />
 </template>
 
 <style scoped lang="less">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Home from './views/index.vue'
 import ScaleBox from '@/components/scaleBox.vue'
-import { onMounted,onUnmounted } from 'vue'
+import { onMounted,onUnmounted,watch } from 'vue'
 import { mapDataStore,leftDataStore,rightDataStore,headerDataStore,bottomDataStore } from '@/store'
 const leftStore = leftDataStore()
 const rightStore = rightDataStore()
@@ -13,26 +13,43 @@ let time : any = null
 onMounted(() => {
   time = setInterval(() => {
     bottomStore.getGenerateElectricity()
-    bottomStore.getWorkOrder()
-    bottomStore.getVolume()
-    bottomStore.getHourElectric()
-    bottomStore.getPR()
-    leftStore.getContributeData()
-    leftStore.getPRdata()
-    leftStore.getalarmReport()
-    rightStore.getAlarmReport()
-    rightStore.getDevStatus()
+    bottomStore.getEnergyPower(mapStore.selectStation)
+    bottomStore.getWorkOrder(mapStore.selectStation)
+    bottomStore.getVolume(mapStore.selectStation)
+    bottomStore.getHourElectric(mapStore.selectStation)
+    bottomStore.getPR(mapStore.selectStation)
+    leftStore.getContributeData(mapStore.selectStation)
+    leftStore.getPRdata(mapStore.selectStation)
+    leftStore.getalarmReport(mapStore.selectStation)
+    rightStore.getAlarmReport(mapStore.selectStation)
+    rightStore.getDevStatus(mapStore.selectStation)
     mapStore.stationListData.data = []
     mapStore.stationListData.start= 0
     mapStore.stationListData.end = 50
     mapStore.getStationList()
     headerStore.getTitle()
-  },1000*60*60)
+  }, 1000 * 60 * 60)
+  watch(() => {
+    return mapStore.selectStation
+  }, () => {
+    // bottomStore.getEnergyPower(mapStore.selectStation)
+    // bottomStore.getWorkOrder(mapStore.selectStation)
+    // bottomStore.getVolume(mapStore.selectStation)
+    // bottomStore.getHourElectric(mapStore.selectStation)
+    // bottomStore.getPR(mapStore.selectStation)
+    // leftStore.getContributeData(mapStore.selectStation)
+    // leftStore.getPRdata(mapStore.selectStation)
+    // leftStore.getalarmReport(mapStore.selectStation)
+    // rightStore.getAlarmReport(mapStore.selectStation)
+    // rightStore.getDevStatus(mapStore.selectStation)
+  })
 })
 onUnmounted(() => {
   window.clearInterval(time)
   time = null
 })
+
+
 </script>
 
 <template>

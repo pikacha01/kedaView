@@ -2,16 +2,16 @@
 import { onMounted, onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
-import { rightDataStore } from '@/store'
+import { rightDataStore,mapDataStore } from '@/store'
 import { computed } from '@vue/reactivity';
 const store = rightDataStore()
-
+const mapStore = mapDataStore()
 let echart = echarts
 let timer : any = null
 let chart : any = null
 
 onMounted(async () => {
-  await store.getAlarmReport()
+  await store.getAlarmReport(mapStore.selectStation)
   alarmChart()
   timer = setInterval(() => {
     store.type = store.type === 3 ? 2 : 3

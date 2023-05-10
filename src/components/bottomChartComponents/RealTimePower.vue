@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { onMounted,onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { bottomDataStore } from '@/store';
+import { bottomDataStore,mapDataStore } from '@/store';
 import * as echarts from "echarts";
 
-
+const mapStore = mapDataStore()
 const store = bottomDataStore()
 let echart = echarts
 let chart : any = null
 
 onMounted(async () => {
-  await store.getHourElectric()
+  await store.getHourElectric(mapStore.selectStation)
   realEleChart();
   watch(() => {
     return store.HourYData

@@ -12,7 +12,8 @@ export interface stationListInfo  {
   todayPower: string,
   totalPower: string,
   weather: string,
-  weatherStatus: string
+  weatherStatus: string,
+  id: number
 }
 export interface stationList {
   data: stationListInfo[],

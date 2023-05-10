@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted,onUnmounted,watch,ref } from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { bottomDataStore } from '@/store';
+import { bottomDataStore,mapDataStore } from '@/store';
 import * as echarts from "echarts";
 
-
+const mapStore = mapDataStore()
 const store = bottomDataStore()
 let echart = echarts
 let timer : any  =null 
@@ -12,7 +12,7 @@ let timer : any  =null
 let chart : any = null
 
 onMounted(async () => {
-  await store.getEnergyPower()
+  await store.getEnergyPower(mapStore.selectStation)
   realTimeChart();
   watch(() => {
     return store.PowerY

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted , watch} from 'vue'
+import {onMounted , watch,ref} from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader';
 import Header from '../views/header.vue';
 import BodyContainer from '@/views/BodyContainer.vue';
@@ -149,6 +149,26 @@ const dotting = () => {
   })
 }
 
+
+const getLocation = () => {
+  AMap.plugin('AMap.Geolocation', function() {
+    var geolocation = new AMap.Geolocation({
+      enableHighAccuracy: true, // 是否使用高精度定位，默认：true
+      timeout: 10000, // 设置定位超时时间，默认：无穷大
+      offset: [10, 20],  // 定位按钮的停靠位置的偏移量
+      zoomToAccuracy: true,  //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+    })
+
+    geolocation.getCurrentPosition(function(status:any,result:any){
+      if(status=='complete'){
+          console.log(result)
+      }
+      console.log(status)
+      console.log(result)
+    });
+  })
+}
+
 // 改变高德地图中的scale方法
 // const changeScale = (changeStr: string,scale: number) => {
 //   // 正则规则
@@ -166,7 +186,7 @@ let AMap :any  = null
 
 const initMap = async () => {
   AMap = await AMapLoader.load({
-      key:"21197c9fef143c98f6d08bf2ebab8488",             // 申请好的Web端开发者Key，首次调用 load 时必填
+      key:"9c9c088be8dd903f5de200cf76d3153d",             // 申请好的Web端开发者Key，首次调用 load 时必填
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
   })
@@ -195,6 +215,7 @@ const initMap = async () => {
   //       polyline.setMap(map);
   // })
   dotting()
+  getLocation()
 }
 
 
@@ -202,6 +223,15 @@ onMounted(async () => {
   await mapStore.getStationList()
   initMap()
 })
+
+
+// 改变电站列表
+const isOptionList = ref<boolean>(false)
+// 选项改变
+const changeSelect = (id:number) => {
+  mapStore.selectStation = id
+  isOptionList.value = false
+}
 </script>
 
 <template>
@@ -214,6 +244,23 @@ onMounted(async () => {
   <div class="leftCover"></div>
   <div class="rightCover"></div>
   <div class="bottomCover"></div>
+  <div class="selectionList" @click="isOptionList = true">
+      <img class="image" src="@/assets/images/电站列表.png">
+      <span class="list">电站列表</span>
+  </div>
+  <div class="allScreen"  v-show="isOptionList" @click="isOptionList = false">
+    <div class="OptionList" @click.stop="">
+      <div class="powerStation">
+        <div class="option"  @click="changeSelect(0)">
+            全部
+        </div>
+        <div class="option" @click="changeSelect(item.id)" v-for="item in mapStore.stationList" :key="item.id">
+            {{ item.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>
 </template>
 
@@ -228,6 +275,7 @@ onMounted(async () => {
 .amap-info-content{
   background-color: #1a232c !important;
   width: 585px !important;
+  padding: 0;
   height: 210px !important;
 }
 .scale {
@@ -348,5 +396,87 @@ onMounted(async () => {
 .amap-icon img {
   width: 40px;
   height: 40px;
+}
+.selectionList {
+  position: absolute;
+  top: 12%;
+  right: 0%;
+  width: 131px;
+  height: 24px;
+  display: flex;
+  z-index: 1000;
+  background: rgba(3,64,75,0.8);
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  .image {
+    width: 18px;
+    height: 18px;
+    margin-left: 18px;
+  }
+  .list {
+    color: #00FFF4;
+    font-size: 18px;
+    margin-left: 8px;
+  }
+}
+.allScreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
+.OptionList {
+  position: absolute;
+  top: 10%;
+  right: 12%;
+  width: 301px;
+  height: 435px;
+  background: #043540;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
+  opacity: 0.95;
+  border-radius: 6px;
+  .powerStation {
+    margin: 23px 19px;
+    width: 270px;
+    height: 389px;
+    overflow-y: scroll;
+    .option{
+      font-family: Light;
+      text-align: center;
+      padding: 0 10px;
+      line-height: 37px;
+      width: 233px;
+      height: 37px;
+      background: #002C36;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #00FFF4;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+    .option:not(:first-child){
+      margin-top: 15px;
+    }
+  }
+}
+/* 隐藏滚动条上下箭头 */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* 定义滚动条的样式 */
+::-webkit-scrollbar {
+  width: 7px; /* 滚动条宽度 */
+  height: 391px; /* 滚动条高度 */
+  background-color: #032830; /* 滚动条背景色 */
+}
+
+/* 定义滚动条滑块的样式 */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px; /* 滑块圆角 */
+  background-color: #096074; /* 滑块颜色 */
 }
 </style>

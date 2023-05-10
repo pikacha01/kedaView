@@ -32,8 +32,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const PRxData = ref<string[]>([])
   const PRyData = ref<string[]>([])
   const regex = /(\d{4})-(\d{2})-(\d{2})/;
-  const getPR = async () => {
-    const data = await getHourApi()
+  const getPR = async (stationId:number) => {
+    const data = await getHourApi(stationId)
     PRxData.value = []
     PRyData.value = []
     data.forEach(item=> {
@@ -48,8 +48,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const HourYData = ref<string[]>([])
   const HourXData = ref<string[]>([])
   const pattern =  /\b(\d{2}):/;
-  const getHourElectric = async () => {
-    const res = await getEnergyHourApi()
+  const getHourElectric = async (stationId:number) => {
+    const res = await getEnergyHourApi(stationId)
     HourXData.value = []
     HourYData.value = []
     res.forEach(item=> {
@@ -63,8 +63,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   // 实时发电功率
   const PowerX = ref<string[]>([])
   const PowerY = ref<string[]>([])
-  const getEnergyPower = async () => {
-    const res = await getEnergyPowerApi()
+  const getEnergyPower = async (stationId:number) => {
+    const res = await getEnergyPowerApi(stationId)
     PowerX.value = []
     PowerY.value = []
     res.forEach(item=> {
@@ -194,8 +194,8 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const arrName = ref<any>()
   const optionData = ref<any>()
   const capacity  = ref<number>(0)
-  const getVolume =async  () => {
-    const res = await getVolumeApi()
+  const getVolume =async  (stationId:number) => {
+    const res = await getVolumeApi(stationId)
     volumeValue.value = []
     volumeValue.value.push({
       name: "并网容量",
@@ -222,10 +222,10 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const sumValueOrderName = ref<number>(0)
   const objDataWorkeOrder = ref<any>()
   const percentageComplete = ref<string>('')
-  const getWorkOrder = async () => {
+  const getWorkOrder = async (stationId:number) => {
     const temp:pieData[] = []
     workOrderName.value = []
-    const res = await getStationWorkOrderApi()
+    const res = await getStationWorkOrderApi(stationId)
     temp.push({
       name: "待处理工单",
       value: res.pending

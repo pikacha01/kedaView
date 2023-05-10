@@ -2,14 +2,15 @@
 import {onMounted,onUnmounted,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
-import { bottomDataStore } from '@/store';
+import { bottomDataStore,mapDataStore } from '@/store';
 
+const mapStore = mapDataStore()
 const store = bottomDataStore()
 let echart = echarts
 let chart : any = null
 
 onMounted(async () => {
-  await store.getPR()
+  await store.getPR(mapStore.selectStation)
   barChart();
   watch(() => {
     return store.PRyData

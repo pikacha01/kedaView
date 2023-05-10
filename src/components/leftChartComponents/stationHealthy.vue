@@ -2,10 +2,11 @@
 import {computed,ref, onMounted,onUnmounted, watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
-import { leftDataStore } from '@/store';
+import { leftDataStore,mapDataStore } from '@/store';
 // const percentage = computed(()=>{
 //   return `80`
 // })
+const mapStore = mapDataStore()
 const store = leftDataStore()
 const rotate = computed(() => {
   const rotateTotal = 405 - 159
@@ -17,8 +18,8 @@ let chart : any = null
 let echart = echarts
 
 onMounted(async () => {
-  await store.getPRdata()
-  await store.getalarmReport()
+  await store.getPRdata(mapStore.selectStation)
+  await store.getalarmReport(mapStore.selectStation)
   initChart();
   // 数据更新配置
   watch(() => {

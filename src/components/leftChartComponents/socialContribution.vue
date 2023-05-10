@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import {ref,onMounted} from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { leftDataStore } from '@/store'
+import { leftDataStore,mapDataStore } from '@/store'
 
 const store = leftDataStore()
+const mapStore = mapDataStore()
 
 onMounted(async () => {
-  await store.getContributeData()
+  await store.getContributeData(mapStore.selectStation)
 })
 
 

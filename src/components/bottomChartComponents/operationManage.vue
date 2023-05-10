@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {onMounted,onUnmounted,ref,watch} from 'vue'
 import ChartTitle from '../chartTitle.vue';
-import { bottomDataStore } from "@/store"
+import { bottomDataStore,mapDataStore } from "@/store"
 import * as echarts from "echarts";
 
+const mapStore = mapDataStore()
 const store = bottomDataStore()
 
 let echart = echarts
@@ -11,7 +12,7 @@ let echart = echarts
 let chart : any = null
 
 onMounted(async () => {
-  await store.getWorkOrder()
+  await store.getWorkOrder(mapStore.selectStation)
   cakeChart();
   circulation();
   const option: any = chart.getOption()// 获取当前配置项

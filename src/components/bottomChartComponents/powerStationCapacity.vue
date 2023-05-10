@@ -2,16 +2,16 @@
 import { onMounted,onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
-import { bottomDataStore } from '@/store';
-import {pieData} from '@/api/data'
+import { bottomDataStore,mapDataStore } from '@/store';
 const store = bottomDataStore()
 
+const mapStore = mapDataStore()
 let echart = echarts
 
 let chart : any = null
 
 onMounted(async () => {
-  await store.getVolume()
+  await store.getVolume(mapStore.selectStation)
   cakeChart();
   circulation();
   watch(() => {
@@ -154,7 +154,7 @@ function cakeChart() {
   width: 490px;
   height: 100%;
   .pieChart {
-    width: 100%;
+    width: 490px;
     height: 230px;
     background: url('@/assets/images/运维管理分析4.png') no-repeat 9% center, 
   }
