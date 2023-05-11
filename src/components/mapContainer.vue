@@ -533,8 +533,8 @@ const changeSelect = (id: number, item?: stationListDetail) => {
 .selectionList {
   position: absolute;
   top: 12%;
-  right: 0%;
-  width: 131px;
+  right: 1%;
+  padding-right: 18px;
   height: 24px;
   display: flex;
   z-index: 1000;
