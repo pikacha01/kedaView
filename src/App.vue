@@ -32,16 +32,16 @@ onMounted(() => {
   watch(() => {
     return mapStore.selectStation
   }, () => {
-    // bottomStore.getEnergyPower(mapStore.selectStation)
-    // bottomStore.getWorkOrder(mapStore.selectStation)
-    // bottomStore.getVolume(mapStore.selectStation)
-    // bottomStore.getHourElectric(mapStore.selectStation)
-    // bottomStore.getPR(mapStore.selectStation)
-    // leftStore.getContributeData(mapStore.selectStation)
-    // leftStore.getPRdata(mapStore.selectStation)
-    // leftStore.getalarmReport(mapStore.selectStation)
-    // rightStore.getAlarmReport(mapStore.selectStation)
-    // rightStore.getDevStatus(mapStore.selectStation)
+    bottomStore.getEnergyPower(mapStore.selectStation)
+    bottomStore.getWorkOrder(mapStore.selectStation)
+    bottomStore.getVolume(mapStore.selectStation)
+    bottomStore.getHourElectric(mapStore.selectStation)
+    bottomStore.getPR(mapStore.selectStation)
+    leftStore.getContributeData(mapStore.selectStation)
+    leftStore.getPRdata(mapStore.selectStation)
+    leftStore.getalarmReport(mapStore.selectStation)
+    rightStore.getAlarmReport(mapStore.selectStation)
+    rightStore.getDevStatus(mapStore.selectStation)
   })
 })
 onUnmounted(() => {

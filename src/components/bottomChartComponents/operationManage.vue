@@ -17,7 +17,7 @@ onMounted(async () => {
   circulation();
   const option: any = chart.getOption()// 获取当前配置项
   watch(() => {
-    return store.workOrder
+    return store.workOrder[0]
   }, () => {
     if (!option) {
       return 
@@ -61,8 +61,11 @@ function cakeChart() {
     legend: {
       show: true,
       data: store.workOrderName,
-      formatter: function(name:string) {
-            return "    {text|" + name + "}    {value|"+ ((store.objDataWorkeOrder[name].value / store.sumValueOrderName * 100).toFixed(2)) +"%}      {title|" + (store.objDataWorkeOrder[name].value) + "} {title|条}"
+      formatter: function (name: string) {
+        if (store.sumValueOrderName === 0) {
+          return "    {text|" + name + "}    {value|"+ 25  +"%}      {title|" + 0 + "} {title|条}"
+        }
+            return "    {text|" + name + "}    {value|"+ ((store.objDataWorkeOrder[name].value / store.sumValueOrderName * 100).toFixed(2))  +"%}      {title|" + (store.objDataWorkeOrder[name].value) + "} {title|条}"
       },
       itemGap: 10,
       textStyle: {
@@ -107,7 +110,9 @@ function cakeChart() {
         emphasis: {
           label: {
             show: true,
-            formatter: "{b}\n\n{d}%",
+            formatter: (params : any) => {
+              return `${params.name}` + `\n\n${params.percent === undefined ? 25 : params.percent}%`
+            },
             fontSize: 14,
             fontWeight: 'bold',
             color:"#36befc"

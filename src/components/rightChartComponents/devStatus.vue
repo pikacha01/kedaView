@@ -125,13 +125,6 @@ function initBarChart(data: pieData[]) {
   };
 }
 
-// 
-const isOptionList = ref<boolean>(false)
-// 选项改变
-const changeSelect = (id:number) => {
-  console.log(id)
-}
-
 
 </script>
 

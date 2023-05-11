@@ -224,7 +224,6 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const percentageComplete = ref<string>('')
   const getWorkOrder = async (stationId:number) => {
     const temp:pieData[] = []
-    workOrderName.value = []
     const res = await getStationWorkOrderApi(stationId)
     temp.push({
       name: "待处理工单",
@@ -243,8 +242,13 @@ export const bottomDataStore = defineStore("bottom-store", () => {
       value: res.close
     })
     workOrder.value = temp
-    percentageComplete.value = ((res.goodCount / res.processed) * 100).toFixed(2)
-    sumValueOrderName.value = workOrder.value.reduce((acc,cur) => acc + cur.value,0)
+    
+    sumValueOrderName.value = workOrder.value.reduce((acc, cur) => acc + cur.value, 0)
+    if (!res.goodCount || !res.processed) {
+      percentageComplete.value = "0"
+    } else {
+      percentageComplete.value = ((res.goodCount / res.processed) * 100).toFixed(2)
+    }
     workOrderName.value = getArrayValue(workOrder.value, "name")
     objDataWorkeOrder.value = array2obj(workOrder.value, "name")
   }

@@ -85,7 +85,7 @@ const dotting = () => {
                     电站编号
                   </div>
                   <div class="textPop">
-                    ${item.sn}  
+                    ${(String(item.sn)).length > 15? (String(item.sn)).substr(0, 15) + '...' : item.sn}  
                   </div>
                 </div>
                 <div class="grid">
@@ -352,7 +352,7 @@ const changeSelect = (id:number) => {
       .textPop {
         font-family: HRegular;
         font-size: 45px;
-        color: #23F7EE
+        color: #23F7EE;
       }
       .InfoCenter {
         margin-left: -50px;

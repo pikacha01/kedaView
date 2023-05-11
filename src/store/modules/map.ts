@@ -47,7 +47,8 @@ export const mapDataStore = defineStore(
       return tempList
     })
     const getStationList =async () => {
-      const res = await getStationListApi(''+stationListData.value.start,''+stationListData.value.end)
+      const res = await getStationListApi('' + stationListData.value.start, '' + stationListData.value.end)
+      console.log(res)
       res.data?.forEach(item => {
         stationListData.value.data?.push(item)
       })

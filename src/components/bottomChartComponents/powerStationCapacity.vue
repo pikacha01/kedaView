@@ -22,7 +22,6 @@ onMounted(async () => {
       return 
     }
     option.series[0].data = store.volumeValue
-    console.log(option.series)
     chart.setOption(option)
   })
 });
