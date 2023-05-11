@@ -15,6 +15,21 @@ export interface stationListInfo  {
   weatherStatus: string,
   id: number
 }
+export interface stationListDetail {
+  position: string[],
+  name: string,
+  volume: number,
+  address: string,
+  factory: string,
+  health: string,
+  sn: string,
+  status: string,
+  todayPower: string,
+  totalPower: string,
+  id: number,
+  weather: string,
+  weatherStatus: string,
+}
 export interface stationList {
   data: stationListInfo[],
   end: number,
@@ -99,4 +114,10 @@ export interface title{
   msg : string,
   status: number,
   data: string
+}
+
+// 天气
+export interface weather {
+  info: string,
+  weather: string
 }

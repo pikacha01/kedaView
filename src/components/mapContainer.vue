@@ -7,6 +7,8 @@ import LeftChart from '@/views/leftChart.vue';
 import BottomChart from '@/views/bottomChart.vue';
 import { mapDataStore } from '@/store'
 import RightChart from '@/views/rightChart.vue';
+import {stationListDetail} from '@/api/data'
+
 
 
 const mapStore = mapDataStore()
@@ -149,25 +151,25 @@ const dotting = () => {
   })
 }
 
+// 获取城市定位
+// const getLocation = () => {
+//   AMap.plugin('AMap.Geolocation', function() {
+//     var geolocation = new AMap.Geolocation({
+//       enableHighAccuracy: true, // 是否使用高精度定位，默认：true
+//       timeout: 10000, // 设置定位超时时间，默认：无穷大
+//       offset: [10, 20],  // 定位按钮的停靠位置的偏移量
+//       zoomToAccuracy: true,  //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+//     })
 
-const getLocation = () => {
-  AMap.plugin('AMap.Geolocation', function() {
-    var geolocation = new AMap.Geolocation({
-      enableHighAccuracy: true, // 是否使用高精度定位，默认：true
-      timeout: 10000, // 设置定位超时时间，默认：无穷大
-      offset: [10, 20],  // 定位按钮的停靠位置的偏移量
-      zoomToAccuracy: true,  //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-    })
-
-    geolocation.getCurrentPosition(function(status:any,result:any){
-      if(status=='complete'){
-          console.log(result)
-      }
-      console.log(status)
-      console.log(result)
-    });
-  })
-}
+//     geolocation.getCurrentPosition(function(status:any,result:any){
+//       if(status=='complete'){
+//           console.log(result)
+//       }
+//       console.log(status)
+//       console.log(result)
+//     });
+//   })
+// }
 
 // 改变高德地图中的scale方法
 // const changeScale = (changeStr: string,scale: number) => {
@@ -215,7 +217,6 @@ const initMap = async () => {
   //       polyline.setMap(map);
   // })
   dotting()
-  getLocation()
 }
 
 
@@ -224,13 +225,145 @@ onMounted(async () => {
   initMap()
 })
 
+const selectStation = ref<string>("全部")
 
 // 改变电站列表
 const isOptionList = ref<boolean>(false)
 // 选项改变
-const changeSelect = (id:number) => {
-  mapStore.selectStation = id
-  isOptionList.value = false
+const changeSelect = (id: number, item?: stationListDetail) => {
+  if (item) {
+    mapStore.selectStation = item.id
+    mapStore.showWeather!.info = item.weatherStatus
+    mapStore.showWeather!.weather = item.weather
+  } else {
+    mapStore.selectStation = id
+  }
+  if (id === 0) {
+    mapStore.showWeather = mapStore.currentWeather
+    selectStation.value = "全部"
+    dotting()
+  } else {
+    selectStation.value = item!.name
+    map.clearMap()
+    map.setCenter(item?.position)
+    let extDataContent = `
+    <div class="scale">
+      <div class="pop">
+        <div class="titlePop">
+          ${item?.name}
+        </div>
+        <div class="addressPop">
+          <img src="/view/img/weizhi.png">
+          <span>${item?.address}</span>
+        </div>
+        <div class="contentPop">
+          <div class="leftPop">
+            <img src="/view/img/guangfupng.png" alt="">
+          </div>
+          <div class="rightPop">
+            <div class="InfoLeft columnSpaceBetween">
+                <div class="grid">
+                  <div class="caption">
+                    设备厂商
+                  </div>
+                  <div class="textPop">
+                    ${item?.factory}
+                  </div>
+                </div>
+                <div class="grid">
+                  <div class="caption">
+                    经纬度
+                  </div>
+                  <div class="textPop">
+                    ${Number(item?.position[0]).toFixed(2)}E  ${Number(item?.position[1]).toFixed(2)}N
+                  </div>
+                </div>
+                <div class="grid">
+                  <div class="caption">
+                    今日发电量
+                  </div>
+                  <div class="textPop">
+                    ${item?.todayPower}kWp
+                  </div>
+                </div>
+            </div>
+            <div class="InfoCenter columnSpaceBetween">
+              <div class="grid">
+                  <div class="caption">
+                    状态
+                  </div>
+                  <div class="textPop">
+                    ${item?.status}
+                  </div>
+                </div>
+                <div class="grid">
+                  <div class="caption">
+                    电站编号
+                  </div>
+                  <div class="textPop">
+                    ${(String(item?.sn)).length > 15? (String(item?.sn)).substr(0, 15) + '...' : item?.sn}  
+                  </div>
+                </div>
+                <div class="grid">
+                  <div class="caption">
+                    总发电量
+                  </div>
+                  <div class="textPop">
+                    ${item?.totalPower}kWp
+                  </div>
+                </div>
+            </div>
+            <div class="InfoRight columnSpaceBetween">
+              <div class="grid">
+                  <div class="caption">
+                    健康度
+                  </div>
+                  <div class="textPop">
+                    ${item?.health}
+                  </div>
+                </div>
+                <div class="grid">
+                </div>
+                <div class="grid">
+                  <div class="caption">
+                    电站容量
+                  </div>
+                  <div class="textPop">
+                    ${item?.volume}kWp
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>`
+    var marker = new AMap.Marker({
+        icon: '/view/img/icon1.png', // 添加 Icon 图标 URL
+        position: item?.position, // 基点位置
+        extData: {
+            content: extDataContent
+        }
+          // content:markerContent
+              // offset: new AMap.Pixel(-10, -32), // 相对于基点的偏移位置
+        });
+        marker.setMap(map);
+        //点击地图点标记的方法
+        //鼠标悬停地图点标记
+        marker.on("mouseover", function (e : any) {
+          let infoWindow = new AMap.InfoWindow({
+              content: e.target.getExtData().content,
+              offset: new AMap.Pixel(0, -30)
+          });
+          infoWindow.open(map, e.target.getPosition());
+          //   const box = document.querySelector('.amap-info') as HTMLDivElement;
+          //   const transFormStr = changeScale(box.style.cssText, 0.3)
+          //   box.style.transform = transFormStr as string;
+        });
+        marker.on('mouseout', function (e: any) {
+          map.clearInfoWindow();
+        });
+      }
+      isOptionList.value = false
 }
 </script>
 
@@ -246,7 +379,7 @@ const changeSelect = (id:number) => {
   <div class="bottomCover"></div>
   <div class="selectionList" @click="isOptionList = true">
       <img class="image" src="@/assets/images/电站列表.png">
-      <span class="list">电站列表</span>
+      <span class="list">{{ selectStation.length > 4? selectStation.substr(0, 4) + '...' : selectStation }}</span>
   </div>
   <div class="allScreen"  v-show="isOptionList" @click="isOptionList = false">
     <div class="OptionList" @click.stop="">
@@ -254,7 +387,7 @@ const changeSelect = (id:number) => {
         <div class="option"  @click="changeSelect(0)">
             全部
         </div>
-        <div class="option" @click="changeSelect(item.id)" v-for="item in mapStore.stationList" :key="item.id">
+        <div class="option" @click="changeSelect(item.id,item)" v-for="item in mapStore.stationList" :key="item.id">
             {{ item.name }}
         </div>
       </div>

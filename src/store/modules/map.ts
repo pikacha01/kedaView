@@ -1,20 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref , computed} from 'vue'
-import { getStationListApi } from '@/api/energyApi'
-import {stationList,stationListInfo} from '@/api/data'
-interface stationListDetail {
-  position: string[],
-  name: string,
-  volume: number,
-  address: string,
-  factory: string,
-  health: string,
-  sn: string,
-  status: string,
-  todayPower: string,
-  totalPower: string,
-  id: number,
-}
+import { getStationListApi,getWeatherApi } from '@/api/energyApi'
+import {stationList,weather,stationListDetail} from '@/api/data'
+
 
 export const mapDataStore = defineStore(
   'map-store',
@@ -40,7 +28,9 @@ export const mapDataStore = defineStore(
             status: item.status,
             todayPower: item.todayPower,
             totalPower: item.totalPower,
-            id: item.id
+            id: item.id,
+            weather: item.weather,
+            weatherStatus: item.weatherStatus
           })
         })
       }
@@ -64,6 +54,18 @@ export const mapDataStore = defineStore(
 
     // 选择电站 默认为0 0为全部
     const selectStation = ref<number>(0)
-    return {stationListData ,getStationList,stationList,selectStation}
+
+    // 当前城市天气
+    const currentWeather = ref<weather>()
+    // 展示的天气
+    const showWeather = ref<weather>()
+
+    // 获取当前城市天气 
+    const getCurrentWeather =async (code: number) => {
+      const res = await getWeatherApi(code) 
+      currentWeather.value = res
+      showWeather.value = res
+    }
+    return {stationListData ,getStationList,stationList,selectStation,getCurrentWeather,showWeather,currentWeather}
   }
 )

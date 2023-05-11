@@ -76,9 +76,9 @@ onUnmounted(() => {
           <div class="right">
             <div>
               <span>
-                {{ mapStore.stationListData.data[0]?.weather }}</span>
+                {{ mapStore.showWeather?.weather }}</span>
               <span style="margin-left: 15px;">
-                {{ mapStore.stationListData.data[0]?.weatherStatus }}
+                {{ mapStore.showWeather?.info }}
               </span>
             </div>
           </div>

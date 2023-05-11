@@ -1,5 +1,5 @@
 import request from "./request"
-import { title,kpi, stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage,devStatus} from '@/api/data'
+import { title,kpi, stationList, realTimePower, energyContribute ,date, VolumeCapacity, operationManage,devStatus,weather} from '@/api/data'
 
 // 获取电站位置
 export const getStationListApi = (start: string, end: string) => {
@@ -53,4 +53,8 @@ export const getHourApi = (stationId: number) => {
 // 获取标题
 export const getTitleApi = () => {
   return request<title>('/energy/screenTitle')
+}
+// 获取当前城市天气
+export const getWeatherApi = (code:number) => {
+  return request<weather>(`/energy/weather/${code}`)
 }
