@@ -49,7 +49,7 @@ function realEleChart() {
         let html =''
         html += '<div style="width: 150px; height: 46px; font-size: 14px; color: #fff;">'
         html += '<div style="margin-top: 2px;">' + params[0].name + '时</div>';
-        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
+        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>小时发电量:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
         return html
       }
     },

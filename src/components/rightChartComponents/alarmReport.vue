@@ -31,12 +31,14 @@ watch(() => {
   if (!option) {
     return 
   }
+  console.log()
   if (store.type === 3) {
     option.series[0].data = store.alarmyDataMonth
+    option.xAxis[0].data = store.alarmxDataMonth
   } else {
     option.series[0].data = store.alarmyDataDay
+    option.xAxis[0].data = store.alarmxDataDay
   }
-  option.xAxis[0].data = store.alarmxData
   chart.setOption(option)
 })
 
@@ -64,13 +66,13 @@ function alarmChart() {
         let html =''
         html += '<div style="width: 100px; height: 46px; font-size: 14px; color: #fff;">'
         html += '<div style="margin-top: 2px;">' + params[0].name + '时</div>';
-        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>发电功率:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'kw</div></div>';
+        html += '<div style="margin-top: 5px; display:flex; align-items: center"><div>告警数量:</div><div style="font-size: 14px;margin-left:10px;color:#F6FF00">'+ params[0].data +'条</div></div>';
         return html
       }
     },
     xAxis: {
       type: 'category',
-      data: store.alarmxData,
+      data: store.alarmxDataMonth,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -90,7 +92,7 @@ function alarmChart() {
     },
     yAxis: {
       type: 'value',
-      name: "kwh",
+      name: "条",
       nameTextStyle: {
           color: "#96D6E8",
           fontSize: 15,
