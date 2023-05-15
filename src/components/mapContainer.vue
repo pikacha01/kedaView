@@ -44,7 +44,7 @@ const dotting = () => {
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src="/view/img/guangfupng.png" alt="">
+            <img src='${item.pic === null ? "/view/img/guangfupng.png" : item.pic }' alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -194,7 +194,7 @@ const initMap = async () => {
   })
   let centerPlot:any = null
   mapStore.stationList.forEach(item => {
-    if (item.address === "安徽省马鞍山市雨山区银塘镇湖西南路82号信成大厦") {
+    if (item.address === "广东省佛山市顺德区万家乐热水厨电科技产业园") {
       centerPlot = item
     }
   })
@@ -217,6 +217,7 @@ const initMap = async () => {
   //       polyline.setMap(map);
   // })
   dotting()
+  // changeSelect("859916425202499587")
 }
 
 
@@ -230,7 +231,7 @@ const selectStation = ref<string>("全部")
 // 改变电站列表
 const isOptionList = ref<boolean>(false)
 // 选项改变
-const changeSelect = (id: number, item?: stationListDetail) => {
+const changeSelect = (id: any, item?: stationListDetail) => {
   if (item) {
     mapStore.selectStation = item.id
     mapStore.showWeather!.info = item.weatherStatus
@@ -377,7 +378,7 @@ const changeSelect = (id: number, item?: stationListDetail) => {
   <div class="leftCover"></div>
   <div class="rightCover"></div>
   <div class="bottomCover"></div>
-  <div class="selectionList" @click="isOptionList = true">
+  <!-- <div class="selectionList" @click="isOptionList = true">
       <img class="image" src="@/assets/images/电站列表.png">
       <span class="list">{{ selectStation.length > 4? selectStation.substr(0, 4) + '...' : selectStation }}</span>
   </div>
@@ -392,7 +393,7 @@ const changeSelect = (id: number, item?: stationListDetail) => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   
 </div>
 </template>
