@@ -30,7 +30,8 @@ export const mapDataStore = defineStore(
             totalPower: item.totalPower,
             id: item.id,
             weather: item.weather,
-            weatherStatus: item.weatherStatus
+            weatherStatus: item.weatherStatus,
+            pic: item.pic
           })
         })
       }

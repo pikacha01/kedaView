@@ -13,7 +13,8 @@ export interface stationListInfo  {
   totalPower: string,
   weather: string,
   weatherStatus: string,
-  id: number
+  id: number,
+  pic: string,
 }
 export interface stationListDetail {
   position: string[],
@@ -29,6 +30,7 @@ export interface stationListDetail {
   id: number,
   weather: string,
   weatherStatus: string,
+  pic: string,
 }
 export interface stationList {
   data: stationListInfo[],

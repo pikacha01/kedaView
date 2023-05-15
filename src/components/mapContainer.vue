@@ -44,7 +44,7 @@ const dotting = () => {
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src="/view/img/guangfupng.png" alt="">
+            <img src=${item.pic === null ? "/view/img/guangfupng.png" : item.pic} alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -462,6 +462,10 @@ const changeSelect = (id: number, item?: stationListDetail) => {
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        width: 567px;
+        height: 385px;
+      }
     }
     .rightPop {
       margin-left: 65px;
