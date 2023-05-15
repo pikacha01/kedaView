@@ -463,6 +463,10 @@ const changeSelect = (id: any, item?: stationListDetail) => {
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        width: 567px;
+        height: 385px;
+      }
     }
     .rightPop {
       margin-left: 65px;
