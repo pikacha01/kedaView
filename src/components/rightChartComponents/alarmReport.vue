@@ -160,7 +160,7 @@ function alarmChart() {
 
 <template>
   <div class="alarmReport">
-    <ChartTitle title="告警趋势分析"
+    <ChartTitle style="padding-left: 10px; width: 460px; margin-right: 20px;" title="告警趋势分析"
     first-option="月" 
     second-option="日" 
     :is-checked="isChecked"
@@ -174,7 +174,7 @@ function alarmChart() {
 .alarmReport {
   margin-top: 120px;
   margin-left: 50px;
-  width: 500px;
+  width: 490px;
   .alarmChart{
     margin-top: 20px;
     width: 100%;

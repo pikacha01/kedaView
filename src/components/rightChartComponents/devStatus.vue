@@ -130,7 +130,7 @@ function initBarChart(data: pieData[]) {
 
 <template>
   <div class="devStatus">
-    <ChartTitle title="设备工况统计" />
+    <ChartTitle style="margin-left: 10px;" title="设备工况统计" />
     <div class="content">
       <div class="box" v-for="(item) in store.devStatusData" :key="item[0].name">
         <div class="chart"  :id="`proChart${item[0].name}`">
@@ -146,7 +146,7 @@ function initBarChart(data: pieData[]) {
 
 <style scoped lang="less">
 .devStatus {
-  width: 500px;
+  width: 490px;
   height: 180px;
   margin-left: 50px;
   position: relative;

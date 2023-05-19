@@ -16,6 +16,6 @@ import AlarmReport from '@/components/rightChartComponents/alarmReport.vue';
 .rightChart{
   position: absolute;
   top: 12%;
-  right: 1%;
+  right: 0;
 }
 </style>
