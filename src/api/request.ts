@@ -1,12 +1,12 @@
 import axios, { type Method } from 'axios'
-export const baseUrl = 'https://zhuyiyun.com/api/smoker/'
+export const baseUrl = 'https://www.kedazhny.com/api/smoker/'
 //@ts-ignore
 import JSONbig from "json-bigint";
 
 const instance = axios.create({
   // TODO 1. 基础地址，超时时间
   baseURL: baseUrl,
-  timeout: 10000,
+  timeout: 60000,
   transformResponse: [
     function (data) {
       // 对 data 进行任意转换处理
