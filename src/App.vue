@@ -30,7 +30,7 @@ onMounted(async() => {
     mapStore.stationListData.end = 50
     mapStore.getStationList()
     // headerStore.getTitle()
-  }, 1000 * 60 * 60)
+  }, 1000 * 60 *60)
 
 
 
