@@ -101,7 +101,8 @@ function realEleChart() {
     },
     series: [
       {
-        data: store.HourYData,
+        // data: store.HourYData,
+        data: [23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20,58,47,21,31,70,25,89],
         type: 'bar',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。

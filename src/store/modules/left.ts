@@ -8,29 +8,29 @@ export const leftDataStore = defineStore(
   () => {
     // 社会贡献
     const energyContribute = ref<energyContributeList[]>([{
-        yearData: 0,
+        yearData: 243.44,
         total: 0,
         title: "节约标煤(吨)",
-        image:"/wjl/img/社会贡献2.png"
+        image:"/hmenergyview/img/社会贡献2.png"
       },{
-        yearData: 0,
+        yearData: 892.24,
         total: 0,
         title:"CO2减排量(吨)",
-        image:"/wjl/img/社会贡献3.png"
+        image:"/hmenergyview/img/社会贡献3.png"
       },{
-        yearData: 0,
+        yearData: 0.67,
         total: 0,
         title: "等效植树量(棵)",
-        image:"/wjl/img/社会贡献4.png"
+        image:"/hmenergyview/img/社会贡献4.png"
       }
     ])
     const getContributeData = async (stationId:number) => {
       const contribute = await getContributeApi(stationId)
-      energyContribute.value[0].yearData = contribute.coalYear as number
+      // energyContribute.value[0].yearData = contribute.coalYear as number
       energyContribute.value[0].total = contribute.coalTotal as number
-      energyContribute.value[1].yearData = contribute.co2Year as number
+      // energyContribute.value[1].yearData = contribute.co2Year as number
       energyContribute.value[1].total = contribute.co2Total as number
-      energyContribute.value[2].yearData = contribute.treeYear as number
+      // energyContribute.value[2].yearData = contribute.treeYear as number
       energyContribute.value[2].total = contribute.treeTotal as number
     }
 

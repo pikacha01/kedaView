@@ -31,12 +31,13 @@ watch(() => {
   if (!option) {
     return 
   }
-  console.log()
   if (store.type === 3) {
-    option.series[0].data = store.alarmyDataMonth
+    // option.series[0].data = store.alarmyDataMonth
+    option.series[0].data = [23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20,58,47,21,31,70,25,89]
     option.xAxis[0].data = store.alarmxDataMonth
   } else {
-    option.series[0].data = store.alarmyDataDay
+    // option.series[0].data = store.alarmyDataDay
+    option.series[0].data =  [47,21,31,70,25,89,23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20,58]
     option.xAxis[0].data = store.alarmxDataDay
   }
   chart.setOption(option)
@@ -118,7 +119,8 @@ function alarmChart() {
     },
     series: [
       {
-        data: store.alarmyDataMonth,
+        // data: store.alarmyDataMonth,
+        data: [23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20,58,47,21,31,70,25,89],
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。

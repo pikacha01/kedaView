@@ -39,12 +39,12 @@ const dotting = () => {
           ${item.name}
         </div>
         <div class="addressPop">
-          <img src="/wjl/img/weizhi.png">
+          <img src="/hmenergyview/img/weizhi.png">
           <span>${item.address}</span>
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src='${item.pic === null ? "/wjl/img/guangfupng.png" : item.pic }' alt="">
+            <img src='${item.pic === null ? "/hmenergyview/img/guangfupng.png" : item.pic }' alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -124,7 +124,7 @@ const dotting = () => {
       </div>
       </div>`
     var marker = new AMap.Marker({
-        icon: '/wjl/img/icon1.png', // 添加 Icon 图标 URL
+        icon: '/hmenergyview/img/icon1.png', // 添加 Icon 图标 URL
         position: item.position, // 基点位置
         extData: {
             content: extDataContent
@@ -255,12 +255,12 @@ const changeSelect = (id: any, item?: stationListDetail) => {
           ${item?.name}
         </div>
         <div class="addressPop">
-          <img src="/wjl/img/weizhi.png">
+          <img src="/hmenergyview/img/weizhi.png">
           <span>${item?.address}</span>
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src='${item?.pic === null ? "/wjl/img/guangfupng.png" : item?.pic }' alt="">
+            <img src='${item?.pic === null ? "/hmenergyview/img/guangfupng.png" : item?.pic }' alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -340,7 +340,7 @@ const changeSelect = (id: any, item?: stationListDetail) => {
       </div>
       </div>`
     var marker = new AMap.Marker({
-        icon: '/wjl/img/icon1.png', // 添加 Icon 图标 URL
+        icon: '/hmenergyview/img/icon1.png', // 添加 Icon 图标 URL
         position: item?.position, // 基点位置
         extData: {
             content: extDataContent
@@ -379,7 +379,7 @@ const changeSelect = (id: any, item?: stationListDetail) => {
   <div class="leftCover"></div>
   <div class="rightCover"></div>
   <div class="bottomCover"></div>
-  <!-- <div class="selectionList" @click="isOptionList = true">
+  <div class="selectionList" @click="isOptionList = true">
       <img class="image" src="@/assets/images/电站列表.png">
       <span class="list">{{ selectStation.length > 4? selectStation.substr(0, 4) + '...' : selectStation }}</span>
   </div>
@@ -394,7 +394,7 @@ const changeSelect = (id: any, item?: stationListDetail) => {
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   
 </div>
 </template>
@@ -423,7 +423,7 @@ const changeSelect = (id: any, item?: stationListDetail) => {
   width: 1950px;
   height: 700px;
   background: url("@/assets/img/弹窗边角.png") no-repeat,
-              url("/wjl/img/弹窗背景.png") no-repeat;
+              url("/hmenergyview/img/弹窗背景.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -458,7 +458,7 @@ const changeSelect = (id: any, item?: stationListDetail) => {
     .leftPop{
       width: 587px;
       height: 407px;
-      background: url("/wjl/img/883.png") no-repeat;
+      background: url("/hmenergyview/img/883.png") no-repeat;
       background-size: 100% 100%;
       padding: 5px;
       display: flex;

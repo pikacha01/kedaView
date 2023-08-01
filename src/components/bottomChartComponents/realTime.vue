@@ -119,7 +119,8 @@ function realTimeChart() {
       {
         name: "等效功率",
         // data: store.HourYData,
-        data: store.PowerY,
+        // data: store.PowerY,
+        data: [23,45,88,75,15,23,54,85,54,75,58,47,21,31,25,20,58,47,21,31,70,25,89],
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。

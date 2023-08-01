@@ -138,7 +138,7 @@ function barChart() {
 </script>
 
 <template>
-  <div class="electricityRank" v-show="!mapStore.selectStation">
+  <!-- <div class="electricityRank" v-show="!mapStore.selectStation">
     <ChartTitle 
     title="发电量排名" 
     first-option="月" 
@@ -146,8 +146,9 @@ function barChart() {
     :is-checked="isChecked"
     />
     <div class="barChart" id="barChart"></div>
-  </div>
-  <PowerStationCapacity v-show="mapStore.selectStation" />
+  </div> -->
+  <!-- <PowerStationCapacity v-show="mapStore.selectStation" /> -->
+  <PowerStationCapacity />
 </template>
 
 <style scoped lang="less">

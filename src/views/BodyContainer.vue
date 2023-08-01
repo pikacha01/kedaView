@@ -28,14 +28,16 @@ onMounted(() => {
           <div class="nomalFont">能效PR</div>
           <div class="nomalFont">%</div>
           <div>
-            <span class="numberFont">{{ leftStore.PRProgress.toFixed(2) }} </span>
+            <!-- <span class="numberFont">{{ leftStore.PRProgress.toFixed(2) }} </span> -->
+            <span class="numberFont">{{ 79.66 }} </span>
           </div>
         </div>
         <div class="third">
           <div class="nomalFont">当日最大功率</div>
           <div class="nomalFont">{{ Number(store.HourKpi?.maxPowerToday) > 100000 ? '万' : '' }}kW</div>
           <div>
-            <span class="numberFont ">{{ Number(store.HourKpi?.maxPowerToday) > 100000? (Number(store.HourKpi?.maxPowerToday)/10000).toFixed(2) : (Number(store.HourKpi?.maxPowerToday)).toFixed(2)}}</span>
+            <!-- <span class="numberFont ">{{ Number(store.HourKpi?.maxPowerToday) > 100000? (Number(store.HourKpi?.maxPowerToday)/10000).toFixed(2) : (Number(store.HourKpi?.maxPowerToday)).toFixed(2)}}</span> -->
+            <span class="numberFont ">165.08</span>
           </div>
         </div>
       </div>
@@ -51,16 +53,20 @@ onMounted(() => {
         </div>
         <div class="second">
           <div class="nomalFont">当月电量</div>
-          <div class="nomalFont">{{ Number(store.HourKpi?.energyMonth) > 100000 ? '万' : '' }}kwh</div>
+          <!-- <div class="nomalFont">{{ Number(store.HourKpi?.energyMonth) > 100000 ? '万' : '' }}kwh</div> -->
+          <div class="nomalFont">kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 100000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)).toFixed(2)}}</span>
+            <!-- <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 100000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)).toFixed(2)}}</span> -->
+            <span class="numberFont">602.45</span>
           </div>
         </div>
         <div class="third">
           <div class="nomalFont">当年电量</div>
-          <div class="nomalFont">{{ Number(store.HourKpi?.energyYear) > 100000 ? '万' : '' }}kwh</div>
+          <!-- <div class="nomalFont">{{ Number(store.HourKpi?.energyYear) > 100000 ? '万' : '' }}kwh</div> -->
+          <div class="nomalFont">kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyYear) > 100000? (Number(store.HourKpi?.energyYear)/10000).toFixed(2) : (Number(store.HourKpi?.energyYear)).toFixed(2)}}</span>
+            <!-- <span class="numberFont">{{ Number(store.HourKpi?.energyYear) > 100000? (Number(store.HourKpi?.energyYear)/10000).toFixed(2) : (Number(store.HourKpi?.energyYear)).toFixed(2)}}</span> -->
+            <span class="numberFont">7767.1</span>
           </div>
         </div>
       </div>

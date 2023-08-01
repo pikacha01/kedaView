@@ -3,7 +3,6 @@ import { onMounted,onUnmounted,watch } from 'vue'
 import ChartTitle from '../chartTitle.vue';
 import * as echarts from "echarts";
 import { bottomDataStore,mapDataStore } from '@/store';
-import { getStationListApi } from '@/api/energyApi'
 
 const store = bottomDataStore()
 
@@ -13,8 +12,7 @@ let echart = echarts
 let chart : any = null
 
 onMounted(async () => {
-  const  res =await getStationListApi('0','10')
-  await store.getVolume(res.data[0].id)
+  await store.getVolume(mapStore.selectStation)
   cakeChart();
   circulation();
   watch(() => {
