@@ -31,9 +31,6 @@ onMounted(async() => {
     mapStore.getStationList()
     headerStore.getTitle()
   }, 1000 * 60 * 60)
-
-
-
   watch(() => {
     return mapStore.selectStation
   }, () => {

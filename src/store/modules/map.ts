@@ -39,11 +39,13 @@ export const mapDataStore = defineStore(
     })
     const getStationList =async () => {
       const res = await getStationListApi('' + stationListData.value.start, '' + stationListData.value.end)
-      res.data?.forEach(item => {
-        if (item.address === '广东省佛山市顺德区万家乐热水厨电科技产业园') {
-          stationListData.value.data?.push(item)
-        }
-      })
+      // res.data?.forEach(item => {
+      //   if (item.address === '广东省佛山市顺德区万家乐热水厨电科技产业园') {
+      //     stationListData.value.data?.push(item)
+      //   }
+      // })
+      stationListData.value.data.push(res.data[0])
+      // selectStation.value = res.data[0].id
       stationListData.value.start = res.start
       stationListData.value.end = res.end
       stationListData.value.total = res.total
@@ -52,15 +54,15 @@ export const mapDataStore = defineStore(
       //   stationListData.value.end += 20
       //   getStationList()
       // }
-      if (stationListData.value.data.length === 0) {
-        stationListData.value.start += 20
-        stationListData.value.end += 20
-        getStationList()
-      }
+      // if (stationListData.value.data.length === 0) {
+      //   stationListData.value.start += 20
+      //   stationListData.value.end += 20
+      //   getStationList()
+      // }
     }
 
     // 选择电站 默认为0 0为全部
-    const selectStation = ref<any>("859916425202499587")
+    const selectStation = ref<any>("0")
 
     // 当前城市天气
     const currentWeather = ref<weather>()

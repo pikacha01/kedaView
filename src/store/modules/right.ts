@@ -45,7 +45,6 @@ export const rightDataStore = defineStore(
         devStatusData.value[2][1].value = res.total - res.alarm
         devStatusData.value =  devStatusData.value
       }
-      
       devStatusTotal.value = res.total
     }
 

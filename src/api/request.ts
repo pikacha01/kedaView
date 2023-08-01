@@ -1,5 +1,5 @@
 import axios, { type Method } from 'axios'
-export const baseUrl = 'https://www.kedazhny.com/api/smoker/'
+export const baseUrl = 'https://www.zhuyiyun.com/api/smoker/'
 //@ts-ignore
 import JSONbig from "json-bigint";
 

@@ -193,11 +193,12 @@ const initMap = async () => {
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
   })
   let centerPlot:any = null
-  mapStore.stationList.forEach(item => {
-    if (item.address === "广东省佛山市顺德区万家乐热水厨电科技产业园") {
-      centerPlot = item
-    }
-  })
+  // mapStore.stationList.forEach(item => {
+  //   if (item.address === "广东省佛山市顺德区万家乐热水厨电科技产业园") {
+  //     centerPlot = item
+  //   }
+  // })
+  centerPlot=mapStore.stationList[0]
   map = new AMap.Map("mapContainer",{  //设置地图容器id
       viewMode:"2D",    //是否为3D地图模式
       zoom:9,           //初始化地图级别
