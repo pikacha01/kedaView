@@ -7,6 +7,7 @@ export const bottomDataStore = defineStore("bottom-store", () => {
 
   // 发电量排行
   const generateXData = ref<string[]>()
+  const generateYDataYear = ref<string[]>()
   // 月数据
   const generateYData = ref<string[]>()
   // 年数据
@@ -16,15 +17,16 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   const getGenerateElectricity = async () => {
     const res =await  getGenerateElectricityApi(3)
     const data =await  getGenerateElectricityApi(4)
-    generateXData.value = []
+    generateXData.value = ['94269.3','116288.57','187126.9','246915.7','311350.9']
     generateYData.value = []
     generateXDataYear.value = []
+    generateYDataYear.value = []
     res.forEach(item => {
-      generateXData.value?.unshift(item.value)
       generateYData.value?.unshift(item.title)
     })
     data.forEach(item => {
       generateXDataYear.value?.unshift(item.value)
+      generateYDataYear.value?.unshift(item.title)
     })
   }
 
@@ -256,6 +258,7 @@ export const bottomDataStore = defineStore("bottom-store", () => {
   return {
     generateXData, generateYData, getGenerateEnum, getGenerateElectricity,percentageComplete,capacity,PowerX,PowerY,
     getPR, HourYData, PRyData, PRxData, getVolume, volumeValue, sumValue, objData, getHourElectric,getEnergyPower,
-    arrName,optionData,getWorkOrder,workOrderName,workOrder,objDataWorkeOrder,sumValueOrderName,HourXData,generateXDataYear
+    arrName, optionData, getWorkOrder, workOrderName, workOrder, objDataWorkeOrder, sumValueOrderName, HourXData, generateXDataYear,
+    generateYDataYear
   }
 })

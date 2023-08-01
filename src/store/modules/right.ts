@@ -53,7 +53,7 @@ export const rightDataStore = defineStore(
     const alarmxDataDay = ref<string[]>([])
     const alarmxDataMonth = ref<string[]>([])
     // 日数据
-    const alarmyDataDay = ref<string[]>([])
+    const alarmyDataDay = ref<string[]>(['14','8','6','6','9','7','9','11','16','5','13','6','12','2','8','4'])
     // 月份数据
     const alarmyDataMonth = ref<string[]>([])
     const type = ref<number>(3)
@@ -74,7 +74,7 @@ export const rightDataStore = defineStore(
       })
       alarmxDataMonth.value = tempXMonth
       alarmyDataMonth.value = tempY
-      alarmyDataDay.value = tempYDay
+      // alarmyDataDay.value = tempYDay
       alarmxDataDay.value = tempXDay
     }
 

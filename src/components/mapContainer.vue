@@ -39,12 +39,12 @@ const dotting = () => {
           ${item.name}
         </div>
         <div class="addressPop">
-          <img src="/view/img/weizhi.png">
+          <img src="/energyview/img/weizhi.png">
           <span>${item.address}</span>
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src=${item.pic === null ? "/view/img/guangfupng.png" : item.pic} alt="">
+            <img src=${item.pic === null ? "/energyview/img/guangfupng.png" : item.pic} alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -124,7 +124,7 @@ const dotting = () => {
       </div>
       </div>`
     var marker = new AMap.Marker({
-        icon: '/view/img/icon1.png', // 添加 Icon 图标 URL
+        icon: '/energyview/img/icon1.png', // 添加 Icon 图标 URL
         position: item.position, // 基点位置
         extData: {
             content: extDataContent
@@ -192,12 +192,7 @@ const initMap = async () => {
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
   })
-  let centerPlot:any = null
-  mapStore.stationList.forEach(item => {
-    if (item.address === "安徽省马鞍山市雨山区银塘镇湖西南路82号信成大厦") {
-      centerPlot = item
-    }
-  })
+  let centerPlot:any = mapStore.stationList[0]
   map = new AMap.Map("mapContainer",{  //设置地图容器id
       viewMode:"2D",    //是否为3D地图模式
       zoom:9,           //初始化地图级别
@@ -253,12 +248,12 @@ const changeSelect = (id: number, item?: stationListDetail) => {
           ${item?.name}
         </div>
         <div class="addressPop">
-          <img src="/view/img/weizhi.png">
+          <img src="/energyview/img/weizhi.png">
           <span>${item?.address}</span>
         </div>
         <div class="contentPop">
           <div class="leftPop">
-            <img src=${item?.pic === null ? "/view/img/guangfupng.png" : item?.pic } alt="">
+            <img src=${item?.pic === null ? "/energyview/img/guangfupng.png" : item?.pic } alt="">
           </div>
           <div class="rightPop">
             <div class="InfoLeft columnSpaceBetween">
@@ -338,7 +333,7 @@ const changeSelect = (id: number, item?: stationListDetail) => {
       </div>
       </div>`
     var marker = new AMap.Marker({
-        icon: '/view/img/icon1.png', // 添加 Icon 图标 URL
+        icon: '/energyview/img/icon1.png', // 添加 Icon 图标 URL
         position: item?.position, // 基点位置
         extData: {
             content: extDataContent
@@ -421,7 +416,7 @@ const changeSelect = (id: number, item?: stationListDetail) => {
   width: 1950px;
   height: 700px;
   background: url("@/assets/img/弹窗边角.png") no-repeat,
-              url("/view/img/弹窗背景.png") no-repeat;
+              url("/energyview/img/弹窗背景.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -456,7 +451,7 @@ const changeSelect = (id: number, item?: stationListDetail) => {
     .leftPop{
       width: 587px;
       height: 407px;
-      background: url("/view/img/883.png") no-repeat;
+      background: url("/energyview/img/883.png") no-repeat;
       background-size: 100% 100%;
       padding: 5px;
       display: flex;

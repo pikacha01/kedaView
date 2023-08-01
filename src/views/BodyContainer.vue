@@ -28,14 +28,14 @@ onMounted(() => {
           <div class="nomalFont">能效PR</div>
           <div class="nomalFont">%</div>
           <div>
-            <span class="numberFont">{{ leftStore.PRProgress.toFixed(2) }} </span>
+            <span class="numberFont">53.33</span>
           </div>
         </div>
         <div class="third">
           <div class="nomalFont">当日最大功率</div>
-          <div class="nomalFont">{{ Number(store.HourKpi?.maxPowerToday) > 100000 ? '万' : '' }}kW</div>
+          <div class="nomalFont">kW</div>
           <div>
-            <span class="numberFont ">{{ Number(store.HourKpi?.maxPowerToday) > 100000? (Number(store.HourKpi?.maxPowerToday)/10000).toFixed(2) : (Number(store.HourKpi?.maxPowerToday)).toFixed(2)}}</span>
+            <span class="numberFont ">19023.49</span>
           </div>
         </div>
       </div>
@@ -51,9 +51,9 @@ onMounted(() => {
         </div>
         <div class="second">
           <div class="nomalFont">当月电量</div>
-          <div class="nomalFont">{{ Number(store.HourKpi?.energyMonth) > 100000 ? '万' : '' }}kwh</div>
+          <div class="nomalFont">kwh</div>
           <div>
-            <span class="numberFont">{{ Number(store.HourKpi?.energyMonth) > 100000? (Number(store.HourKpi?.energyMonth)/10000).toFixed(2) : (Number(store.HourKpi?.energyMonth)).toFixed(2)}}</span>
+            <span class="numberFont">177.90</span>
           </div>
         </div>
         <div class="third">

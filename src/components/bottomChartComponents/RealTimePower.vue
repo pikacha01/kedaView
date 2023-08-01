@@ -12,17 +12,17 @@ let chart : any = null
 onMounted(async () => {
   await store.getHourElectric(mapStore.selectStation)
   realEleChart();
-  watch(() => {
-    return store.HourYData
-    }, () => {
-    const option: any = chart.getOption()// 获取当前配置项
-    if (!option) {
-      return 
-    }
-    option.xAxis[0].data = store.HourXData
-    option.series[0].data = store.HourYData
-    chart.setOption(option)
-  })
+  // watch(() => {
+  //   return store.HourYData
+  //   }, () => {
+  //   const option: any = chart.getOption()// 获取当前配置项
+  //   if (!option) {
+  //     return 
+  //   }
+  //   option.xAxis[0].data = store.HourXData
+  //   option.series[0].data = store.HourYData
+  //   chart.setOption(option)
+  // })
 });
 onUnmounted(() => {
   echart.dispose(chart);
@@ -101,7 +101,32 @@ function realEleChart() {
     },
     series: [
       {
-        data: store.HourYData,
+        data: [
+  0,
+  6500,
+  7000,
+  9179,
+  10145,
+  10919,
+  11963,
+  12737,
+  13820,
+  14670,
+  15523,
+  14500,
+  13000,
+  16877,
+  14588,
+  9179,
+  10145,
+  10919,
+  11963,
+  12737,
+  13820,
+  14670,
+  11945,
+  10776,
+],
         type: 'bar',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。

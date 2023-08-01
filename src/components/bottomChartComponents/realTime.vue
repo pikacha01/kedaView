@@ -14,17 +14,17 @@ let chart : any = null
 onMounted(async () => {
   await store.getEnergyPower(mapStore.selectStation)
   realTimeChart();
-  watch(() => {
-    return store.PowerY
-    }, () => {
-    const option: any = chart.getOption()// 获取当前配置项
-    if (!option) {
-      return 
-    }
-    option.xAxis[0].data = store.PowerX
-    option.series[0].data = store.PowerY
-    chart.setOption(option)
-  })
+  // watch(() => {
+  //   return store.PowerY
+  //   }, () => {
+  //   const option: any = chart.getOption()// 获取当前配置项
+  //   if (!option) {
+  //     return 
+  //   }
+  //   option.xAxis[0].data = store.PowerX
+  //   option.series[0].data = store.PowerY
+  //   chart.setOption(option)
+  // })
   // timer = setInterval(() => {
   //   console.log("Timeout")
   //   data.value = data.value.map(item => {
@@ -119,7 +119,34 @@ function realTimeChart() {
       {
         name: "等效功率",
         // data: store.HourYData,
-        data: store.PowerY,
+        data: [
+  7000,
+  7254,
+  7507,
+  7761,
+  8014,
+  14670,
+  15523,
+  16170,
+  17044,
+  17761,
+  9282,
+  9536,
+  9790,
+  10043,
+  10297,
+  10550,
+  10804,
+  11058,
+  11311,
+  9282,
+  9536,
+  9790,
+  12326,
+  12579,
+  12833,
+]
+,
         type: 'line',
         smooth: true, //平滑曲线显示
         showAllSymbol: true, //显示所有图形。

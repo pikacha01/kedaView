@@ -36,12 +36,12 @@ onMounted(async () => {
     } else {
       option.series[0].data = store.generateXDataYear
     }
-    option.yAxis[0].data = store.generateYData
+    option.yAxis[0].data = store.generateYDataYear
     chart.setOption(option)
   })
   timer = setInterval(() => {
     store.getGenerateEnum = store.getGenerateEnum === 3 ? 4 : 3
-  }, 2000)
+  }, 10000)
 });
 
 onUnmounted(() => {
@@ -99,7 +99,7 @@ function barChart() {
           return texts;
         }
       },
-      data: store.generateYData
+      data: store.generateYDataYear
     },
     series: [
       {

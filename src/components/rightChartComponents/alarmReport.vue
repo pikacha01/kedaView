@@ -15,7 +15,7 @@ onMounted(async () => {
   alarmChart()
   timer = setInterval(() => {
     store.type = store.type === 3 ? 2 : 3
-  },2000)
+  },10000)
 })
 
 onUnmounted(() => {
@@ -31,7 +31,6 @@ watch(() => {
   if (!option) {
     return 
   }
-  console.log()
   if (store.type === 3) {
     option.series[0].data = store.alarmyDataMonth
     option.xAxis[0].data = store.alarmxDataMonth
