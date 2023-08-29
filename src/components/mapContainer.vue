@@ -194,7 +194,7 @@ const initMap = async () => {
   })
   let centerPlot:any = null
   mapStore.stationList.forEach(item => {
-    if (item.address === "广东省佛山市顺德区万家乐热水厨电科技产业园") {
+    if (item.id+'' === "893877179528577025") {
       centerPlot = item
     }
   })

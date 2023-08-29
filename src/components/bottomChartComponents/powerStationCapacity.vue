@@ -72,6 +72,10 @@ function cakeChart() {
             data = item
           }
         })
+        if (store.sumValue === 0) {
+        return "   {text|" + name + "}     {value|"+ 25  +"%}      {title|" + (data.value) + "} {title|kw}"
+          
+        }
         return "   {text|" + name + "}     {value|"+ ((data.value / store.sumValue * 100).toFixed(2)) +"%}      {title|" + (data.value) + "} {title|kw}"
       },
       itemGap: 15,
@@ -117,7 +121,9 @@ function cakeChart() {
         emphasis: {
           label: {
             show: true,
-            formatter: "{b}\n\n{d}%",
+            formatter: (params : any) => {
+              return `${params.name}` + `\n\n${params.percent === undefined ? 25 : params.percent}%`
+            },
             fontSize: 14,
             fontWeight: 'bold',
             color:"#36befc"

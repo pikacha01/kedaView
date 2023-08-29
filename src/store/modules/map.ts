@@ -60,7 +60,7 @@ export const mapDataStore = defineStore(
     }
 
     // 选择电站 默认为0 0为全部
-    const selectStation = ref<any>("859916425202499587")
+    const selectStation = ref<any>("893877179528577025")
 
     // 当前城市天气
     const currentWeather = ref<weather>()
