@@ -192,8 +192,10 @@ const initMap = async () => {
       version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
   })
-  let centerPlot:any = null
+  let centerPlot: any = null
+  console.log(mapStore.stationList)
   mapStore.stationList.forEach(item => {
+    console.log(item.id+'' === "893877179528577025")
     if (item.id+'' === "893877179528577025") {
       centerPlot = item
     }

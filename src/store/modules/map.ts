@@ -40,7 +40,7 @@ export const mapDataStore = defineStore(
     const getStationList =async () => {
       const res = await getStationListApi('' + stationListData.value.start, '' + stationListData.value.end)
       res.data?.forEach(item => {
-        if (item.address === '广东省佛山市顺德区万家乐热水厨电科技产业园') {
+        if (item.id+'' === "893877179528577025") {
           stationListData.value.data?.push(item)
         }
       })
