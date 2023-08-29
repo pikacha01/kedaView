@@ -11,17 +11,17 @@ export const leftDataStore = defineStore(
         yearData: 0,
         total: 0,
         title: "节约标煤(吨)",
-        image:"/wjl/img/社会贡献2.png"
+        image:"/zgty/img/社会贡献2.png"
       },{
         yearData: 0,
         total: 0,
         title:"CO2减排量(吨)",
-        image:"/wjl/img/社会贡献3.png"
+        image:"/zgty/img/社会贡献3.png"
       },{
         yearData: 0,
         total: 0,
         title: "等效植树量(棵)",
-        image:"/wjl/img/社会贡献4.png"
+        image:"/zgty/img/社会贡献4.png"
       }
     ])
     const getContributeData = async (stationId:number) => {
