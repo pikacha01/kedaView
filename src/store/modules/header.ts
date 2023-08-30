@@ -29,10 +29,10 @@ export const headerDataStore = defineStore(
     }
 
     // 获取大屏标题
-    const titleContent = ref<string>('科达智慧能源智能管控系统')
+    const titleContent = ref<string>('中钢天源智慧能源管控系统')
     const getTitle = async () => {
-      const res = await getTitleApi()
-      titleContent.value = res.data
+      // const res = await getTitleApi()
+      // titleContent.value = res.data
     }
 
     return {energyContribute,getContributeData,getKpi,HourKpi,getTitle,titleContent }
